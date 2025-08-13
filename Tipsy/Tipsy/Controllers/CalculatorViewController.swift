@@ -17,9 +17,11 @@ class CalculatorViewController: UIViewController {
     @IBOutlet var splitNumberLabel: UILabel!
     
     var tips = 0.1
-    var splitNumber = 1
+    var splitNumber = 1.0
+    var bill = 0.0
     
     @IBAction func tipChanged(_ sender: UIButton) {
+        billTextField.endEditing(true)
         
         zeroPctButton.isSelected = false
         tenPctButton.isSelected = false
@@ -36,15 +38,30 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        splitNumber = Int(sender.value)
-        splitNumberLabel.text = String(splitNumber)
+        splitNumber = Double(sender.value)
+        splitNumberLabel.text = String(format: "%.0f" , splitNumber)
         
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(tips)
-        print(splitNumber)
+        bill = Double(billTextField.text!) ?? 0.0
+//        print(tips)
+//        print(splitNumber)
+//        print(bill)
+        
+        performSegue(withIdentifier: "goToResults", sender: self)
+        
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        if segue.identifier == "goToResults" {
+            // Pass the selected object to the new view controller.
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.tipsValue = tips
+            destinationVC.splitNumberValue = splitNumber
+            destinationVC.billValue = bill
+            destinationVC.resultValue = (bill / splitNumber) + (bill / splitNumber) * tips
+        }
+    }
 }
 
