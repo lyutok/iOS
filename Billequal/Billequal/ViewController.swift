@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet var pepleUIPicker: UIPickerView!
     let options = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    var pplNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return options[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pplNumber = Int(options[row]) ?? 1
+    }
+    
+    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        print(pplNumber)
     }
 }
 
