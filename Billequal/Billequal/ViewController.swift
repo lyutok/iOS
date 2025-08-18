@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
+    @IBOutlet var totalTextField: UITextField!
     
     @IBOutlet var fivePercSwitch: UISwitch!
     @IBOutlet var tenPercSwitch: UISwitch!
@@ -17,21 +18,44 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var switches: [UISwitch: Double] = [:]
     
-    @IBOutlet var pepleUIPicker: UIPickerView!
+    @IBOutlet var peopleUIPicker: UIPickerView!
     let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    
+    var total = 0.0
     var pplNumber = 5
-    var tips = 0.0
+    var tips = 10.0
+    var eachToPay = 0.0
     
     override func viewDidLoad() {
         
+        super.viewDidLoad()
+        
         switches = [fivePercSwitch: 5.0, tenPercSwitch: 10.0, twentyPercSwitch: 20.0, twentyFivePercSwitch: 25.0]
         
-        super.viewDidLoad()
-        pepleUIPicker.delegate = self
-        pepleUIPicker.dataSource = self
-        pepleUIPicker.selectRow(4, inComponent: 0, animated: false)
+        totalTextField.delegate = self
+        
+        peopleUIPicker.delegate = self
+        peopleUIPicker.dataSource = self
+        peopleUIPicker.selectRow(4, inComponent: 0, animated: false)
+        
+        // to dismiss keybord
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
     }
-
+    
+    //MARK: - Keyboard
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        total = Double(totalTextField.text!) ?? 0.0
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+        }
+    
+    //MARK: - UIPicker methods
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -48,20 +72,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         pplNumber = Int(options[row]) ?? 1
     }
     
+    //MARK: - IBActions
+    
     @IBAction func switchChanged(_ sender: UISwitch) {
         // one One, set others to Off
         for switcher in switches.keys {
             if switcher != sender {
                 switcher.setOn(false, animated: true)
             }
-        }
-        
-        tips = switches[sender] ?? 0.0
-            
+            }
+            if sender.isOn {
+                tips = switches[sender] ?? 0.0
+            } else {
+                tips = 0.0
+            }
         }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        
+        eachToPay = total / Double(pplNumber) + (total / Double(pplNumber)) * (tips / 100)
+        print(total)
         print(pplNumber)
         print(tips)
+        print(totalTextField.text!)
+        print(eachToPay)
     }
 }
