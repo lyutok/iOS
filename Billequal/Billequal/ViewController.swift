@@ -15,15 +15,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var twentyPercSwitch: UISwitch!
     @IBOutlet var twentyFivePercSwitch: UISwitch!
     
-    var switches: [UISwitch] = []
+    var switches: [UISwitch: Double] = [:]
     
     @IBOutlet var pepleUIPicker: UIPickerView!
     let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     var pplNumber = 5
+    var tips = 0.0
     
     override func viewDidLoad() {
         
-        switches = [fivePercSwitch, tenPercSwitch, twentyPercSwitch, twentyFivePercSwitch]
+        switches = [fivePercSwitch: 5.0, tenPercSwitch: 10.0, twentyPercSwitch: 20.0, twentyFivePercSwitch: 25.0]
         
         super.viewDidLoad()
         pepleUIPicker.delegate = self
@@ -48,16 +49,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func switchChanged(_ sender: UISwitch) {
-        for switcher in switches {
+        // one One, set others to Off
+        for switcher in switches.keys {
             if switcher != sender {
                 switcher.setOn(false, animated: true)
             }
         }
-        print("Selected switch index: \(switches.firstIndex(of: sender) ?? -1)")
-    }
-    
+        
+        tips = switches[sender] ?? 0.0
+            
+        }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         print(pplNumber)
+        print(tips)
     }
 }
