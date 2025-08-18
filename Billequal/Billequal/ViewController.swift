@@ -10,11 +10,21 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
+    @IBOutlet var fivePercSwitch: UISwitch!
+    @IBOutlet var tenPercSwitch: UISwitch!
+    @IBOutlet var twentyPercSwitch: UISwitch!
+    @IBOutlet var twentyFivePercSwitch: UISwitch!
+    
+    var switches: [UISwitch] = []
+    
     @IBOutlet var pepleUIPicker: UIPickerView!
-    let options = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    var pplNumber = 1
+    let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    var pplNumber = 5
     
     override func viewDidLoad() {
+        
+        switches = [fivePercSwitch, tenPercSwitch, twentyPercSwitch, twentyFivePercSwitch]
+        
         super.viewDidLoad()
         pepleUIPicker.delegate = self
         pepleUIPicker.dataSource = self
@@ -37,34 +47,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         pplNumber = Int(options[row]) ?? 1
     }
     
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        for switcher in switches {
+            if switcher != sender {
+                switcher.setOn(false, animated: true)
+            }
+        }
+        print("Selected switch index: \(switches.firstIndex(of: sender) ?? -1)")
+    }
+    
+    
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         print(pplNumber)
     }
 }
-
-//import UIKit
-//
-//class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-//
-//    @IBOutlet weak var picker: UIPickerView! // соединить с Storyboard
-//
-//    let options = ["Option 1", "Option 2", "Option 3"]
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        picker.delegate = self
-//        picker.dataSource = self
-//    }
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return options.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return options[row]
-//    }
-//}
