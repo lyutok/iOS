@@ -75,6 +75,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //MARK: - IBActions
     
     @IBAction func switchChanged(_ sender: UISwitch) {
+        totalTextField.endEditing(true)
         // one One, set others to Off
         for switcher in switches.keys {
             if switcher != sender {
@@ -89,12 +90,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
-        
+        totalTextField.endEditing(true)
         eachToPay = total / Double(pplNumber) + (total / Double(pplNumber)) * (tips / 100)
         print(total)
         print(pplNumber)
         print(tips)
         print(totalTextField.text!)
         print(eachToPay)
+        
+        performSegue(withIdentifier: "goToResult", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultViewController
+            destinationVC.totalValue = total
+            destinationVC.tipsValue = tips
+            destinationVC.pplNumberValue = pplNumber
+            destinationVC.eachToPayValue = eachToPay
+    }
+    
     }
 }

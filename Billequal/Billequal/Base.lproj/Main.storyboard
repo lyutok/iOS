@@ -168,7 +168,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRz-uF-GzF">
                                                         <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" title="Calculate">
+                                                        <buttonConfiguration key="configuration" style="filled" title="Equal Split">
                                                             <backgroundConfiguration key="background" cornerRadius="11">
                                                                 <color key="backgroundColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </backgroundConfiguration>
@@ -234,31 +234,32 @@
                         <outlet property="totalTextField" destination="vU8-lP-2qk" id="Ptx-t7-yPb"/>
                         <outlet property="twentyFivePercSwitch" destination="Sob-w7-a0J" id="oG3-zh-iW3"/>
                         <outlet property="twentyPercSwitch" destination="0bz-m4-xRd" id="xMI-08-n9f"/>
+                        <segue destination="FSK-pB-nrF" kind="presentation" identifier="goToResult" id="Dux-xw-F8V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8.8000000000000007" y="42.728635682158924"/>
+            <point key="canvasLocation" x="-247" y="41"/>
         </scene>
-        <!--View Controller-->
+        <!--Result View Controller-->
         <scene sceneID="40H-yo-xRl">
             <objects>
-                <viewController id="FSK-pB-nrF" sceneMemberID="viewController">
+                <viewController id="FSK-pB-nrF" customClass="ResultViewController" customModule="Billequal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2HE-0a-73c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbo-00-eej" userLabel="Bottom View">
-                                <rect key="frame" x="0.0" y="660" width="375" height="152"/>
+                                <rect key="frame" x="0.0" y="606" width="375" height="152"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-ON-Egu">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-ON-Egu" userLabel="Recalculate">
                                         <rect key="frame" x="50" y="54" width="275" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="0J6-a3-9to"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="uJa-0O-qzv"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Calculate">
+                                        <buttonConfiguration key="configuration" style="filled" title="Recalculate">
                                             <backgroundConfiguration key="background" cornerRadius="11">
                                                 <color key="backgroundColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </backgroundConfiguration>
@@ -266,6 +267,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UcF-qm-paM"/>
+                                            <action selector="reCalculateButtonPressed:" destination="FSK-pB-nrF" eventType="touchUpInside" id="gGv-nj-caR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -316,6 +318,9 @@
                                                 <color key="backgroundColor" red="0.94117647059999998" green="0.41568627450000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="shareButtonPressed:" destination="FSK-pB-nrF" eventType="touchUpInside" id="vzJ-xR-gS5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -332,6 +337,10 @@
                             <constraint firstItem="qUS-ax-2a3" firstAttribute="centerX" secondItem="2HE-0a-73c" secondAttribute="centerX" id="zJB-nD-wmK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resultNote" destination="Os3-as-oOH" id="Bgk-GG-ttA"/>
+                        <outlet property="resultToPayLabel" destination="HWD-de-fYg" id="A3Q-AB-NCT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DE2-GA-Jfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
