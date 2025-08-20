@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var switches: [UISwitch: Double] = [:]
     
     @IBOutlet var peopleUIPicker: UIPickerView!
-    let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
     
     var total = 0.0
     var pplNumber = 5
@@ -38,6 +38,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         peopleUIPicker.dataSource = self
         peopleUIPicker.selectRow(4, inComponent: 0, animated: false)
         
+        // create toolbar to keyboard
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        // create flexible space (to push Done button to the right)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        // create Done button
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        
+        doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
+        toolbar.items = [flexSpace, doneButton]
+            
+        // assign toolbar to your textField
+        totalTextField.inputAccessoryView = toolbar
+        
         // to dismiss keybord
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
@@ -48,6 +64,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         total = Double(totalTextField.text!) ?? 0.0
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true) // closes keyboard for any active textField
     }
     
     @objc func dismissKeyboard() {
