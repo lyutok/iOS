@@ -109,7 +109,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
         }
     
-    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+    @IBAction func equalSplitButtonPressed(_ sender: UIButton) {
         totalTextField.endEditing(true)
         eachToPay = total / Double(pplNumber) + (total / Double(pplNumber)) * (tips / 100)
         print(total)
@@ -119,6 +119,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print(eachToPay)
         
         performSegue(withIdentifier: "goToResult", sender: self)
+    }
+    
+    
+    @IBAction func customButtonPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "goToCustom", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2069FC352E5703770014AC45 /* CustomViewController.swift */; };
 		20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */; };
 		20EC7AEC2E4E91EE0069E4FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EC7AEB2E4E91EE0069E4FF /* AppDelegate.swift */; };
 		20EC7AEE2E4E91EE0069E4FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EC7AED2E4E91EE0069E4FF /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2069FC352E5703770014AC45 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		20EC7AE82E4E91EE0069E4FF /* Billequal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billequal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EC7AEB2E4E91EE0069E4FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 			children = (
 				20EC7AEF2E4E91EE0069E4FF /* StartViewController.swift */,
 				20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */,
+				2069FC352E5703770014AC45 /* CustomViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				20EC7AF02E4E91EE0069E4FF /* StartViewController.swift in Sources */,
 				20EC7AEC2E4E91EE0069E4FF /* AppDelegate.swift in Sources */,
+				2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */,
 				20EC7AEE2E4E91EE0069E4FF /* SceneDelegate.swift in Sources */,
 				20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */,
 			);
