@@ -9,16 +9,47 @@ import UIKit
 
 class CustomViewController: UIViewController {
 
+    
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        tableView.dataSource = self
+    tableView.register(UINib(nibName: "CalculateCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+//        print("tableView is \(tableView)")
+//        tableView.backgroundColor = .lightGray
+             
     }
-    
 
     @IBAction func recalculatePressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+}
+    
+
+extension CustomViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfRowsInSection")
+        return 10
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 44
+//    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! CalculateCell
+        
+        cell.personTextField.text = "Person \(indexPath.row + 1)"
+        cell.personTextField.placeholder = "Person \(indexPath.row + 1)"
+//        print("dequeueReusableCell")
+//        cell.backgroundColor = .yellow
+        return cell
+    }
+    
+}
     /*
     // MARK: - Navigation
 
@@ -29,4 +60,4 @@ class CustomViewController: UIViewController {
     }
     */
 
-}
+
