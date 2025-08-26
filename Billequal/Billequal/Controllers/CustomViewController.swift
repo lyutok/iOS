@@ -16,7 +16,7 @@ class CustomViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
-    tableView.register(UINib(nibName: "CalculateCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
 //        print("tableView is \(tableView)")
 //        tableView.backgroundColor = .lightGray
              
@@ -35,17 +35,12 @@ extension CustomViewController: UITableViewDataSource {
         return 10
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 44
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! CalculateCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! CalculateCell
         
         cell.personTextField.text = "Person \(indexPath.row + 1)"
         cell.personTextField.placeholder = "Person \(indexPath.row + 1)"
-//        print("dequeueReusableCell")
-//        cell.backgroundColor = .yellow
+        
         return cell
     }
     

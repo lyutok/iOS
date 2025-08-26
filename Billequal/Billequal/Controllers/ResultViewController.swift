@@ -9,10 +9,11 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var totalValue: Double?
-    var tipsValue: Double?
-    var pplNumberValue: Int?
-    var eachToPayValue: Double?
+//    var totalValue: Double?
+//    var tipsValue: Double?
+//    var pplNumberValue: Int?
+//    var eachToPayValue: Double?
+    var billValues: Bill?
     
     @IBOutlet var resultToPayLabel: UILabel!
     @IBOutlet var resultNote: UILabel!
@@ -20,13 +21,17 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resultToPayLabel.text = String(format: "%.2f", eachToPayValue ?? 0.0)
-        resultNote.text = "\(String(format: "%.0f", tipsValue ?? 0.0))% tips included."
+        if let bill = billValues {
+            resultToPayLabel.text = String(format: "%.2f", bill.eachToPay)
+            resultNote.text = "\(String(format: "%.0f", bill.tips))% tips included."
+        }
+        
+        
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
         // Text or data to share
-        let textToShare = "Here’s \(String(format: "%.2f", totalValue ?? 0.0)) bill split: \(String(format: "%.2f", eachToPayValue ?? 0.0)) 💸 each, \(String(format: "%.0f", tipsValue ?? 0.0))% included."
+        let textToShare = "Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) 💸 each, \(String(format: "%.0f", billValues?.tips ?? 0.0))% included."
             
             let items: [Any] = [textToShare]
             

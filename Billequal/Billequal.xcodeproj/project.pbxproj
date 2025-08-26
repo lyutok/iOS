@@ -17,6 +17,9 @@
 		20EC7AF32E4E91EE0069E4FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EC7AF12E4E91EE0069E4FF /* Main.storyboard */; };
 		20EC7AF52E4E91F70069E4FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20EC7AF42E4E91F70069E4FF /* Assets.xcassets */; };
 		20EC7AF82E4E91F70069E4FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EC7AF62E4E91F70069E4FF /* LaunchScreen.storyboard */; };
+		20FEACEA2E5D9E6B00476F0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEACE92E5D9E6B00476F0D /* Constants.swift */; };
+		20FEACED2E5E3EAB00476F0D /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEACEC2E5E3EAB00476F0D /* Bill.swift */; };
+		20FEACEF2E5E409200476F0D /* BillequalBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FEACEE2E5E409200476F0D /* BillequalBrain.swift */; };
 		F5A50F779D732B3C0B6EAD58 /* Pods_Billequal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41E98B70446F0E3139A60A0 /* Pods_Billequal.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +36,9 @@
 		20EC7AF42E4E91F70069E4FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20EC7AF72E4E91F70069E4FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20EC7AF92E4E91F70069E4FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20FEACE92E5D9E6B00476F0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		20FEACEC2E5E3EAB00476F0D /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		20FEACEE2E5E409200476F0D /* BillequalBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillequalBrain.swift; sourceTree = "<group>"; };
 		356B8BE03E9BAE0840709573 /* Pods-Billequal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billequal.release.xcconfig"; path = "Target Support Files/Pods-Billequal/Pods-Billequal.release.xcconfig"; sourceTree = "<group>"; };
 		B41E98B70446F0E3139A60A0 /* Pods_Billequal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billequal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7FF6E2CB2068B670771F797 /* Pods-Billequal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billequal.debug.xcconfig"; path = "Target Support Files/Pods-Billequal/Pods-Billequal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				20EC7AF12E4E91EE0069E4FF /* Main.storyboard */,
+				20EC7AF62E4E91F70069E4FF /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -91,15 +98,25 @@
 		20EC7AEA2E4E91EE0069E4FF /* Billequal */ = {
 			isa = PBXGroup;
 			children = (
+				20FEACEB2E5DA0A700476F0D /* Model */,
 				20EC7AEB2E4E91EE0069E4FF /* AppDelegate.swift */,
 				20EC7AED2E4E91EE0069E4FF /* SceneDelegate.swift */,
 				20AAB5D92E53C7FD0032DB88 /* Controllers */,
 				20C859A82E5898260071E1C4 /* Views */,
 				20EC7AF42E4E91F70069E4FF /* Assets.xcassets */,
-				20EC7AF62E4E91F70069E4FF /* LaunchScreen.storyboard */,
+				20FEACE92E5D9E6B00476F0D /* Constants.swift */,
 				20EC7AF92E4E91F70069E4FF /* Info.plist */,
 			);
 			path = Billequal;
+			sourceTree = "<group>";
+		};
+		20FEACEB2E5DA0A700476F0D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20FEACEC2E5E3EAB00476F0D /* Bill.swift */,
+				20FEACEE2E5E409200476F0D /* BillequalBrain.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2CBCB95C18B04175D20E2545 /* Pods */ = {
@@ -108,7 +125,6 @@
 				C7FF6E2CB2068B670771F797 /* Pods-Billequal.debug.xcconfig */,
 				356B8BE03E9BAE0840709573 /* Pods-Billequal.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -240,7 +256,10 @@
 				20EC7AEC2E4E91EE0069E4FF /* AppDelegate.swift in Sources */,
 				2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */,
 				20EC7AEE2E4E91EE0069E4FF /* SceneDelegate.swift in Sources */,
+				20FEACEA2E5D9E6B00476F0D /* Constants.swift in Sources */,
+				20FEACED2E5E3EAB00476F0D /* Bill.swift in Sources */,
 				20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */,
+				20FEACEF2E5E409200476F0D /* BillequalBrain.swift in Sources */,
 				20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

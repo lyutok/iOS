@@ -17,14 +17,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var twentyFivePercSwitch: UISwitch!
     
     var switches: [UISwitch: Double] = [:]
+    let numbersForUIPicker = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
+    
+    var brain = BillequalBrain()
+    
+    var total: Double = 0.0
+    var pplNumber: Int = 5
+    var tips: Double = 10.0
+
     
     @IBOutlet var peopleUIPicker: UIPickerView!
-    let options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
-    
-    var total = 0.0
-    var pplNumber = 5
-    var tips = 10.0
-    var eachToPay = 0.0
     
     override func viewDidLoad() {
         
@@ -81,15 +83,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return options.count
+        return numbersForUIPicker.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return options[row]
+        return numbersForUIPicker[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pplNumber = Int(options[row]) ?? 1
+        pplNumber = Int(numbersForUIPicker[row]) ?? 1
     }
     
     //MARK: - IBActions
@@ -111,30 +113,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func equalSplitButtonPressed(_ sender: UIButton) {
         totalTextField.endEditing(true)
-        eachToPay = total / Double(pplNumber) + (total / Double(pplNumber)) * (tips / 100)
-        print(total)
-        print(pplNumber)
-        print(tips)
-        print(totalTextField.text!)
-        print(eachToPay)
         
-        performSegue(withIdentifier: "goToResult", sender: self)
+        brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
+        
+        performSegue(withIdentifier: K.calculateSegueIdentifier, sender: self)
     }
     
     
     @IBAction func customButtonPressed(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "goToCustom", sender: self)
+        performSegue(withIdentifier: K.customSegueIdentifier, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToResult" {
+        if segue.identifier == K.calculateSegueIdentifier {
             let destinationVC = segue.destination as! ResultViewController
-            destinationVC.totalValue = total
-            destinationVC.tipsValue = tips
-            destinationVC.pplNumberValue = pplNumber
-            destinationVC.eachToPayValue = eachToPay
-    }
+            
+            destinationVC.billValues = brain.bill
+            
+        }
     
     }
 }
