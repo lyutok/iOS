@@ -8,21 +8,28 @@
 import UIKit
 
 class CustomViewController: UIViewController {
-
     
+    var billValues: Bill?
+    
+    @IBOutlet var totalTextField: UITextField!
+    
+    @IBOutlet var tipsTextField: UITextField!
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let bill = billValues {
+            totalTextField.text = String(format: "%.2f", bill.total)
+            tipsTextField.text = String(format: "%.0f", bill.tips)
+        }
+        
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-//        print("tableView is \(tableView)")
-//        tableView.backgroundColor = .lightGray
              
     }
 
-    @IBAction func recalculatePressed(_ sender: UIButton) {
+    @IBAction func goBackPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -45,14 +52,3 @@ extension CustomViewController: UITableViewDataSource {
     }
     
 }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-

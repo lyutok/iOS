@@ -71,7 +71,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @objc func doneButtonTapped() {
         view.endEditing(true) // closes keyboard for any active textField
     }
-    
+                                                                        
     @objc func dismissKeyboard() {
         view.endEditing(true)
         }
@@ -113,7 +113,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func equalSplitButtonPressed(_ sender: UIButton) {
         totalTextField.endEditing(true)
-        
         brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
         
         performSegue(withIdentifier: K.calculateSegueIdentifier, sender: self)
@@ -121,17 +120,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func customButtonPressed(_ sender: UIButton) {
-        
+        brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
         performSegue(withIdentifier: K.customSegueIdentifier, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == K.calculateSegueIdentifier {
             let destinationVC = segue.destination as! ResultViewController
-            
             destinationVC.billValues = brain.bill
-            
+        } else if segue.identifier == K.customSegueIdentifier {
+            let destinationVC = segue.destination as! CustomViewController
+            destinationVC.billValues = brain.bill
         }
-    
+        
     }
 }

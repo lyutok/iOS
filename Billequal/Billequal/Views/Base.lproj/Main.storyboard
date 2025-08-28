@@ -364,7 +364,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nCd-Zv-yBP" userLabel="Top All Stack View">
-                                <rect key="frame" x="0.0" y="0.0" width="416" height="191"/>
+                                <rect key="frame" x="0.0" y="0.0" width="416" height="182.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="xpy-M4-HJs" userLabel="Top Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="416" height="100"/>
@@ -388,52 +388,28 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VEJ-Dl-7AG" userLabel="Total Tips Fields Stack View">
-                                        <rect key="frame" x="0.0" y="102" width="416" height="65"/>
+                                        <rect key="frame" x="0.0" y="102" width="416" height="56.5"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x3u-lk-zAX">
-                                                <rect key="frame" x="0.0" y="4.5" width="208" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="208" height="56.5"/>
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WYl-9e-gGf">
-                                                <rect key="frame" x="208" y="4.5" width="208" height="56.5"/>
+                                                <rect key="frame" x="208" y="0.0" width="208" height="56.5"/>
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="center" distribution="fillEqually" spacing="10" id="NaP-xh-zJy" userLabel="Headers Stack View">
-                                        <rect key="frame" x="63" y="169" width="290" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bw3-Gl-0bH">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F8D-du-u82">
-                                                <rect key="frame" x="75" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cp-oC-UzJ">
-                                                <rect key="frame" x="150" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="With Tips" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-Sy-NUQ">
-                                                <rect key="frame" x="225" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total | With Tips" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-Sy-NUQ">
+                                        <rect key="frame" x="20" y="160.5" width="376" height="22"/>
+                                        <color key="textColor" name="MainFontColor"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xpy-M4-HJs" secondAttribute="trailing" id="An5-sd-F8h"/>
@@ -443,10 +419,11 @@
                                     <constraint firstItem="xpy-M4-HJs" firstAttribute="leading" secondItem="nCd-Zv-yBP" secondAttribute="leading" id="SDd-qc-C4a"/>
                                     <constraint firstAttribute="trailing" secondItem="VEJ-Dl-7AG" secondAttribute="trailing" id="loO-Jn-hm7"/>
                                     <constraint firstItem="VEJ-Dl-7AG" firstAttribute="leading" secondItem="nCd-Zv-yBP" secondAttribute="leading" id="umC-tv-AwC"/>
+                                    <constraint firstAttribute="trailing" secondItem="NNg-Sy-NUQ" secondAttribute="trailing" constant="20" id="voP-mv-TUN"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cgf-S6-K4b">
-                                <rect key="frame" x="0.0" y="191" width="414" height="530"/>
+                                <rect key="frame" x="0.0" y="182.5" width="414" height="538.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="LIw-Ho-Wes" userLabel="Bottom Stack View">
@@ -471,14 +448,14 @@
                                     <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="LLX-FX-feJ" userLabel="Bottom View">
                                         <rect key="frame" x="0.0" y="38" width="414" height="137"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvH-7v-Qug" userLabel="Recalculate">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jvH-7v-Qug">
                                                 <rect key="frame" x="69.5" y="18" width="275" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="aEW-Td-dQO"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="ddG-OF-qV2"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Recalculate">
+                                                <buttonConfiguration key="configuration" style="filled" title="Restart">
                                                     <backgroundConfiguration key="background" cornerRadius="11">
                                                         <color key="backgroundColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </backgroundConfiguration>
@@ -537,175 +514,13 @@
                     <navigationItem key="navigationItem" id="KtX-9s-YcD"/>
                     <connections>
                         <outlet property="tableView" destination="cgf-S6-K4b" id="kzg-ex-sGN"/>
+                        <outlet property="tipsTextField" destination="WYl-9e-gGf" id="KBG-7A-Axu"/>
+                        <outlet property="totalTextField" destination="x3u-lk-zAX" id="fko-7J-FMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNg-E9-UAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1771.0144927536232" y="441.96428571428572"/>
-        </scene>
-        <!--Custom View Controller-->
-        <scene sceneID="Uae-lS-dWP">
-            <objects>
-                <viewController id="LTY-zZ-tcR" customClass="CustomViewController" customModule="Billequal" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZPo-Bi-Nxn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QwO-YJ-gBj" userLabel="Top All Stack View">
-                                <rect key="frame" x="0.0" y="0.0" width="290" height="191"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="bottom" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="FtA-u0-lwi" userLabel="Top Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="100"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ika-Kq-UvL">
-                                                <rect key="frame" x="0.0" y="45" width="85" height="55"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tips, %:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQQ-zc-l6P">
-                                                <rect key="frame" x="205" y="45" width="85" height="55"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.64705882349999999" green="0.82745098039999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="Hdc-TP-aHj"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="s8z-06-DtI" userLabel="Total Tips Fields Stack View">
-                                        <rect key="frame" x="0.0" y="102" width="290" height="65"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jYg-B7-nzK">
-                                                <rect key="frame" x="0.0" y="4.5" width="145" height="56.5"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VfL-IL-hfy">
-                                                <rect key="frame" x="145" y="4.5" width="145" height="56.5"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="center" distribution="fillEqually" spacing="10" id="Zxb-mh-9oe" userLabel="Headers Stack View">
-                                        <rect key="frame" x="0.0" y="169" width="290" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ft6-l1-1vP">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ycu-f8-ogR">
-                                                <rect key="frame" x="75" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5E5-dD-Bw4">
-                                                <rect key="frame" x="150" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="With Tips" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HL1-cJ-zgT">
-                                                <rect key="frame" x="225" y="0.0" width="65" height="22"/>
-                                                <color key="textColor" name="MainFontColor"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="FtA-u0-lwi" firstAttribute="leading" secondItem="QwO-YJ-gBj" secondAttribute="leading" id="8Mh-Zg-2Hw"/>
-                                    <constraint firstAttribute="trailing" secondItem="s8z-06-DtI" secondAttribute="trailing" id="QSc-AU-3io"/>
-                                    <constraint firstItem="s8z-06-DtI" firstAttribute="leading" secondItem="QwO-YJ-gBj" secondAttribute="leading" id="ZR7-wf-sm7"/>
-                                    <constraint firstItem="FtA-u0-lwi" firstAttribute="top" secondItem="QwO-YJ-gBj" secondAttribute="top" id="ge7-Mf-TqE"/>
-                                    <constraint firstItem="FtA-u0-lwi" firstAttribute="leading" secondItem="QwO-YJ-gBj" secondAttribute="leading" id="h7b-fW-e6e"/>
-                                    <constraint firstAttribute="trailing" secondItem="FtA-u0-lwi" secondAttribute="trailing" id="nmw-vU-CaR"/>
-                                    <constraint firstAttribute="trailing" secondItem="FtA-u0-lwi" secondAttribute="trailing" id="skg-eD-a3m"/>
-                                </constraints>
-                            </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DQ9-cW-p7o">
-                                <rect key="frame" x="0.0" y="191" width="414" height="568"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbF-O6-S20">
-                                <rect key="frame" x="0.0" y="759" width="414" height="137"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Left: 00.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Pu-Vb-z3h">
-                                        <rect key="frame" x="33" y="18" width="149" height="41"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
-                                        <color key="textColor" name="MainFontColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcD-qV-IIX" userLabel="Recalculate">
-                                        <rect key="frame" x="70" y="72" width="275" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="ORM-3k-8pN"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="275" id="rSq-Cv-OfL"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Restart">
-                                            <backgroundConfiguration key="background" cornerRadius="11">
-                                                <color key="backgroundColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </backgroundConfiguration>
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="25"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nNU-4v-2uE"/>
-                                            <action selector="reCalculateButtonPressed:" destination="FSK-pB-nrF" eventType="touchUpInside" id="fD0-GY-F1h"/>
-                                            <action selector="recalculatePressed:" destination="b4N-7T-Mc9" eventType="touchUpInside" id="JGx-8S-Vv2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkC-dE-SPm">
-                                        <rect key="frame" x="310" y="23" width="62" height="31"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="62" id="9Hk-7S-xaz"/>
-                                            <constraint firstAttribute="height" constant="31" id="f9f-gI-fWU"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Share">
-                                            <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" red="0.94117647059999998" green="0.41568627450000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </backgroundConfiguration>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="shareButtonPressed:" destination="FSK-pB-nrF" eventType="touchUpInside" id="PYT-Hv-qRS"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.64705882349999999" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="137" id="iXX-g8-0dQ"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="xMO-La-jjd"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="lbF-O6-S20" firstAttribute="leading" secondItem="xMO-La-jjd" secondAttribute="leading" id="79l-Ux-hwi"/>
-                            <constraint firstAttribute="bottom" secondItem="lbF-O6-S20" secondAttribute="bottom" id="de2-og-h9K"/>
-                            <constraint firstItem="lbF-O6-S20" firstAttribute="top" secondItem="DQ9-cW-p7o" secondAttribute="bottom" id="eJW-30-Nmc"/>
-                            <constraint firstItem="xMO-La-jjd" firstAttribute="trailing" secondItem="lbF-O6-S20" secondAttribute="trailing" id="eaj-dY-Xhu"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="AT2-wy-oGb"/>
-                    <connections>
-                        <outlet property="tableView" destination="DQ9-cW-p7o" id="jYS-ne-1TY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aKI-P0-cdH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2494.202898550725" y="441.96428571428572"/>
         </scene>
     </scenes>
     <resources>

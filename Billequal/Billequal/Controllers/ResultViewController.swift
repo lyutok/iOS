@@ -9,10 +9,6 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-//    var totalValue: Double?
-//    var tipsValue: Double?
-//    var pplNumberValue: Int?
-//    var eachToPayValue: Double?
     var billValues: Bill?
     
     @IBOutlet var resultToPayLabel: UILabel!
