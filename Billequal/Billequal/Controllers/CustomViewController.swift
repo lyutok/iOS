@@ -10,6 +10,7 @@ import UIKit
 class CustomViewController: UIViewController {
     
     var billValues: Bill?
+    var leftAmount = 0.0
     
     @IBOutlet var totalTextField: UITextField!
     
@@ -30,7 +31,7 @@ class CustomViewController: UIViewController {
     }
 
     @IBAction func goBackPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
     
@@ -39,7 +40,7 @@ extension CustomViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("numberOfRowsInSection")
-        return 10
+        return billValues?.pplNumber ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,6 +48,9 @@ extension CustomViewController: UITableViewDataSource {
         
         cell.personTextField.text = "Person \(indexPath.row + 1)"
         cell.personTextField.placeholder = "Person \(indexPath.row + 1)"
+        
+        cell.resultLabel.text = "00.00"
+        cell.resultWithTips.text = "00.00"
         
         return cell
     }
