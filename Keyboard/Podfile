@@ -1,0 +1,11 @@
+platform :ios, '9.0'
+
+target 'Keyboard' do
+
+  use_frameworks!
+
+  # Pods for Keyboard
+
+pod 'IQKeyboardManagerSwift'
+
+end

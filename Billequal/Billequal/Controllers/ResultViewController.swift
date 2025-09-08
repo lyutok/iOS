@@ -21,8 +21,6 @@ class ResultViewController: UIViewController {
             resultToPayLabel.text = String(format: "%.2f", bill.eachToPay)
             resultNote.text = "\(String(format: "%.0f", bill.tips))% tips included."
         }
-        
-        
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {

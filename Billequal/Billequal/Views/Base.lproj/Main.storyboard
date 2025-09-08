@@ -375,7 +375,7 @@
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tips, %:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMb-nl-yi4">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tips:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMb-nl-yi4">
                                                 <rect key="frame" x="208" y="45" width="208" height="55"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
                                                 <color key="textColor" name="MainFontColor"/>
@@ -394,13 +394,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="208" height="56.5"/>
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WYl-9e-gGf">
                                                 <rect key="frame" x="208" y="0.0" width="208" height="56.5"/>
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -422,7 +422,7 @@
                                     <constraint firstAttribute="trailing" secondItem="NNg-Sy-NUQ" secondAttribute="trailing" constant="20" id="voP-mv-TUN"/>
                                 </constraints>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cgf-S6-K4b">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cgf-S6-K4b">
                                 <rect key="frame" x="0.0" y="182.5" width="414" height="538.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
@@ -464,7 +464,7 @@
                                                 <connections>
                                                     <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0he-LD-Yw5"/>
                                                     <action selector="reCalculateButtonPressed:" destination="FSK-pB-nrF" eventType="touchUpInside" id="UwD-R3-KDt"/>
-                                                    <action selector="recalculatePressed:" destination="b4N-7T-Mc9" eventType="touchUpInside" id="7vX-wn-tRR"/>
+                                                    <action selector="restartPressed:" destination="b4N-7T-Mc9" eventType="touchUpInside" id="Mgc-VW-e7h"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMV-Rd-eBr">
@@ -513,6 +513,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="KtX-9s-YcD"/>
                     <connections>
+                        <outlet property="leftLabel" destination="HQq-fK-8L9" id="xDC-lj-T1k"/>
                         <outlet property="tableView" destination="cgf-S6-K4b" id="kzg-ex-sGN"/>
                         <outlet property="tipsTextField" destination="WYl-9e-gGf" id="KBG-7A-Axu"/>
                         <outlet property="totalTextField" destination="x3u-lk-zAX" id="fko-7J-FMM"/>
