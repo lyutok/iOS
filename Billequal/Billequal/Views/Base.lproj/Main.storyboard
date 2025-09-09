@@ -40,8 +40,8 @@
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ird-q7-Qq9" userLabel="Labels Stack View">
                                         <rect key="frame" x="0.0" y="139.5" width="414" height="90.5"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vU8-lP-2qk">
-                                                <rect key="frame" x="153" y="0.0" width="108.5" height="56.5"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" textAlignment="center" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vU8-lP-2qk">
+                                                <rect key="frame" x="165" y="0.0" width="84" height="56.5"/>
                                                 <color key="textColor" name="MainFontColor"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
@@ -404,14 +404,32 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total  | Tips, 0%" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-Sy-NUQ">
-                                        <rect key="frame" x="20" y="159" width="376" height="22"/>
-                                        <color key="textColor" name="MainFontColor"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dGL-UK-va2" userLabel="Headers Total, Tips %Stack View">
+                                        <rect key="frame" x="10" y="159" width="396" height="22"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-Sy-NUQ" userLabel="Empty">
+                                                <rect key="frame" x="0.0" y="0.0" width="132" height="22"/>
+                                                <color key="textColor" name="MainFontColor"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Total" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scp-Iv-kXu">
+                                                <rect key="frame" x="132" y="0.0" width="132" height="22"/>
+                                                <color key="textColor" name="MainFontColor"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tips, 0%" textAlignment="right" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OjC-xr-bch">
+                                                <rect key="frame" x="264" y="0.0" width="132" height="22"/>
+                                                <color key="textColor" name="MainFontColor"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dGL-UK-va2" secondAttribute="trailing" constant="10" id="AP2-dY-269"/>
                                     <constraint firstAttribute="trailing" secondItem="xpy-M4-HJs" secondAttribute="trailing" id="An5-sd-F8h"/>
                                     <constraint firstItem="xpy-M4-HJs" firstAttribute="leading" secondItem="nCd-Zv-yBP" secondAttribute="leading" id="KJ6-H9-oxw"/>
                                     <constraint firstAttribute="trailing" secondItem="xpy-M4-HJs" secondAttribute="trailing" id="KpV-ga-Mg9"/>
@@ -419,7 +437,6 @@
                                     <constraint firstItem="xpy-M4-HJs" firstAttribute="leading" secondItem="nCd-Zv-yBP" secondAttribute="leading" id="SDd-qc-C4a"/>
                                     <constraint firstAttribute="trailing" secondItem="VEJ-Dl-7AG" secondAttribute="trailing" id="loO-Jn-hm7"/>
                                     <constraint firstItem="VEJ-Dl-7AG" firstAttribute="leading" secondItem="nCd-Zv-yBP" secondAttribute="leading" id="umC-tv-AwC"/>
-                                    <constraint firstAttribute="trailing" secondItem="NNg-Sy-NUQ" secondAttribute="trailing" constant="20" id="voP-mv-TUN"/>
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cgf-S6-K4b">
@@ -494,7 +511,7 @@
                     <connections>
                         <outlet property="leftValueLabel" destination="9Wg-Sl-sgM" id="wTM-8H-57p"/>
                         <outlet property="tableView" destination="cgf-S6-K4b" id="kzg-ex-sGN"/>
-                        <outlet property="textWithTipsLabel" destination="NNg-Sy-NUQ" id="6pL-30-BHU"/>
+                        <outlet property="textWithTipsLabel" destination="OjC-xr-bch" id="v7j-bQ-KSh"/>
                         <outlet property="totalValueLabel" destination="r2R-RQ-abP" id="hWi-pB-nHN"/>
                     </connections>
                 </viewController>

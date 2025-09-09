@@ -39,14 +39,15 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sh-1t-5kX">
                                         <rect key="frame" x="0.0" y="0.0" width="141" height="39"/>
-                                        <color key="tintColor" red="0.64705882349999999" green="0.82745098039999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Calculate">
+                                            <backgroundConfiguration key="background" cornerRadius="11">
+                                                <color key="backgroundColor" red="0.64705882349999999" green="0.82745098039999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
                                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
-                                            <color key="baseBackgroundColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="openCalculatorPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VxI-r7-QSu"/>
+                                            <action selector="calculateButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hFt-RR-8RP"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123.88" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJM-g3-nsv">

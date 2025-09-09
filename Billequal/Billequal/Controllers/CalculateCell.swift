@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CalculateCellDelegate: AnyObject {
-    func didUpdateCalculationText(_ text: String, in cell: CalculateCell)
+    func didTapCalculate(in cell: CalculateCell)
 }
 
 class CalculateCell: UITableViewCell {
@@ -18,7 +18,7 @@ class CalculateCell: UITableViewCell {
     @IBOutlet var resultWithTipsLabel: UILabel!
     
     weak var delegate: CalculateCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -28,8 +28,10 @@ class CalculateCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    @IBAction func openCalculatorPressed(_ sender: UIButton) {
-        let calculatorVC = CalculatorViewController()
-            present(calculatorVC, animated: true, completion: nil)
+    
+    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        delegate?.didTapCalculate(in: self)
     }
 }
+
+

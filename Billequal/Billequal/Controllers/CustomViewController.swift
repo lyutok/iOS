@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomViewController: UIViewController {
-    
+  
     var billValues: Bill?
     var billequalBrain = BillequalBrain()
     var leftAmount = 0.0
@@ -23,9 +23,8 @@ class CustomViewController: UIViewController {
         
         if let bill = billValues {
             totalValueLabel.text = String(format: "%.2f", bill.total)
-//            ??todo textWithTipsLabel
             
-            textWithTipsLabel.text = "Total | Tips " + String(format: "%.0f", bill.tips) + "%"
+            textWithTipsLabel.text = "Tips, " + String(format: "%.0f", bill.tips) + "%"
             
             leftAmount = bill.total
             leftValueLabel.text = String(format: "%.2f", leftAmount)
@@ -76,11 +75,13 @@ class CustomViewController: UIViewController {
     @IBAction func shareButtonPressed(_ sender: UIButton) {
     }
     
+    @IBAction func CalculatePressed(_ sender: UIButton) {
+        let calculatorVC = CalculatorViewController()
+            present(calculatorVC, animated: true, completion: nil)
+    }
 }
 
-
-    
-
+// TableView
 extension CustomViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,10 +95,10 @@ extension CustomViewController: UITableViewDataSource {
         cell.personLabel.text = "Person \(indexPath.row + 1)"
 //        cell.personTextField.placeholder = "Person \(indexPath.row + 1)"
         
-        cell.resultLabel.text = "00.00"
-        cell.resultWithTipsLabel.text = "00.00"
+        cell.resultLabel.text = "0.00"
+        cell.resultWithTipsLabel.text = "0.00"
         
-//        cell.delegate = self
+        cell.delegate = self
         
         return cell
     }
@@ -118,4 +119,13 @@ extension CustomViewController: UITableViewDataSource {
 //            print("⚠️ Invalid expression")
 //        }
 //    }
+}
+
+// protocal for the cell to press Calculate button
+extension CustomViewController: CalculateCellDelegate {
+    
+    func didTapCalculate(in cell: CalculateCell) {
+        let calculatorVC = CalculatorViewController()
+        present(calculatorVC, animated: true, completion: nil)
+    }
 }

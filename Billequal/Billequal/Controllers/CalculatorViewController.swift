@@ -24,7 +24,7 @@ class CalculatorViewController: UIViewController {
         // Display label
         displayLabel.text = currentInput
         displayLabel.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-        displayLabel.textColor = #colorLiteral(red: 1, green: 0.3882352941, blue: 0.3882352941, alpha: 1)
+        displayLabel.textColor = UIColor(named: "MainFontColor")
         displayLabel.textAlignment = .right
         displayLabel.numberOfLines = 1
         displayLabel.translatesAutoresizingMaskIntoConstraints = false
