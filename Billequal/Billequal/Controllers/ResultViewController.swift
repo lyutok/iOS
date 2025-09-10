@@ -27,16 +27,7 @@ class ResultViewController: UIViewController {
         // Text or data to share
         let textToShare = "Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) 💸 each, \(String(format: "%.0f", billValues?.tips ?? 0.0))% included."
             
-            let items: [Any] = [textToShare]
-            
-            let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            
-            // For iPad: present in a popover
-            if let popoverController = activityVC.popoverPresentationController {
-                popoverController.sourceView = sender
-            }
-            
-            present(activityVC, animated: true, completion: nil)
+        ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
     }
     
     @IBAction func reCalculateButtonPressed(_ sender: UIButton) {

@@ -32,47 +32,18 @@ class CustomViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-//
-//        // create toolbar to keyboard
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//        // create flexible space (to push Done button to the right)
-//        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-//        // create Done button
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        
-//        doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
-//        toolbar.items = [flexSpace, doneButton]
-//            
-//        // assign toolbar to your textField
-//        totalTextField.inputAccessoryView = toolbar
-//
-//        // to dismiss keybord
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        view.addGestureRecognizer(tapGesture)
     }
-    
-//    //MARK: - Keyboard
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-////        total = Double(totalTextField.text!) ?? 0.0
-//    }
-//
-//    @objc func doneButtonTapped() {
-//        view.endEditing(true) // closes keyboard for any active textField
-//    }
-//
-//    @objc func dismissKeyboard() {
-//        view.endEditing(true)
-//        }
     
     @IBAction func restartPressed(_ sender: UIButton) {
         view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
+        // TOT TEXT ADD appName
+        // Text or data to share
+        let textToShare = "Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) 💸 each, \(String(format: "%.0f", billValues?.tips ?? 0.0))% included."
+        
+        ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
     }
     
     @IBAction func CalculatePressed(_ sender: UIButton) {
@@ -102,23 +73,6 @@ extension CustomViewController: UITableViewDataSource {
         
         return cell
     }
-     
-//    // text from textView of the custom cell and calculate total to pay, to pay with tips
-//    func didUpdateCalculationText(_ text: String, in cell: CalculateCell) {
-//        if let totalFromBrain = billequalBrain.evaluateExpression(text) {
-//            let totalWithTips = totalFromBrain + totalFromBrain * (billValues?.tips ?? 0.0) / 100
-//            leftAmount -= totalFromBrain
-//            cell.resultLabel.text = String(format: "%.2f", totalFromBrain)
-//            cell.resultWithTips.text = String(format: "%.2f", totalWithTips)
-//            leftLabel.text = "Left: " + String(format: "%.2f", leftAmount)
-//            cell.CalculationTextView.textColor = .label // reset to normal color
-//        } else {
-//            cell.CalculationTextView.textColor = .red
-//            cell.resultLabel.text = "Error"
-//            cell.resultWithTips.text = ""
-//            print("⚠️ Invalid expression")
-//        }
-//    }
 }
 
 // protocal for the cell to press Calculate button
