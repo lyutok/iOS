@@ -45,11 +45,6 @@ class CustomViewController: UIViewController {
         
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
     }
-    
-    @IBAction func CalculatePressed(_ sender: UIButton) {
-        let calculatorVC = CalculatorViewController()
-            present(calculatorVC, animated: true, completion: nil)
-    }
 }
 
 // TableView
@@ -76,10 +71,13 @@ extension CustomViewController: UITableViewDataSource {
 }
 
 // protocal for the cell to press Calculate button
+// Open Calculator VC, Send Person label to calculator VC
 extension CustomViewController: CalculateCellDelegate {
     
     func didTapCalculate(in cell: CalculateCell) {
+//        print(cell.personLabel.text)
         let calculatorVC = CalculatorViewController()
+        calculatorVC.personLabel.text = cell.personLabel.text ?? "Person "
         present(calculatorVC, animated: true, completion: nil)
     }
 }

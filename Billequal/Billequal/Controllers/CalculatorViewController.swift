@@ -14,6 +14,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     private var firstOperand: Double?
     private var operation: String?
     
+    let personLabel = UILabel()
     private let personTextField = UITextField()
 
     override func viewDidLoad() {
@@ -25,8 +26,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     // MARK: - SetupUI
     private func setupUI() {
         // 1️⃣ Person row (Label + TextField)
-        let personLabel = UILabel()
-        personLabel.text = "Person 1"
         personLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         personLabel.textColor = UIColor(named: "MainFontColor")
         
