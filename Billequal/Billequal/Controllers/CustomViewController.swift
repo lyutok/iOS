@@ -12,11 +12,13 @@ class CustomViewController: UIViewController {
     var billValues: Bill?
     var billequalBrain = BillequalBrain()
     var leftAmount = 0.0
+    var tappedRow = 0 // index for the row of Calculate button tapped
     
     @IBOutlet var totalValueLabel: UILabel!
     @IBOutlet var leftValueLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var textWithTipsLabel: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class CustomViewController: UIViewController {
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
-        // TOT TEXT ADD appName
+        // TOT TEXT ADD appName!!!!
         // Text or data to share
         let textToShare = "Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) 💸 each, \(String(format: "%.0f", billValues?.tips ?? 0.0))% included."
         
@@ -59,8 +61,6 @@ extension CustomViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! CalculateCell
         
         cell.personLabel.text = "Person \(indexPath.row + 1)"
-//        cell.personTextField.placeholder = "Person \(indexPath.row + 1)"
-        
         cell.resultLabel.text = "0.00"
         cell.resultWithTipsLabel.text = "0.00"
         
@@ -70,14 +70,55 @@ extension CustomViewController: UITableViewDataSource {
     }
 }
 
-// protocal for the cell to press Calculate button
+// protocol for the cell to press Calculate button
 // Open Calculator VC, Send Person label to calculator VC
 extension CustomViewController: CalculateCellDelegate {
     
-    func didTapCalculate(in cell: CalculateCell) {
-//        print(cell.personLabel.text)
+    func tapCalculateOnCell(in cell: CalculateCell) {
+        
+        // Get the indexPath of the tapped cell
+        if let indexPath = tableView.indexPath(for: cell) {
+            tappedRow = indexPath.row
+            print("Tapped row button in row: \(tappedRow)")
+        }
+            
         let calculatorVC = CalculatorViewController()
+            calculatorVC.delegate = self
+     
         calculatorVC.personLabel.text = cell.personLabel.text ?? "Person "
         present(calculatorVC, animated: true, completion: nil)
     }
+}
+
+// Recieve and update data after Calculation done
+extension CustomViewController: CalculatorViewControllerDelegate {
+    func calculatorDidFinish(name: String, result: String) {
+        print("Got back: \(name), \(result)")
+        
+        let indexPath = IndexPath(row: tappedRow, section: 0)
+
+        if let cellToChange = tableView.cellForRow(at: indexPath) as? CalculateCell {
+            // update visible cell directly
+            if !name.isEmpty {
+                cellToChange.personLabel.text = name
+            }
+            
+            if let res = Double(result), let tips = billValues?.tips {
+                cellToChange.resultLabel.text = String(format: "%.2f", res)
+                
+                let withTips = res + (res * tips / 100)
+                cellToChange.resultWithTipsLabel.text = String(format: "%.2f", withTips)
+                leftAmount -= res
+            }
+        } else {
+            // If cell is off-screen, just reload the row
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        leftValueLabel.text = String(format: "%.2f", leftAmount)
+    }
+}
+
+func updateLeftLabel (for person: Int, amountToPay: Double) -> Double {
+    
+    return 0.0
 }

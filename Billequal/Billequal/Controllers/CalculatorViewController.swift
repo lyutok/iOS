@@ -7,7 +7,14 @@
 
 import UIKit
 
+// protocol for passing data back to CustomVC
+protocol CalculatorViewControllerDelegate: AnyObject {
+    func calculatorDidFinish(name: String, result: String)
+}
+
 class CalculatorViewController: UIViewController, UITextFieldDelegate {
+    
+    weak var delegate: CalculatorViewControllerDelegate?
 
     private let displayLabel = UILabel()
     private var currentInput: String = "0"
@@ -200,7 +207,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Done button action
     @objc private func doneTapped() {
-        
         let name = personTextField.text ?? ""
         let result = displayLabel.text ?? "0"
         
@@ -209,6 +215,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         }
         print(result)
         
+        delegate?.calculatorDidFinish(name: name, result: result)
         self.dismiss(animated: true, completion: nil)
     }
 }

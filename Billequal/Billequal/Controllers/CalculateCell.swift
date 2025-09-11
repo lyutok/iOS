@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CalculateCellDelegate: AnyObject {
-    func didTapCalculate(in cell: CalculateCell)
+    func tapCalculateOnCell(in cell: CalculateCell)
 }
 
 class CalculateCell: UITableViewCell {
@@ -30,7 +30,7 @@ class CalculateCell: UITableViewCell {
     
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
-        delegate?.didTapCalculate(in: self)
+        delegate?.tapCalculateOnCell(in: self)
     }
 }
 
