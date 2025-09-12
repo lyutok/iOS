@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2003C8E12E7478570012CB2E /* PersonCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003C8E02E7478560012CB2E /* PersonCalculation.swift */; };
 		2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2069FC352E5703770014AC45 /* CustomViewController.swift */; };
 		20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */; };
 		20A0A2442E5BCAB900FC4514 /* CalculateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A0A2422E5BCAB900FC4514 /* CalculateCell.xib */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2003C8E02E7478560012CB2E /* PersonCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCalculation.swift; sourceTree = "<group>"; };
 		2069FC352E5703770014AC45 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateCell.swift; sourceTree = "<group>"; };
 		20A0A2422E5BCAB900FC4514 /* CalculateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalculateCell.xib; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				20FEACEC2E5E3EAB00476F0D /* Bill.swift */,
 				20FEACEE2E5E409200476F0D /* BillequalBrain.swift */,
+				2003C8E02E7478560012CB2E /* PersonCalculation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				20FEACED2E5E3EAB00476F0D /* Bill.swift in Sources */,
 				20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */,
 				20FEACEF2E5E409200476F0D /* BillequalBrain.swift in Sources */,
+				2003C8E12E7478570012CB2E /* PersonCalculation.swift in Sources */,
 				20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
