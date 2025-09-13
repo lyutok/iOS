@@ -135,12 +135,31 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
         view.addSubview(doneButton)
         
+        // 5️⃣ Done Button (below calculator stack)
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        cancelButton.backgroundColor = #colorLiteral(red: 0.968627451, green: 0.6470588235, blue: 0.6392156863, alpha: 1)
+        cancelButton.tintColor = .white
+        cancelButton.layer.cornerRadius = 10
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        view.addSubview(cancelButton)
+        
+        // StackView for Done + Cancel
+        let bottomButtonsStack = UIStackView(arrangedSubviews: [cancelButton, doneButton])
+        bottomButtonsStack.axis = .horizontal
+        bottomButtonsStack.spacing = 20
+        bottomButtonsStack.distribution = .fillEqually
+        bottomButtonsStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomButtonsStack)
+        
         NSLayoutConstraint.activate([
-            doneButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
-            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            doneButton.widthAnchor.constraint(equalToConstant: 120),
-            doneButton.heightAnchor.constraint(equalToConstant: 44),
-            doneButton.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -20)
+            bottomButtonsStack.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
+            bottomButtonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            bottomButtonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            bottomButtonsStack.heightAnchor.constraint(equalToConstant: 44),
+            bottomButtonsStack.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -20)
         ])
     }
     
@@ -205,7 +224,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - Done button action
+    // MARK: - Done/Cancel button actions
     @objc private func doneTapped() {
         let name = personTextField.text ?? ""
         let result = displayLabel.text ?? "0"
@@ -216,6 +235,10 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         print(result)
         
         delegate?.calculatorDidFinish(name: name, result: result)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func cancelTapped() {
         self.dismiss(animated: true, completion: nil)
     }
 }
