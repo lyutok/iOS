@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet var fivePercSwitch: UISwitch!
     @IBOutlet var tenPercSwitch: UISwitch!
+    @IBOutlet var fifteenPercSwitch: UISwitch!
     @IBOutlet var twentyPercSwitch: UISwitch!
     @IBOutlet var twentyFivePercSwitch: UISwitch!
     
@@ -32,7 +33,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         super.viewDidLoad()
         
-        switches = [fivePercSwitch: 5.0, tenPercSwitch: 10.0, twentyPercSwitch: 20.0, twentyFivePercSwitch: 25.0]
+        switches = [fivePercSwitch: 5.0, tenPercSwitch: 10.0, fifteenPercSwitch: 15.0, twentyPercSwitch: 20.0, twentyFivePercSwitch: 25.0]
         
         totalTextField.delegate = self
         
