@@ -229,11 +229,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         let name = personTextField.text ?? ""
         let result = displayLabel.text ?? "0"
         
-        if name != "" {
-            print(name)
-        }
-        print(result)
-        
         delegate?.calculatorDidFinish(name: name, result: result)
         self.dismiss(animated: true, completion: nil)
     }

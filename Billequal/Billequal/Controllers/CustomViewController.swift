@@ -52,9 +52,19 @@ class CustomViewController: UIViewController {
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
-        // TOT TEXT ADD appName!!!!
         // Text or data to share
-        let textToShare = "Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) 💸 each, \(String(format: "%.0f", billValues?.tips ?? 0.0))% included."
+        var agregatedData = ""
+        for data in rowData {
+            agregatedData += String("\(data.name): \(data.resultWithTips) 💸. ")
+        }
+        
+        let textToShare = """
+                        Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split:
+                        \(agregatedData)
+                        \(String(format: "%.0f", billValues?.tips ?? 0.0))% included.
+                        
+                        — Sent from Billequal
+                        """
         
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
     }
@@ -87,10 +97,9 @@ extension CustomViewController: CalculateCellDelegate {
     
     func tapCalculateOnCell(in cell: CalculateCell) {
         
-        // Get the indexPath of the tapped cell
+        // Get the indexPath of the tapped row cell
         if let indexPath = tableView.indexPath(for: cell) {
             tappedRow = indexPath.row
-            print("Tapped row button in row: \(tappedRow)")
         }
             
         let calculatorVC = CalculatorViewController()
@@ -104,7 +113,7 @@ extension CustomViewController: CalculateCellDelegate {
 // Recieve and update data after Calculation done
 extension CustomViewController: CalculatorViewControllerDelegate {
     func calculatorDidFinish(name: String, result: String) {
-        print("Got back: \(name), \(result)")
+//        print("Got back: \(name), \(result)")
         
         let indexPath = IndexPath(row: tappedRow, section: 0)
 
@@ -141,8 +150,6 @@ extension CustomViewController: CalculatorViewControllerDelegate {
             // Update left amount label
             self.leftValueLabel.text = String(format: "%.2f", self.leftAmount)
         }
-
-        print(self.rowData)
     }
 }
 
