@@ -89,8 +89,8 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             ["7","8","9","÷"],
             ["4","5","6","×"],
             ["1","2","3","−"],
-            ["0",".","C","="],
-            ["+"] // last row only plus
+            ["0",".","C","+"],
+            ["="] // last row only plus
         ]
         
         let stackView = UIStackView()
