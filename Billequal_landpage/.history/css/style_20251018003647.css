@@ -16,11 +16,11 @@
 	}
 }
 
-.gradient-background-still {
+/* .gradient-background {
   background: linear-gradient(135deg, #69B5BE, #F06A66);
   color: white;
   position: relative;
-}
+} */
 
 /* Keep SVG under the content */
 .wave-divider svg {
@@ -43,6 +43,6 @@
 .icon-square {
     width: 70px;              /* controls the square size */
     height: 70px;
-    background-color: #f8f9fa; /* light background */
+    background-color: #f8f9fa; /* light background (Bootstrap’s light gray) */
     border-radius: 12px;       /* optional: slightly rounded corners */
   }

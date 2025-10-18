@@ -16,18 +16,17 @@
 	}
 }
 
-.gradient-background-still {
+/* .gradient-background {
   background: linear-gradient(135deg, #69B5BE, #F06A66);
   color: white;
   position: relative;
-}
+} */
 
 /* Keep SVG under the content */
 .wave-divider svg {
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: -1px;
 }
 
 /* Float the hero image slightly above the wave */
@@ -39,10 +38,3 @@
   border-radius: 35px;
   max-width: 50%;
 }
-
-.icon-square {
-    width: 70px;              /* controls the square size */
-    height: 70px;
-    background-color: #f8f9fa; /* light background */
-    border-radius: 12px;       /* optional: slightly rounded corners */
-  }

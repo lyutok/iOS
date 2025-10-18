@@ -1,4 +1,4 @@
-.gradient-background {
+/* .gradient-background {
 	background: linear-gradient(-45deg, #69B5BE, #F06A66, #A5D3D9, #F7A5A3);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
@@ -14,9 +14,9 @@
 	100% {
 		background-position: 0% 50%;
 	}
-}
+} */
 
-.gradient-background-still {
+.gradient-background {
   background: linear-gradient(135deg, #69B5BE, #F06A66);
   color: white;
   position: relative;
@@ -27,7 +27,6 @@
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: -1px;
 }
 
 /* Float the hero image slightly above the wave */
@@ -39,10 +38,3 @@
   border-radius: 35px;
   max-width: 50%;
 }
-
-.icon-square {
-    width: 70px;              /* controls the square size */
-    height: 70px;
-    background-color: #f8f9fa; /* light background */
-    border-radius: 12px;       /* optional: slightly rounded corners */
-  }
