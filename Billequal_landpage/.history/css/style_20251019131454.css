@@ -50,15 +50,6 @@
   .section-divider {
   border: 0;
   height: 2px;
-  background: linear-gradient(to right, #ddd, #69B5BE, #F06A66, #A5D3D9, #F7A5A3);
+  background: linear-gradient(to right, #ddd, #aaa, #ddd);
   border-radius: 2px;
 }
-
-/* .message-preview {
-  background: #f8f9fa;
-  border-radius: 16px;
-  padding: 1.5rem;
-  max-width: 420px;
-  margin: auto;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-} */
