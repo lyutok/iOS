@@ -62,7 +62,6 @@ class CustomViewController: UIViewController {
                         Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split:
                         \(agregatedData)
                         \(String(format: "%.0f", billValues?.tips ?? 0.0))% included.
-                        
                         — Sent from Billequal
                         """
         
