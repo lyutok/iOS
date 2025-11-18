@@ -55,7 +55,7 @@ class CustomViewController: UIViewController {
         // Text or data to share
         var agregatedData = ""
         for data in rowData {
-            agregatedData += String("\(data.name): \(data.resultWithTips) 💸. ")
+            agregatedData += String("\(data.name): \(data.resultWithTips) 💸\n")
         }
         
         let textToShare = """
