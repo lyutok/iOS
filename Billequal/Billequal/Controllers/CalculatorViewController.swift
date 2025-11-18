@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 // protocol for passing data back to CustomVC
 protocol CalculatorViewControllerDelegate: AnyObject {
@@ -17,16 +18,19 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     weak var delegate: CalculatorViewControllerDelegate?
 
     private let displayLabel = UILabel()
+    private let expressionLabel = UILabel()
     private var currentInput: String = "0"
-    private var firstOperand: Double?
+//    private var firstOperand: Double?
     private var operation: String?
+    private var textToCalculate: String = ""
+    private var dotRemoved: Bool = false
     
     let personLabel = UILabel()
     private let personTextField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "BgColor")
         setupUI()
     }
     
@@ -35,14 +39,25 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         // 1️⃣ Person row (Label + TextField)
         personLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         personLabel.textColor = UIColor(named: "MainFontColor")
-        
-        personTextField.delegate = self // for keyboard
         personTextField.placeholder = "Enter name"
         personTextField.borderStyle = .roundedRect
+            
+        personTextField.delegate = self // for keyboard
         personTextField.keyboardType = .default
         personTextField.autocapitalizationType = .words
-        personTextField.tintColor = UIColor(named: "MainFontColor")
+        personTextField.textColor = UIColor(named: "MainFontColor")
         personTextField.returnKeyType = .continue
+        personTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        personTextField.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        personTextField.layer.borderWidth = 1
+        personTextField.layer.cornerRadius = 8
+        
+        // placeholder text color
+        personTextField.attributedPlaceholder = NSAttributedString(
+            string: "Enter name",
+            attributes: [.foregroundColor: UIColor.gray]
+        )
+
         
         // 👇 disable autocomplete bar
         personTextField.autocorrectionType = .no
@@ -73,16 +88,33 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         displayLabel.font = UIFont.systemFont(ofSize: 36, weight: .bold)
         displayLabel.textColor = UIColor(named: "MainFontColor")
         displayLabel.textAlignment = .right
-        displayLabel.numberOfLines = 1
+        displayLabel.numberOfLines = 0
         displayLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(displayLabel)
         
         NSLayoutConstraint.activate([
-            displayLabel.topAnchor.constraint(equalTo: personRow.bottomAnchor, constant: 20),
+            displayLabel.topAnchor.constraint(equalTo: personRow.bottomAnchor, constant: 1),
             displayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             displayLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             displayLabel.heightAnchor.constraint(equalToConstant: 80)
         ])
+        
+        // 2️⃣.1 Expression label (smaller grey text)
+        expressionLabel.text = ""
+        expressionLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        expressionLabel.textColor = UIColor.gray
+        expressionLabel.textAlignment = .right
+        expressionLabel.numberOfLines = 1
+        expressionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(expressionLabel)
+
+        NSLayoutConstraint.activate([
+            expressionLabel.topAnchor.constraint(equalTo: displayLabel.bottomAnchor, constant: 1),
+            expressionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            expressionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            expressionLabel.heightAnchor.constraint(equalToConstant: 22)
+        ])
+
         
         // 3️⃣ Buttons layout
         let buttons: [[String]] = [
@@ -100,7 +132,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: displayLabel.bottomAnchor, constant: 20),
+            stackView.topAnchor.constraint(equalTo: expressionLabel.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
@@ -124,18 +156,18 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             stackView.addArrangedSubview(rowStack)
         }
         
-        // 4️⃣ Done Button (below calculator stack)
-        let doneButton = UIButton(type: .system)
-        doneButton.setTitle("Done", for: .normal)
-        doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        doneButton.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4156862745, blue: 0.4, alpha: 1)
-        doneButton.tintColor = .white
-        doneButton.layer.cornerRadius = 10
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
-        view.addSubview(doneButton)
+        // 4️⃣ Submit Button (below calculator stack)
+        let submitButton = UIButton(type: .system)
+        submitButton.setTitle("Submit", for: .normal)
+        submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        submitButton.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4156862745, blue: 0.4, alpha: 1)
+        submitButton.tintColor = .white
+        submitButton.layer.cornerRadius = 10
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
+        view.addSubview(submitButton)
         
-        // 5️⃣ Done Button (below calculator stack)
+        // 5️⃣ Cancel Button (below calculator stack)
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
@@ -146,8 +178,8 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         view.addSubview(cancelButton)
         
-        // StackView for Done + Cancel
-        let bottomButtonsStack = UIStackView(arrangedSubviews: [cancelButton, doneButton])
+        // StackView for Submit + Cancel
+        let bottomButtonsStack = UIStackView(arrangedSubviews: [cancelButton, submitButton])
         bottomButtonsStack.axis = .horizontal
         bottomButtonsStack.spacing = 20
         bottomButtonsStack.distribution = .fillEqually
@@ -179,53 +211,128 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
 
         switch title {
         case "0"..."9":
+            operation = nil
             if currentInput == "0" {
                 currentInput = title
+                print(currentInput)
             } else {
                 currentInput += title
+                print(currentInput)
             }
-            displayLabel.text = currentInput
+            textToCalculate += title
+            print("textToCalculate:", textToCalculate)
+            displayLabel.text = textToCalculate
 
         case ".":
-            if !currentInput.contains(".") {
-                currentInput += "."
-                displayLabel.text = currentInput
-            }
+            if let last = textToCalculate.last, "+−×÷".contains(last) {
+                return
+            } else if !currentInput.contains(".") || dotRemoved {
+                if textToCalculate.isEmpty {
+                    currentInput += "."
+                    textToCalculate = textToCalculate + "0" + title
+                    displayLabel.text = textToCalculate
+
+                } else {
+                    currentInput += "."
+                    textToCalculate += title
+                    displayLabel.text = textToCalculate
+                }
+                }
+            dotRemoved = false
 
         case "+","−","×","÷":
-            firstOperand = Double(currentInput)
-            operation = title
-            displayLabel.text = currentInput
-            currentInput = "0"
-
-        case "=":
-            if let op = operation, let first = firstOperand, let second = Double(currentInput) {
-                var result: Double = 0
-                switch op {
-                case "+": result = first + second
-                case "−": result = first - second
-                case "×": result = first * second
-                case "÷": result = second != 0 ? first / second : 0
-                default: break
-                }
-                currentInput = String(result)
-                displayLabel.text = currentInput
-                operation = nil
-                firstOperand = nil
+//            firstOperand = Double(currentInput)
+            if operation == nil && textToCalculate.last != "." {
+                operation = title
+                textToCalculate += title
+                displayLabel.text = textToCalculate
+                currentInput = "0"
             }
 
-        case "C":
+        case "=":
+            if let result = evaluate(textToCalculate) {
+                displayLabel.text = String(format: "%g", result)
+                print("Result: \(result)")
+            }
+            expressionLabel.text = textToCalculate
+
             currentInput = "0"
-            firstOperand = nil
             operation = nil
-            displayLabel.text = currentInput
+//            textToCalculate = ""
+            dotRemoved = false
+            
+            
+//            if let op = operation, let first = firstOperand, let second = Double(currentInput) {
+//                var result: Double = 0
+//                switch op {
+//                case "+": result = first + second
+//                case "−": result = first - second
+//                case "×": result = first * second
+//                case "÷": result = second != 0 ? first / second : 0
+//                default: break
+//                }
+//                currentInput = String(result)
+//                displayLabel.text = currentInput
+//                operation = nil
+//                firstOperand = nil
+//            }
+
+        case "C":
+//            currentInput = "0"
+//            firstOperand = nil
+//            operation = nil
+//            displayLabel.text = currentInput
+            
+            if expressionLabel.text?.isEmpty == false {
+                displayLabel.text = "0"
+                expressionLabel.text = ""
+                textToCalculate = ""
+            }
+            
+            if !textToCalculate.isEmpty {
+             let last = textToCalculate.removeLast()
+                if last == "." {
+                    dotRemoved = true
+                }
+                
+                if textToCalculate.isEmpty {
+                    displayLabel.text = "0"
+                    currentInput = "0"
+                } else {
+                    displayLabel.text = textToCalculate
+                }
+            }
+
 
         default: break
         }
     }
     
-    // MARK: - Done/Cancel button actions
-    @objc private func doneTapped() {
+    func evaluate(_ math: String) -> Double? {
+        var clean = math
+                .replacingOccurrences(of: "−", with: "-")
+                .replacingOccurrences(of: "×", with: "*")
+                .replacingOccurrences(of: "÷", with: "/")
+        
+        // Remove trailing operator if present
+            if let last = clean.last, "+-*/.".contains(last) {
+                clean.removeLast()
+            }
+        
+        // Convert only integers to decimals (skip existing decimals!)
+        let regex = try! NSRegularExpression(pattern: #"(?<![\d.])(\d+)(?![\d.])"#)
+            clean = regex.stringByReplacingMatches(
+                in: clean,
+                range: NSRange(clean.startIndex..., in: clean),
+                withTemplate: "$1.0"
+            )
+        
+        let exp = NSExpression(format: clean)
+        return exp.expressionValue(with: nil, context: nil) as? Double
+    }
+    
+    // MARK: - Submit/Cancel button actions
+    @objc private func submitTapped() {
         let name = personTextField.text ?? ""
         let result = displayLabel.text ?? "0"
         

@@ -78,8 +78,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         view.endEditing(true)
         }
     
-    //MARK: - UIPicker methods
-    
+    // MARK: - UIPicker methods
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -88,13 +88,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return numbersForUIPicker.count
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return numbersForUIPicker[row]
+    // Appearance
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let title = numbersForUIPicker[row]
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(named: "MainFontColor") ?? UIColor.black,
+            .font: UIFont.systemFont(ofSize: 18)
+        ]
+        return NSAttributedString(string: title, attributes: attributes)
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pplNumber = Int(numbersForUIPicker[row]) ?? 1
     }
+
     
     //MARK: - IBActions
     
