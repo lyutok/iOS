@@ -241,7 +241,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             dotRemoved = false
 
         case "+","−","×","÷":
-//            firstOperand = Double(currentInput)
             if operation == nil && textToCalculate.last != "." {
                 operation = title
                 textToCalculate += title
@@ -252,37 +251,28 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         case "=":
             if let result = evaluate(textToCalculate) {
                 displayLabel.text = String(format: "%g", result)
+            } else {
+                displayLabel.text = "Error"
+            }
+            
+            if let result = evaluate(textToCalculate) {
+                displayLabel.text = String(format: "%g", result)
                 print("Result: \(result)")
             }
+            
+            // Clean the last if "+-*/."
+            if let last = textToCalculate.last, "+−×÷.".contains(last) {
+                textToCalculate.removeLast()
+            }
+
+            // Update the UI
             expressionLabel.text = textToCalculate
 
             currentInput = "0"
             operation = nil
-//            textToCalculate = ""
             dotRemoved = false
-            
-            
-//            if let op = operation, let first = firstOperand, let second = Double(currentInput) {
-//                var result: Double = 0
-//                switch op {
-//                case "+": result = first + second
-//                case "−": result = first - second
-//                case "×": result = first * second
-//                case "÷": result = second != 0 ? first / second : 0
-//                default: break
-//                }
-//                currentInput = String(result)
-//                displayLabel.text = currentInput
-//                operation = nil
-//                firstOperand = nil
-//            }
 
         case "C":
-//            currentInput = "0"
-//            firstOperand = nil
-//            operation = nil
-//            displayLabel.text = currentInput
-            
             if expressionLabel.text?.isEmpty == false {
                 displayLabel.text = "0"
                 expressionLabel.text = ""
@@ -302,7 +292,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
                     displayLabel.text = textToCalculate
                 }
             }
-
 
         default: break
         }
