@@ -51,7 +51,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         // create Done button
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
         
-        doneButton.tintColor = UIColor(named: "MainFontColor")
+        doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
                                              
         toolbar.items = [flexSpace, doneButton]
             

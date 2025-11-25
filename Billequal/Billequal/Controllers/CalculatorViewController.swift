@@ -20,7 +20,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     private let displayLabel = UILabel()
     private let expressionLabel = UILabel()
     private var currentInput: String = "0"
-//    private var firstOperand: Double?
     private var operation: String?
     private var textToCalculate: String = ""
     private var dotRemoved: Bool = false
@@ -88,7 +87,8 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         displayLabel.font = UIFont.systemFont(ofSize: 36, weight: .bold)
         displayLabel.textColor = UIColor(named: "MainFontColor")
         displayLabel.textAlignment = .right
-        displayLabel.numberOfLines = 0
+        displayLabel.numberOfLines = 1
+        displayLabel.lineBreakMode = .byTruncatingHead   // adds “…” on the left
         displayLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(displayLabel)
         
@@ -241,6 +241,9 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             dotRemoved = false
 
         case "+","−","×","÷":
+            if textToCalculate == "" && ["×", "÷", "+"].contains(title) {
+                return
+            }
             if operation == nil && textToCalculate.last != "." {
                 operation = title
                 textToCalculate += title
@@ -249,15 +252,26 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             }
 
         case "=":
-            if let result = evaluate(textToCalculate) {
-                displayLabel.text = String(format: "%g", result)
-            } else {
+            // Check if string is only one character
+            let operators: Set<String> = ["+", "−", "×", "÷", "=", ""]
+            if operators.contains(textToCalculate) {
+                print("= ", textToCalculate)
+                return
+            }
+            
+            // Check if there is no "nan", "inf" in the textToCalculate
+            let nonValid = ["nan", "inf"]
+            if nonValid.contains(where: { textToCalculate.lowercased().contains($0) }) {
                 displayLabel.text = "Error"
+                return
             }
             
             if let result = evaluate(textToCalculate) {
                 displayLabel.text = String(format: "%g", result)
                 print("Result: \(result)")
+            } else {
+                displayLabel.text = "Error"
+                return
             }
             
             // Clean the last if "+-*/."
@@ -267,7 +281,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
 
             // Update the UI
             expressionLabel.text = textToCalculate
-
+            textToCalculate = displayLabel.text!
             currentInput = "0"
             operation = nil
             dotRemoved = false
