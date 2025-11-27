@@ -7,39 +7,46 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class StartViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var totalTextField: UITextField!
-    
-    @IBOutlet var fivePercSwitch: UISwitch!
-    @IBOutlet var tenPercSwitch: UISwitch!
-    @IBOutlet var fifteenPercSwitch: UISwitch!
-    @IBOutlet var twentyPercSwitch: UISwitch!
-    @IBOutlet var twentyFivePercSwitch: UISwitch!
-    
-    var switches: [UISwitch: Double] = [:]
-    let numbersForUIPicker = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]
+    @IBOutlet var addTipsLabel: UILabel!
+    @IBOutlet var percButtons: [UIButton]!
+    @IBOutlet var customPercTextField: UITextField!
+    @IBOutlet var pplTextField: UITextField!
     
     var brain = BillequalBrain()
     
     var total: Double = 0.0
-    var pplNumber: Int = 5
-    var tips: Double = 10.0
-
-    
-    @IBOutlet var peopleUIPicker: UIPickerView!
+    var pplNumber: Int = 1
+    var tips: Double = 0.0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        switches = [fivePercSwitch: 5.0, tenPercSwitch: 10.0, fifteenPercSwitch: 15.0, twentyPercSwitch: 20.0, twentyFivePercSwitch: 25.0]
+        // apply textFields styles
+        styleTextField(customPercTextField)
+        styleTextField(pplTextField)
+        customPercTextField.font = UIFont(name: "OpenSans-Semibold", size: 17)
+        pplTextField.font = UIFont(name: "OpenSans-Semibold", size: 22)
+        
+        // apply % buttons style
+        stylePercButtons()
         
         totalTextField.delegate = self
+        customPercTextField.delegate = self
+        pplTextField.delegate = self
         
-        peopleUIPicker.delegate = self
-        peopleUIPicker.dataSource = self
-        peopleUIPicker.selectRow(4, inComponent: 0, animated: false)
+//        // Disable menu & suggestions for all these fields
+//        totalTextField.inputAssistantItem.leadingBarButtonGroups = []
+//        totalTextField.inputAssistantItem.trailingBarButtonGroups = []
+//
+//        pplTextField.inputAssistantItem.leadingBarButtonGroups = []
+//        pplTextField.inputAssistantItem.trailingBarButtonGroups = []
+//
+//        customPercTextField.inputAssistantItem.leadingBarButtonGroups = []
+//        customPercTextField.inputAssistantItem.trailingBarButtonGroups = []
         
         // create toolbar to keyboard
         let toolbar = UIToolbar()
@@ -54,9 +61,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
                                              
         toolbar.items = [flexSpace, doneButton]
+        
             
         // assign toolbar to your textField
         totalTextField.inputAccessoryView = toolbar
+        customPercTextField.inputAccessoryView = toolbar
+        pplTextField.inputAccessoryView = toolbar
         
         // to dismiss keybord
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -64,10 +74,102 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
+    //MARK: - Style of Buttons %
+    func stylePercButtons() {
+        for button in percButtons {
+            // Rounded corners
+            button.layer.cornerRadius = 12
+            button.clipsToBounds = true
+            
+//            applyGradient(to: button)
+            
+            // Border
+            button.layer.borderWidth = 1
+            button.layer.borderColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
+            
+            // Background color
+            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            
+            // Title color
+            button.setTitleColor(UIColor(named: K.customMainFontColor), for: .normal)
+            
+            // Font
+            button.titleLabel?.font = UIFont(name: "OpenSans-Semibold", size: 17)
+        }
+    }
+
+//    func applyGradient(to button: UIButton) {
+//        let gradient = CAGradientLayer()
+//        gradient.frame = button.bounds
+//        gradient.colors = [
+//            #colorLiteral(red: 0.968627451, green: 0.6470588235, blue: 0.6392156863, alpha: 1).cgColor,
+//            #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1).cgColor
+//        ]
+//        gradient.cornerRadius = button.layer.cornerRadius
+//        button.layer.insertSublayer(gradient, at: 0)
+//    }
+
+    
+    //MARK: - Style of TextField
+    
+    func styleTextField(_ textField: UITextField) {
+        textField.layer.cornerRadius = 12
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
+        textField.clipsToBounds = true
+        textField.textAlignment = .center
+        textField.textColor = UIColor(named: K.customMainFontColor)
+        // placeholder color
+        textField.attributedPlaceholder = NSAttributedString(
+            string: textField.placeholder ?? "",
+            attributes: [
+                .foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            ]
+        )
+
+    }
+    
+    //MARK: - Get tips from the string
+    
+    func extractTip(_ labelText: String) -> Double {
+        let number = labelText
+            .replacingOccurrences(of: "Add Tips: ", with: "")
+            .replacingOccurrences(of: " %", with: "")
+        return Double(number) ?? 0
+    }
+    
     //MARK: - Keyboard
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // set curson to the end when editing
+        let endPosition = textField.endOfDocument
+        textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
+        
+        if textField == customPercTextField {
+            customPercTextField.text = ""    // Clears previous value
+        }
+    }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
+        // If custom percentage field was edited
+        if textField == customPercTextField {
+            if let value = Int(customPercTextField.text!) {
+                addTipsLabel.text = "Add Tips: \(value) %"
+                customPercTextField.text = "\(value) %"
+                
+                // Reset all buttons to default color
+                for button in percButtons {
+                    button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                }
+                customPercTextField.backgroundColor = #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1)
+            }
+        }
+        
+        // get all values
         total = Double(totalTextField.text!) ?? 0.0
+        pplNumber = Int(pplTextField.text!) ?? 1
+        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
+//        print(total, pplNumber, tips)
     }
     
     @objc func doneButtonTapped() {
@@ -78,50 +180,36 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         view.endEditing(true)
         }
     
-    // MARK: - UIPicker methods
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numbersForUIPicker.count
-    }
-
-    // Appearance
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title = numbersForUIPicker[row]
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(named: "MainFontColor") ?? UIColor.black,
-            .font: UIFont.systemFont(ofSize: 18)
-        ]
-        return NSAttributedString(string: title, attributes: attributes)
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pplNumber = Int(numbersForUIPicker[row]) ?? 1
-    }
-
+    //MARK: - Actions
     
-    //MARK: - IBActions
-    
-    @IBAction func switchChanged(_ sender: UISwitch) {
-        totalTextField.endEditing(true)
-        // one One, set others to Off
-        for switcher in switches.keys {
-            if switcher != sender {
-                switcher.setOn(false, animated: true)
+    @IBAction func percButtonPressed(_ sender: UIButton) {
+        // Reset CustomField
+        customPercTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        customPercTextField.text = ""
+        
+        if sender.backgroundColor == #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1){
+            sender.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            addTipsLabel.text = "Add Tips: 0 %"
+            print("0")
+        } else {
+            
+            for button in percButtons {
+                // Reset all buttons to default color
+                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
-            }
-            if sender.isOn {
-                tips = switches[sender] ?? 0.0
-            } else {
-                tips = 0.0
-            }
+            
+            // Highlight the pressed button
+            sender.backgroundColor = #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1)
+            addTipsLabel.text = "Add Tips: \(sender.titleLabel!.text!)"
+            print(sender.titleLabel!.text!)
         }
-    
+        
+        
+    }
+
     @IBAction func equalSplitButtonPressed(_ sender: UIButton) {
-        totalTextField.endEditing(true)
+        view.endEditing(true)   // hides keyboard for ANY active field
+        
         brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
         
         performSegue(withIdentifier: K.calculateSegueIdentifier, sender: self)
@@ -145,3 +233,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
 }
+
+
+// get values - when press buttons

@@ -9,15 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Start View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Billequal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="StartViewController" customModule="Billequal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gdK-Dm-YyK">
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalCentering" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="gdK-Dm-YyK">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etl-Hh-cEN" userLabel="Top View">
@@ -44,200 +44,213 @@
                                             <constraint firstAttribute="height" constant="100" id="Uj8-cs-d7w"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ird-q7-Qq9" userLabel="Labels Stack View">
-                                        <rect key="frame" x="0.0" y="119.5" width="414" height="90.5"/>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-Fd-Ufh" userLabel="Middle View">
+                                        <rect key="frame" x="40" y="120" width="334" height="376"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="0.00" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vU8-lP-2qk">
-                                                <rect key="frame" x="161.5" y="0.0" width="91.5" height="56.5"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="0.00">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="47" name="OpenSans-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8K-Ai-EP1">
-                                                <rect key="frame" x="160" y="64.5" width="94.5" height="26"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Add Tips:">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="22" name="OpenSans-Semibold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="vU8-lP-2qk" firstAttribute="centerX" secondItem="Ird-q7-Qq9" secondAttribute="centerX" id="Y6m-ag-dLo"/>
-                                            <constraint firstItem="q8K-Ai-EP1" firstAttribute="centerX" secondItem="Ird-q7-Qq9" secondAttribute="centerX" id="Z1W-po-B0b"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oEP-pE-5ha" userLabel="% Stack View">
-                                        <rect key="frame" x="102.5" y="229.5" width="209" height="200"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="Quh-HS-OfZ" userLabel="5% Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="209" height="28"/>
+                                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ShM-eu-Ztt" userLabel="Labels Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="121"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="izV-li-DET">
-                                                        <rect key="frame" x="0.0" y="2" width="48" height="23.5"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="0.00" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EgY-qR-tRf">
+                                                        <rect key="frame" x="121.5" y="0.0" width="91.5" height="56.5"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="5   %">
+                                                            <fragment content="0.00">
                                                                 <attributes>
-                                                                    <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="OpenSans-Semibold"/>
+                                                                    <color key="NSColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <font key="NSFont" size="47" name="OpenSans-Bold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="apO-Ho-UcT">
-                                                        <rect key="frame" x="148" y="0.0" width="63" height="28"/>
-                                                        <color key="onTintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="oIQ-QR-t9d"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="uwX-KD-ime" userLabel="10% Stack View">
-                                                <rect key="frame" x="0.0" y="43" width="209" height="28"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBi-hX-6t0">
-                                                        <rect key="frame" x="0.0" y="2" width="48" height="23.5"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-iA-KXb">
+                                                        <rect key="frame" x="96.5" y="64.5" width="141" height="56.5"/>
                                                         <attributedString key="attributedText">
-                                                            <fragment content="10 %">
+                                                            <fragment content="Add Tips: 0 %">
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="OpenSans-Semibold"/>
+                                                                    <font key="NSFont" size="22" name="OpenSans-Semibold"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                 </attributes>
                                                             </fragment>
                                                         </attributedString>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="tSn-yj-aHr">
-                                                        <rect key="frame" x="148" y="0.0" width="63" height="28"/>
-                                                        <color key="onTintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="48h-Bc-hqC"/>
-                                                        </connections>
-                                                    </switch>
                                                 </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="dhi-Ha-JAo" userLabel="15% Stack View">
-                                                <rect key="frame" x="0.0" y="86" width="209" height="28"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UnN-Vt-x6R" userLabel="15 %">
-                                                        <rect key="frame" x="0.0" y="2" width="48" height="23.5"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="15 %">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="OpenSans-Semibold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="T24-w1-nqr">
-                                                        <rect key="frame" x="148" y="0.0" width="63" height="28"/>
-                                                        <color key="onTintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="7tK-GH-XCQ"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="HJM-xR-NHv" userLabel="20% Stack View">
-                                                <rect key="frame" x="0.0" y="129" width="209" height="28"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXK-Uv-LzH">
-                                                        <rect key="frame" x="0.0" y="2" width="48" height="23.5"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="20 %">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="OpenSans-Semibold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0bz-m4-xRd">
-                                                        <rect key="frame" x="148" y="0.0" width="63" height="28"/>
-                                                        <color key="onTintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="qVb-cT-Scs"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="jgZ-3d-wUe" userLabel="25% Stack View">
-                                                <rect key="frame" x="0.0" y="172" width="209" height="28"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyq-hL-RqF">
-                                                        <rect key="frame" x="0.0" y="2" width="48" height="23.5"/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="25 %">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <font key="NSFont" size="20" name="OpenSans-Semibold"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Sob-w7-a0J">
-                                                        <rect key="frame" x="148" y="0.0" width="63" height="28"/>
-                                                        <color key="onTintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <connections>
-                                                            <action selector="switchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="KRx-LA-w8B"/>
-                                                        </connections>
-                                                    </switch>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="x8U-op-MHy"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yG6-uM-AJO" userLabel="How many ppl Stack View">
-                                        <rect key="frame" x="87" y="448.5" width="240" height="242"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxH-JO-GMU">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="26"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="How many persons?">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <font key="NSFont" size="22" name="OpenSans-Semibold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <pickerView contentMode="center" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="A0T-JF-f7x">
-                                                <rect key="frame" x="0.0" y="26" width="240" height="216"/>
-                                                <color key="tintColor" white="0.34999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="240" id="Iy2-3o-L7t"/>
+                                                    <constraint firstItem="DAu-iA-KXb" firstAttribute="centerX" secondItem="ShM-eu-Ztt" secondAttribute="centerX" id="2Zk-iS-QPg"/>
+                                                    <constraint firstItem="EgY-qR-tRf" firstAttribute="centerX" secondItem="ShM-eu-Ztt" secondAttribute="centerX" id="BUc-WK-iRd"/>
                                                 </constraints>
-                                            </pickerView>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="liD-hm-zpI" userLabel="% Stack View">
+                                                <rect key="frame" x="0.0" y="131" width="334" height="150"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="WHx-jM-r5f" userLabel="1 Row ButtonsStack View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWZ-bl-rBq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="5 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XDH-nd-lVe"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUz-hO-NjT">
+                                                                <rect key="frame" x="116.5" y="0.0" width="101" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="10 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cgH-2T-Ik7"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSh-k3-rF3">
+                                                                <rect key="frame" x="232.5" y="0.0" width="101.5" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="12 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mc4-oo-bkq"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="TPx-Jx-Dtc" userLabel="2 Row ButtonsStack View">
+                                                        <rect key="frame" x="0.0" y="55" width="334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfc-la-sFs">
+                                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="15 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dBd-2t-AOA"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdT-xg-gF8">
+                                                                <rect key="frame" x="116.5" y="0.0" width="101" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="18 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68c-PY-T4T"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j77-zd-pXU" userLabel="20 %">
+                                                                <rect key="frame" x="232.5" y="0.0" width="101.5" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="20 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RO0-0B-O7x"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Gr0-h2-SIy" userLabel="3 Row ButtonsStack View">
+                                                        <rect key="frame" x="0.0" y="110" width="334" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6e-A7-whe">
+                                                                <rect key="frame" x="0.0" y="0.0" width="101.5" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="22 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zZz-Sz-dzE"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epa-Dw-R78">
+                                                                <rect key="frame" x="116.5" y="0.0" width="101" height="40"/>
+                                                                <color key="tintColor" red="0.20392156859999999" green="0.2470588235" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="25 %">
+                                                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                                                        <color key="strokeColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </backgroundConfiguration>
+                                                                    <fontDescription key="titleFontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="percButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6co-Li-sy6"/>
+                                                                </connections>
+                                                            </button>
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Custom" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vly-Fp-hRu">
+                                                                <rect key="frame" x="232.5" y="0.0" width="101.5" height="40"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" red="0.41176470590000003" green="0.70980392160000005" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="textColor" name="MainFontColor"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="150" id="sgN-7y-ofr"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Hgj-yZ-jlX" userLabel="How many ppl Stack View">
+                                                <rect key="frame" x="0.0" y="291" width="334" height="85"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gif-YQ-abN">
+                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="35"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="How many persons?">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <font key="NSFont" size="22" name="OpenSans-Semibold"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter amount" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LIp-4r-TYT">
+                                                        <rect key="frame" x="0.0" y="50" width="334" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" name="MainFontColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="mxH-JO-GMU" firstAttribute="centerX" secondItem="yG6-uM-AJO" secondAttribute="centerX" id="Pgc-jc-LoM"/>
-                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoR-ug-195" userLabel="Bottom View">
                                         <rect key="frame" x="0.0" y="710" width="414" height="186"/>
@@ -288,12 +301,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Etl-Hh-cEN" firstAttribute="leading" secondItem="gdK-Dm-YyK" secondAttribute="leading" id="Ba8-TV-qpT"/>
-                                    <constraint firstItem="oEP-pE-5ha" firstAttribute="centerX" secondItem="gdK-Dm-YyK" secondAttribute="centerX" id="DLb-0P-FH1"/>
-                                    <constraint firstItem="Ird-q7-Qq9" firstAttribute="leading" secondItem="gdK-Dm-YyK" secondAttribute="leading" id="RFf-PI-fUm"/>
-                                    <constraint firstItem="yG6-uM-AJO" firstAttribute="centerX" secondItem="gdK-Dm-YyK" secondAttribute="centerX" id="Wht-Wn-IRp"/>
+                                    <constraint firstItem="Da5-Fd-Ufh" firstAttribute="top" secondItem="Etl-Hh-cEN" secondAttribute="bottom" constant="20" id="H6j-HS-QmY"/>
+                                    <constraint firstItem="Da5-Fd-Ufh" firstAttribute="leading" secondItem="gdK-Dm-YyK" secondAttribute="leading" constant="40" id="MnI-1R-MoX"/>
                                     <constraint firstItem="AoR-ug-195" firstAttribute="leading" secondItem="gdK-Dm-YyK" secondAttribute="leading" id="XG5-hb-Jlx"/>
                                     <constraint firstAttribute="trailing" secondItem="AoR-ug-195" secondAttribute="trailing" id="vY4-Kf-hLz"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ird-q7-Qq9" secondAttribute="trailing" id="z9s-rD-LIR"/>
+                                    <constraint firstAttribute="trailing" secondItem="Da5-Fd-Ufh" secondAttribute="trailing" constant="40" id="zAi-XL-IQb"/>
                                     <constraint firstAttribute="bottom" secondItem="AoR-ug-195" secondAttribute="bottom" id="zQ8-qe-PVg"/>
                                 </constraints>
                             </stackView>
@@ -310,20 +322,25 @@
                     </view>
                     <navigationItem key="navigationItem" id="nhG-8f-jlL"/>
                     <connections>
-                        <outlet property="fifteenPercSwitch" destination="T24-w1-nqr" id="hGg-HX-1ZQ"/>
-                        <outlet property="fivePercSwitch" destination="apO-Ho-UcT" id="KgV-OP-ce3"/>
-                        <outlet property="peopleUIPicker" destination="A0T-JF-f7x" id="5TF-YG-oOR"/>
-                        <outlet property="tenPercSwitch" destination="tSn-yj-aHr" id="A82-90-ltY"/>
-                        <outlet property="totalTextField" destination="vU8-lP-2qk" id="Ptx-t7-yPb"/>
-                        <outlet property="twentyFivePercSwitch" destination="Sob-w7-a0J" id="oG3-zh-iW3"/>
-                        <outlet property="twentyPercSwitch" destination="0bz-m4-xRd" id="xMI-08-n9f"/>
+                        <outlet property="addTipsLabel" destination="DAu-iA-KXb" id="Jvm-fg-oYH"/>
+                        <outlet property="customPercTextField" destination="vly-Fp-hRu" id="YOf-Uk-lHp"/>
+                        <outlet property="pplTextField" destination="LIp-4r-TYT" id="9IK-v8-ep8"/>
+                        <outlet property="totalTextField" destination="EgY-qR-tRf" id="gNv-b7-O6o"/>
+                        <outletCollection property="percButtons" destination="hWZ-bl-rBq" collectionClass="NSMutableArray" id="R28-6L-K0s"/>
+                        <outletCollection property="percButtons" destination="bUz-hO-NjT" collectionClass="NSMutableArray" id="AVK-6v-WFE"/>
+                        <outletCollection property="percButtons" destination="PSh-k3-rF3" collectionClass="NSMutableArray" id="Tvb-8y-36t"/>
+                        <outletCollection property="percButtons" destination="kfc-la-sFs" collectionClass="NSMutableArray" id="tV8-AH-K4c"/>
+                        <outletCollection property="percButtons" destination="hdT-xg-gF8" collectionClass="NSMutableArray" id="fB6-Ng-RLM"/>
+                        <outletCollection property="percButtons" destination="j77-zd-pXU" collectionClass="NSMutableArray" id="rMI-GH-dKm"/>
+                        <outletCollection property="percButtons" destination="p6e-A7-whe" collectionClass="NSMutableArray" id="Ht1-oL-STR"/>
+                        <outletCollection property="percButtons" destination="Epa-Dw-R78" collectionClass="NSMutableArray" id="m2z-H7-qUX"/>
                         <segue destination="FSK-pB-nrF" kind="modal" identifier="goToResult" id="Dux-xw-F8V"/>
                         <segue destination="b4N-7T-Mc9" kind="modal" identifier="goToCustom" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="UTt-E9-Pov"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479.68799999999999" y="60.689655172413794"/>
+            <point key="canvasLocation" x="491" y="156"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="40H-yo-xRl">
@@ -455,7 +472,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DE2-GA-Jfr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222.6799999999998" y="-422.62068965517244"/>
+            <point key="canvasLocation" x="1320" y="-423"/>
         </scene>
         <!--Custom View Controller-->
         <scene sceneID="FoO-qQ-D6A">
@@ -661,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iNg-E9-UAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="660"/>
+            <point key="canvasLocation" x="1319" y="652"/>
         </scene>
     </scenes>
     <resources>
@@ -669,7 +686,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainFontColor">
-            <color red="0.062745098039215685" green="0.1764705882352941" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.063000001013278961" green="0.17599999904632568" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

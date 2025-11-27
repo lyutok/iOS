@@ -10,4 +10,5 @@ struct K {
     static let cellNibName = "CalculateCell"
     static let calculateSegueIdentifier = "goToResult"
     static let customSegueIdentifier = "goToCustom"
+    static let customMainFontColor = "MainFontColor"
 }

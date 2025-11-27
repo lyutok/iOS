@@ -37,14 +37,14 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     private func setupUI() {
         // 1️⃣ Person row (Label + TextField)
         personLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        personLabel.textColor = UIColor(named: "MainFontColor")
+        personLabel.textColor = UIColor(named: K.customMainFontColor)
         personTextField.placeholder = "Enter name"
         personTextField.borderStyle = .roundedRect
             
         personTextField.delegate = self // for keyboard
         personTextField.keyboardType = .default
         personTextField.autocapitalizationType = .words
-        personTextField.textColor = UIColor(named: "MainFontColor")
+        personTextField.textColor = UIColor(named: K.customMainFontColor)
         personTextField.returnKeyType = .continue
         personTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         personTextField.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
@@ -85,7 +85,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         // 2️⃣ Display label (below Person row)
         displayLabel.text = currentInput
         displayLabel.font = UIFont.systemFont(ofSize: 36, weight: .bold)
-        displayLabel.textColor = UIColor(named: "MainFontColor")
+        displayLabel.textColor = UIColor(named: K.customMainFontColor)
         displayLabel.textAlignment = .right
         displayLabel.numberOfLines = 1
         displayLabel.lineBreakMode = .byTruncatingHead   // adds “…” on the left
