@@ -27,7 +27,7 @@ class CustomViewController: UIViewController {
         if let bill = billValues {
             totalValueLabel.text = String(format: "%.2f", bill.total)
             
-            textWithTipsLabel.text = "Tips, " + String(format: "%.0f", bill.tips) + "%"
+            textWithTipsLabel.text = "Tips: " + String(format: "%.0f", bill.tips) + "%"
             
             leftAmount = bill.total
             leftValueLabel.text = String(format: "%.2f", leftAmount)
@@ -54,15 +54,17 @@ class CustomViewController: UIViewController {
     @IBAction func shareButtonPressed(_ sender: UIButton) {
         // Text or data to share
         var agregatedData = ""
+        
         for data in rowData {
-            agregatedData += String("\(data.name): \(data.resultWithTips) 💸\n")
+            agregatedData += "· \(data.name) — \(String(format: "%.2f", data.resultWithTips))\n"
         }
         
         let textToShare = """
-                        Here’s \(String(format: "%.2f", billValues?.total ?? 0.0)) bill split:
+                        Total: \(String(format: "%.2f", billValues?.total ?? 0.0))
+                        \(String(format: "%.0f", billValues?.tips ?? 0.0))% included\n
+                        Bill split:
                         \(agregatedData)
-                        \(String(format: "%.0f", billValues?.tips ?? 0.0))% included.
-                        — Sent from Billequal
+                        — Sent via Billequal
                         """
         
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
