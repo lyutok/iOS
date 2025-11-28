@@ -164,12 +164,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
                 customPercTextField.backgroundColor = #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1)
             }
         }
-        
-        // get all values
-        total = Double(totalTextField.text!) ?? 0.0
-        pplNumber = Int(pplTextField.text!) ?? 1
-        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
-//        print(total, pplNumber, tips)
     }
     
     @objc func doneButtonTapped() {
@@ -190,7 +184,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         if sender.backgroundColor == #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1){
             sender.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             addTipsLabel.text = "Add Tips: 0 %"
-            print("0")
         } else {
             
             for button in percButtons {
@@ -203,11 +196,14 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             addTipsLabel.text = "Add Tips: \(sender.titleLabel!.text!)"
             print(sender.titleLabel!.text!)
         }
-        
-        
     }
 
     @IBAction func equalSplitButtonPressed(_ sender: UIButton) {
+        // get values
+        total = Double(totalTextField.text!) ?? 0.0
+        pplNumber = Int(pplTextField.text!) ?? 1
+        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
+        
         view.endEditing(true)   // hides keyboard for ANY active field
         
         brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
@@ -217,6 +213,11 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func customButtonPressed(_ sender: UIButton) {
+        // get values
+        total = Double(totalTextField.text!) ?? 0.0
+        pplNumber = Int(pplTextField.text!) ?? 1
+        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
+        
         brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
         performSegue(withIdentifier: K.customSegueIdentifier, sender: self)
     }
@@ -230,7 +231,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             let destinationVC = segue.destination as! CustomViewController
             destinationVC.billValues = brain.bill
         }
-        
     }
 }
 
