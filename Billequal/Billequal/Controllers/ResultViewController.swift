@@ -23,6 +23,12 @@ class ResultViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func copyButtonPressed(_ sender: UIButton) {
+//        TODO: COPY
+        
+    }
+    
     @IBAction func shareButtonPressed(_ sender: UIButton) {
         // Text or data to share      
         let textToShare = """
