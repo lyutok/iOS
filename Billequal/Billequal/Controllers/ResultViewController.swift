@@ -10,6 +10,7 @@ import UIKit
 class ResultViewController: UIViewController {
     
     var billValues: Bill?
+    let textToShare = ""
     
     @IBOutlet var resultToPayLabel: UILabel!
     @IBOutlet var resultNote: UILabel!
@@ -23,20 +24,21 @@ class ResultViewController: UIViewController {
         }
     }
     
+    func generateTextToShare() -> String {
+        return """
+                Each person pays: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) (\(String(format: "%.0f", billValues?.tips ?? 0.0))% tips included)
+                Total bill: \(String(format: "%.2f", billValues?.total ?? 0.0)) 
+                — Sent via Billequal
+                """
+    }
     
     @IBAction func copyButtonPressed(_ sender: UIButton) {
-//        TODO: COPY
-        
+        UIPasteboard.general.string = generateTextToShare()
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {
         // Text or data to share      
-        let textToShare = """
-                        
-                        Each person pays: 💸\(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) (\(String(format: "%.0f", billValues?.tips ?? 0.0))% tips included)
-                        Total bill: 💸\(String(format: "%.2f", billValues?.total ?? 0.0)) 
-                        — Sent via Billequal
-                        """
+        let textToShare = generateTextToShare()
             
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
     }

@@ -43,17 +43,38 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             
         personTextField.delegate = self // for keyboard
         personTextField.keyboardType = .default
+        personTextField.textContentType = .none
+        personTextField.returnKeyType = .done
         personTextField.autocapitalizationType = .words
         personTextField.textColor = UIColor(named: K.customMainFontColor)
-        personTextField.returnKeyType = .continue
+        
         personTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         personTextField.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         personTextField.layer.borderWidth = 1
         personTextField.layer.cornerRadius = 8
         
+        
+        // create toolbar to keyboard
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        // create flexible space (to push Done button to the right)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        // create Done button
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        
+        doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
+                                             
+        toolbar.items = [flexSpace, doneButton]
+        
+            
+        // assign toolbar to your textField
+        personTextField.inputAccessoryView = toolbar
+        
         // placeholder text color
         personTextField.attributedPlaceholder = NSAttributedString(
-            string: "Enter name",
+            string: "Name (optional)",
             attributes: [.foregroundColor: UIColor.gray]
         )
 
@@ -203,6 +224,10 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder() // dismiss keyboard
         return true
+    }
+    
+    @objc func doneButtonTapped() {
+        view.endEditing(true) // closes keyboard for any active textField
     }
     
     // MARK: - Calculatot Functionality

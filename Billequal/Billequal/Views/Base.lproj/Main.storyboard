@@ -350,18 +350,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="848"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyE-wA-8jt" userLabel="Top View">
+                            <view contentMode="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="NyE-wA-8jt" userLabel="Top View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                                <color key="backgroundColor" red="0.64705882349999999" green="0.82745098039999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="giH-zC-pSq"/>
-                                </constraints>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aSo-dz-WJ5" userLabel="Data Stack View">
-                                <rect key="frame" x="106" y="190" width="202.5" height="139.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xdo-zr-mTv">
-                                        <rect key="frame" x="0.0" y="0.0" width="202.5" height="42"/>
+                                        <rect key="frame" x="106" y="53" width="202.5" height="42"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Each person">
                                                 <attributes>
@@ -373,8 +366,19 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.64705882349999999" green="0.82745098039999998" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Xdo-zr-mTv" firstAttribute="centerX" secondItem="NyE-wA-8jt" secondAttribute="centerX" id="1CI-5b-QE8"/>
+                                    <constraint firstItem="Xdo-zr-mTv" firstAttribute="centerY" secondItem="NyE-wA-8jt" secondAttribute="centerY" constant="24" id="5Vj-q8-NIf"/>
+                                    <constraint firstAttribute="height" constant="100" id="giH-zC-pSq"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aSo-dz-WJ5" userLabel="Data Stack View">
+                                <rect key="frame" x="118" y="120" width="178" height="87.5"/>
+                                <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukm-3r-t8N">
-                                        <rect key="frame" x="58" y="52" width="86" height="51.5"/>
+                                        <rect key="frame" x="46" y="0.0" width="86" height="51.5"/>
                                         <attributedString key="attributedText">
                                             <fragment content="0.00">
                                                 <attributes>
@@ -387,7 +391,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyi-Qo-2DQ">
-                                        <rect key="frame" x="12" y="113.5" width="178" height="26"/>
+                                        <rect key="frame" x="0.0" y="61.5" width="178" height="26"/>
                                         <attributedString key="attributedText">
                                             <fragment content="(0% tips included)">
                                                 <attributes>
@@ -402,7 +406,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SXh-Cu-XWV" userLabel="Share Copy Stack View">
-                                <rect key="frame" x="82" y="379.5" width="250" height="34.5"/>
+                                <rect key="frame" x="82" y="257.5" width="250" height="34.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="3jq-7n-B6y">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="34.5"/>
@@ -460,7 +464,7 @@
                         <viewLayoutGuide key="safeArea" id="fP5-xT-BlO"/>
                         <color key="backgroundColor" name="BgColor"/>
                         <constraints>
-                            <constraint firstItem="aSo-dz-WJ5" firstAttribute="top" secondItem="NyE-wA-8jt" secondAttribute="bottom" constant="90" id="1sJ-9z-zvo"/>
+                            <constraint firstItem="aSo-dz-WJ5" firstAttribute="top" secondItem="NyE-wA-8jt" secondAttribute="bottom" constant="20" id="1sJ-9z-zvo"/>
                             <constraint firstAttribute="trailing" secondItem="NyE-wA-8jt" secondAttribute="trailing" id="4au-3o-aIi"/>
                             <constraint firstItem="SXh-Cu-XWV" firstAttribute="top" secondItem="aSo-dz-WJ5" secondAttribute="bottom" constant="50" id="5yH-qO-8pE"/>
                             <constraint firstItem="Sbo-00-eej" firstAttribute="leading" secondItem="2HE-0a-73c" secondAttribute="leading" id="9M6-Wv-W4X"/>
