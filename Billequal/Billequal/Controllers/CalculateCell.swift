@@ -2,7 +2,7 @@
 //  CalculateCell.swift
 //  Billequal
 //
-//  Created by Lyudmila Tokar on 8/25/25.
+//  Created by Liudmyla Tokar on 8/25/25.
 //
 
 import UIKit
@@ -34,7 +34,8 @@ class CalculateCell: UITableViewCell {
             \(personLabel.text ?? "")
             Subtotal: \(resultLabel.text ?? "")
             With tips: \(resultWithTipsLabel.text ?? "")
-            — Sent via Billequal
+            
+            — Billequal • Making splits simple
             """
         // Animate to "Copied ☑️"
             UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {

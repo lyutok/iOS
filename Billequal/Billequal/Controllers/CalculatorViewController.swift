@@ -2,7 +2,7 @@
 //  CalculatorViewController.swift
 //  Billequal
 //
-//  Created by Lyudmila Tokar on 9/8/25.
+//  Created by Liudmyla Tokar on 9/8/25.
 //
 
 import UIKit

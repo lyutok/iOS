@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Billequal
 //
-//  Created by Lyudmila Tokar on 8/15/25.
+//  Created by Liudmyla Tokar on 8/15/25.
 //
 
 import UIKit
@@ -37,16 +37,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         totalTextField.delegate = self
         customPercTextField.delegate = self
         pplTextField.delegate = self
-        
-//        // Disable menu & suggestions for all these fields
-//        totalTextField.inputAssistantItem.leadingBarButtonGroups = []
-//        totalTextField.inputAssistantItem.trailingBarButtonGroups = []
-//
-//        pplTextField.inputAssistantItem.leadingBarButtonGroups = []
-//        pplTextField.inputAssistantItem.trailingBarButtonGroups = []
-//
-//        customPercTextField.inputAssistantItem.leadingBarButtonGroups = []
-//        customPercTextField.inputAssistantItem.trailingBarButtonGroups = []
         
         // create toolbar to keyboard
         let toolbar = UIToolbar()
@@ -97,18 +87,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             button.titleLabel?.font = UIFont(name: "OpenSans-Semibold", size: 17)
         }
     }
-
-//    func applyGradient(to button: UIButton) {
-//        let gradient = CAGradientLayer()
-//        gradient.frame = button.bounds
-//        gradient.colors = [
-//            #colorLiteral(red: 0.968627451, green: 0.6470588235, blue: 0.6392156863, alpha: 1).cgColor,
-//            #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1).cgColor
-//        ]
-//        gradient.cornerRadius = button.layer.cornerRadius
-//        button.layer.insertSublayer(gradient, at: 0)
-//    }
-
     
     //MARK: - Style of TextField
     
@@ -194,7 +172,6 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             // Highlight the pressed button
             sender.backgroundColor = #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1)
             addTipsLabel.text = "Add Tips: \(sender.titleLabel!.text!)"
-            print(sender.titleLabel!.text!)
         }
     }
 
@@ -233,6 +210,3 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-
-
-// get values - when press buttons

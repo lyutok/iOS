@@ -2,7 +2,7 @@
 //  ResultViewController.swift
 //  Billequal
 //
-//  Created by Lyudmila Tokar on 8/18/25.
+//  Created by Liudmyla Tokar on 8/18/25.
 //
 
 import UIKit
@@ -27,8 +27,9 @@ class ResultViewController: UIViewController {
     func generateTextToShare() -> String {
         return """
                 Each person pays: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) (\(String(format: "%.0f", billValues?.tips ?? 0.0))% tips included)
-                Total bill: \(String(format: "%.2f", billValues?.total ?? 0.0)) 
-                — Sent via Billequal
+                Total bill: \(String(format: "%.2f", billValues?.total ?? 0.0))
+                
+                — Billequal • Making splits simple
                 """
     }
     

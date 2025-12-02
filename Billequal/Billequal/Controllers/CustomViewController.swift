@@ -2,7 +2,7 @@
 //  CustomViewController.swift
 //  Billequal
 //
-//  Created by Lyudmila Tokar on 8/21/25.
+//  Created by Liudmyla Tokar on 8/21/25.
 //
 
 import UIKit
@@ -64,7 +64,7 @@ class CustomViewController: UIViewController {
                         \(String(format: "%.0f", billValues?.tips ?? 0.0))% included\n
                         Bill split:
                         \(agregatedData)
-                        — Sent via Billequal
+                        — Billequal • Making splits simple
                         """
         
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)
@@ -114,7 +114,6 @@ extension CustomViewController: CalculateCellDelegate {
 // Recieve and update data after Calculation done
 extension CustomViewController: CalculatorViewControllerDelegate {
     func calculatorDidFinish(name: String, result: String) {
-//        print("Got back: \(name), \(result)")
         
         let indexPath = IndexPath(row: tappedRow, section: 0)
 

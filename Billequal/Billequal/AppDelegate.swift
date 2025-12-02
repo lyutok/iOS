@@ -14,14 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch. - Google Ads
 //        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
-        // print all fonts
-//        for family in UIFont.familyNames.sorted() {
-//            print("Font family: \(family)")
-//            for name in UIFont.fontNames(forFamilyName: family) {
-//                print("   Font name: \(name)")
-//            }
-//        }
 
         return true
     }
