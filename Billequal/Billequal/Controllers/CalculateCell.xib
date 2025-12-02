@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="23.5" width="383" height="42.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cfH-8B-kaa" userLabel="Numbers labels">
-                                        <rect key="frame" x="0.0" y="0.0" width="227" height="42.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="217" height="42.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AXi-Hq-5yM">
                                                 <rect key="frame" x="0.0" y="0.0" width="127" height="17.5"/>
@@ -108,9 +108,9 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BJ-6k-eus">
-                                        <rect key="frame" x="235" y="2.5" width="70" height="38"/>
+                                        <rect key="frame" x="225" y="2.5" width="75" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="8vs-o7-wTB"/>
+                                            <constraint firstAttribute="width" constant="75" id="8vs-o7-wTB"/>
                                             <constraint firstAttribute="height" constant="38" id="F13-Og-Nmz"/>
                                         </constraints>
                                         <color key="tintColor" red="0.3190197051" green="0.52081125969999997" blue="0.59857684369999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,14 +120,14 @@
                                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="15"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="calculateButtonPressed:" destination="Vnh-dn-75F" eventType="touchUpInside" id="FFe-5N-h1I"/>
+                                            <action selector="copyButtonPressed:" destination="Vnh-dn-75F" eventType="touchUpInside" id="9ko-VL-UWm"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QR-UC-fcj">
-                                        <rect key="frame" x="313" y="2.5" width="70" height="38"/>
+                                        <rect key="frame" x="308" y="2.5" width="75" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="38" id="Pb0-TC-p5d"/>
-                                            <constraint firstAttribute="width" constant="70" id="R06-BU-Qjh"/>
+                                            <constraint firstAttribute="width" constant="75" id="R06-BU-Qjh"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Count">

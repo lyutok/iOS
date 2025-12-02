@@ -34,6 +34,17 @@ class ResultViewController: UIViewController {
     
     @IBAction func copyButtonPressed(_ sender: UIButton) {
         UIPasteboard.general.string = generateTextToShare()
+        // Animate to "Copied ☑️"
+            UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {
+                sender.setTitle("Copied ☑️", for: .normal)
+            }
+
+        // Reset after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {
+                sender.setTitle("Copy", for: .normal)
+            }
+        }
     }
     
     @IBAction func shareButtonPressed(_ sender: UIButton) {

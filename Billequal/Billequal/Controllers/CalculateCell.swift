@@ -29,6 +29,27 @@ class CalculateCell: UITableViewCell {
     }
     
     
+    @IBAction func copyButtonPressed(_ sender: UIButton) {
+        UIPasteboard.general.string = """
+            \(personLabel.text ?? "")
+            Subtotal: \(resultLabel.text ?? "")
+            With tips: \(resultWithTipsLabel.text ?? "")
+            — Sent via Billequal
+            """
+        // Animate to "Copied ☑️"
+            UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {
+                sender.setTitle("☑️", for: .normal)
+            }
+
+        // Reset after 1.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {
+                sender.setTitle("Copy", for: .normal)
+            }
+        }
+    }
+    
+    
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         delegate?.tapCalculateOnCell(in: self)
     }
