@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24412" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24405"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="He9-Mr-CIX" userLabel="All logo">
+                                <rect key="frame" x="59.666666666666657" y="393.66666666666669" width="295" height="108.66666666666669"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="PyY-f3-z4u" userLabel="Logo">
+                                        <rect key="frame" x="0.0" y="0.0" width="295" height="75.333333333333329"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billequal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSG-rp-2md">
+                                                <rect key="frame" x="0.0" y="0.0" width="236" height="75.333333333333329"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="55"/>
+                                                <color key="textColor" name="MainFontColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Billequal" translatesAutoresizingMaskIntoConstraints="NO" id="Pwr-fE-1Nn">
+                                                <rect key="frame" x="237" y="8.6666666666666288" width="58" height="58"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="58" id="43e-ZY-CjN"/>
+                                                    <constraint firstAttribute="width" constant="58" id="z2c-KK-99z"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Making Splits Simple" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJf-YZ-nzY">
+                                        <rect key="frame" x="3" y="77.333333333333314" width="289" height="31.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
+                                        <color key="textColor" name="MainFontColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pJf-YZ-nzY" firstAttribute="leading" secondItem="He9-Mr-CIX" secondAttribute="leading" constant="3" id="1Ts-Al-JH2"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="linkColor"/>
+                        <constraints>
+                            <constraint firstItem="He9-Mr-CIX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="3Yt-B6-lox"/>
+                            <constraint firstItem="He9-Mr-CIX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="GPY-ui-9vy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="59" y="247"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" name="AccentColor"/>
+    <resources>
+        <image name="Billequal" width="341.33334350585938" height="341.33334350585938"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainFontColor">
+            <color red="0.063000001013278961" green="0.17599999904632568" blue="0.27799999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
