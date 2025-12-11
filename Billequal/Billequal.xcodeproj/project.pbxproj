@@ -11,6 +11,7 @@
 		2020BCD12ED517EA0014EDB8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2020BCD02ED517EA0014EDB8 /* OpenSans-Semibold.ttf */; };
 		2020BCD52ED5E3DD0014EDB8 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2020BCD42ED5E3DD0014EDB8 /* OpenSans-Bold.ttf */; };
 		2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2069FC352E5703770014AC45 /* CustomViewController.swift */; };
+		2083A2942EE73D9D007B8453 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083A2932EE73D99007B8453 /* AdManager.swift */; };
 		20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */; };
 		20A0A2442E5BCAB900FC4514 /* CalculateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A0A2422E5BCAB900FC4514 /* CalculateCell.xib */; };
 		20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */; };
@@ -34,6 +35,7 @@
 		2020BCD02ED517EA0014EDB8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		2020BCD42ED5E3DD0014EDB8 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		2069FC352E5703770014AC45 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		2083A2932EE73D99007B8453 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateCell.swift; sourceTree = "<group>"; };
 		20A0A2422E5BCAB900FC4514 /* CalculateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalculateCell.xib; sourceTree = "<group>"; };
 		20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		20E6D2282E718CA10023E4CA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2083A2932EE73D99007B8453 /* AdManager.swift */,
 				20E6D2292E718CD70023E4CA /* ShareButtonHelper.swift */,
 			);
 			path = Helpers;
@@ -240,6 +243,7 @@
 				20EBCB9A2E6F8DE000D627DA /* CalculatorViewController.swift in Sources */,
 				20EC7AF02E4E91EE0069E4FF /* StartViewController.swift in Sources */,
 				20E6D22A2E718CD80023E4CA /* ShareButtonHelper.swift in Sources */,
+				2083A2942EE73D9D007B8453 /* AdManager.swift in Sources */,
 				20EC7AEC2E4E91EE0069E4FF /* AppDelegate.swift in Sources */,
 				2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */,
 				20EC7AEE2E4E91EE0069E4FF /* SceneDelegate.swift in Sources */,
@@ -418,6 +422,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mila.lyutok.Billequal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -452,6 +457,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mila.lyutok.Billequal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

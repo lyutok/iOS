@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,6 @@
 		20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */; };
 		20A0A2442E5BCAB900FC4514 /* CalculateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20A0A2422E5BCAB900FC4514 /* CalculateCell.xib */; };
 		20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AAB5DA2E53C8460032DB88 /* ResultViewController.swift */; };
-		20BFF6BB2EB97A69007A14EE /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 20BFF6BA2EB97A69007A14EE /* GoogleMobileAds */; };
 		20D925E42ED5120500EC8E26 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20D925E32ED5120500EC8E26 /* OpenSans-Regular.ttf */; };
 		20E6D22A2E718CD80023E4CA /* ShareButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6D2292E718CD70023E4CA /* ShareButtonHelper.swift */; };
 		20EBCB9A2E6F8DE000D627DA /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EBCB992E6F8DE000D627DA /* CalculatorViewController.swift */; };
@@ -56,11 +55,8 @@
 /* Begin PBXFrameworksBuildPhase section */
 		20EC7AE52E4E91EE0069E4FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
-				20BFF6BB2EB97A69007A14EE /* GoogleMobileAds in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -169,12 +165,7 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = Billequal;
-			packageProductDependencies = (
-				20BFF6BA2EB97A69007A14EE /* GoogleMobileAds */,
-			);
 			productName = Billequal;
 			productReference = 20EC7AE82E4E91EE0069E4FF /* Billequal.app */;
 			productType = "com.apple.product-type.application";
@@ -195,7 +186,6 @@
 				};
 			};
 			buildConfigurationList = 20EC7AE32E4E91EE0069E4FF /* Build configuration list for PBXProject "Billequal" */;
-			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -204,8 +194,8 @@
 			);
 			mainGroup = 20EC7ADF2E4E91EE0069E4FF;
 			packageReferences = (
-				20BFF6B92EB97A69007A14EE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 20EC7AE92E4E91EE0069E4FF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -218,7 +208,6 @@
 /* Begin PBXResourcesBuildPhase section */
 		20EC7AE62E4E91EE0069E4FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				20A0A2442E5BCAB900FC4514 /* CalculateCell.xib in Resources */,
 				20EC7AF82E4E91F70069E4FF /* LaunchScreen.storyboard in Resources */,
@@ -228,14 +217,12 @@
 				20EC7AF32E4E91EE0069E4FF /* Main.storyboard in Resources */,
 				2020BCD52ED5E3DD0014EDB8 /* OpenSans-Bold.ttf in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		20EC7AE42E4E91EE0069E4FF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				20EBCB9A2E6F8DE000D627DA /* CalculatorViewController.swift in Sources */,
 				20EC7AF02E4E91EE0069E4FF /* StartViewController.swift in Sources */,
@@ -250,7 +237,6 @@
 				2003C8E12E7478570012CB2E /* PersonCalculation.swift in Sources */,
 				20AAB5DB2E53C8460032DB88 /* ResultViewController.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -274,7 +260,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		20EC7AFA2E4E91F70069E4FF /* Debug */ = {
+		20EC7AFA2E4E91F70069E4FF /* Debug configuration for PBXProject "Billequal" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -337,7 +323,7 @@
 			};
 			name = Debug;
 		};
-		20EC7AFB2E4E91F70069E4FF /* Release */ = {
+		20EC7AFB2E4E91F70069E4FF /* Release configuration for PBXProject "Billequal" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -394,7 +380,7 @@
 			};
 			name = Release;
 		};
-		20EC7AFD2E4E91F70069E4FF /* Debug */ = {
+		20EC7AFD2E4E91F70069E4FF /* Debug configuration for PBXNativeTarget "Billequal" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -428,7 +414,7 @@
 			};
 			name = Debug;
 		};
-		20EC7AFE2E4E91F70069E4FF /* Release */ = {
+		20EC7AFE2E4E91F70069E4FF /* Release configuration for PBXNativeTarget "Billequal" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -468,41 +454,20 @@
 		20EC7AE32E4E91EE0069E4FF /* Build configuration list for PBXProject "Billequal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				20EC7AFA2E4E91F70069E4FF /* Debug */,
-				20EC7AFB2E4E91F70069E4FF /* Release */,
+				20EC7AFA2E4E91F70069E4FF /* Debug configuration for PBXProject "Billequal" */,
+				20EC7AFB2E4E91F70069E4FF /* Release configuration for PBXProject "Billequal" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		20EC7AFC2E4E91F70069E4FF /* Build configuration list for PBXNativeTarget "Billequal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				20EC7AFD2E4E91F70069E4FF /* Debug */,
-				20EC7AFE2E4E91F70069E4FF /* Release */,
+				20EC7AFD2E4E91F70069E4FF /* Debug configuration for PBXNativeTarget "Billequal" */,
+				20EC7AFE2E4E91F70069E4FF /* Release configuration for PBXNativeTarget "Billequal" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		20BFF6B92EB97A69007A14EE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		20BFF6BA2EB97A69007A14EE /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 20BFF6B92EB97A69007A14EE /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 20EC7AE02E4E91EE0069E4FF /* Project object */;
 }

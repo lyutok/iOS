@@ -37,7 +37,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         totalTextField.delegate = self
         customPercTextField.delegate = self
         pplTextField.delegate = self
-        
+    
         // create toolbar to keyboard
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -47,12 +47,9 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         
         // create Done button
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        
         doneButton.tintColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
-                                             
         toolbar.items = [flexSpace, doneButton]
         
-            
         // assign toolbar to your textField
         totalTextField.inputAccessoryView = toolbar
         customPercTextField.inputAccessoryView = toolbar
@@ -60,8 +57,15 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         
         // to dismiss keybord
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false 
         view.addGestureRecognizer(tapGesture)
-        
+    }
+    
+    // Load ad only after the UI is fully shown
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        AdManager.shared.loadAd()
     }
     
     //MARK: - Style of Buttons %
@@ -70,9 +74,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             // Rounded corners
             button.layer.cornerRadius = 12
             button.clipsToBounds = true
-            
-//            applyGradient(to: button)
-            
+                        
             // Border
             button.layer.borderWidth = 1
             button.layer.borderColor = #colorLiteral(red: 0.4117647059, green: 0.7098039216, blue: 0.7450980392, alpha: 1)
@@ -87,9 +89,9 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             button.titleLabel?.font = UIFont(name: "OpenSans-Semibold", size: 17)
         }
     }
+ 
     
     //MARK: - Style of TextField
-    
     func styleTextField(_ textField: UITextField) {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
@@ -104,20 +106,19 @@ class StartViewController: UIViewController, UITextFieldDelegate {
                 .foregroundColor: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
             ]
         )
-
     }
+
     
     //MARK: - Get tips from the string
-    
     func extractTip(_ labelText: String) -> Double {
         let number = labelText
             .replacingOccurrences(of: "Add Tips: ", with: "")
             .replacingOccurrences(of: " %", with: "")
         return Double(number) ?? 0
     }
+ 
     
     //MARK: - Keyboard
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // set curson to the end when editing
         let endPosition = textField.endOfDocument
@@ -152,8 +153,8 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
         }
     
-    //MARK: - Actions
     
+    //MARK: - Actions
     @IBAction func percButtonPressed(_ sender: UIButton) {
         // Reset CustomField
         customPercTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -187,8 +188,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         
         performSegue(withIdentifier: K.calculateSegueIdentifier, sender: self)
     }
-    
-    
+        
     @IBAction func customButtonPressed(_ sender: UIButton) {
         // get values
         total = Double(totalTextField.text!) ?? 0.0

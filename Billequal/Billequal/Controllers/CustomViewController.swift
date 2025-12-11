@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class CustomViewController: UIViewController {
   
@@ -13,6 +14,7 @@ class CustomViewController: UIViewController {
     var billequalBrain = BillequalBrain()
     var leftAmount = 0.0
     var tappedRow = 0 // index for the row of Calculate button tapped
+    var shouldShowAd = true // show ad ONLY once per appearance
     
     var rowData: [PersonCalculation] = []
     
@@ -40,11 +42,24 @@ class CustomViewController: UIViewController {
                 resultWithTips: 0.0
             )
         }
-
         }
         
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+    }
+    
+    // Google ads
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Load next ad
+        AdManager.shared.loadAd()
+        
+        // Show ad ONCE
+        if shouldShowAd {
+            shouldShowAd = false
+            AdManager.shared.showInterstitial(from: self)
+        }
     }
     
     @IBAction func restartPressed(_ sender: UIButton) {
