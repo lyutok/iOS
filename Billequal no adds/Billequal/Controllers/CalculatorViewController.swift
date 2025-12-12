@@ -19,10 +19,11 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
 
     private let displayLabel = UILabel()
     private let expressionLabel = UILabel()
-    private var currentInput: String = "0"
     private var operation: String?
-    private var textToCalculate: String = ""
     private var dotRemoved: Bool = false
+    
+    var currentInput: String = "0"
+    var textToCalculate: String = ""
     
     let personLabel = UILabel()
     private let personTextField = UITextField()
@@ -44,7 +45,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         personTextField.delegate = self // for keyboard
         personTextField.keyboardType = .default
         personTextField.textContentType = .none
-        personTextField.returnKeyType = .done
+        personTextField.returnKeyType = .default
         personTextField.autocapitalizationType = .words
         personTextField.textColor = UIColor(named: K.customMainFontColor)
         

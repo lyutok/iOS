@@ -93,7 +93,7 @@ extension CustomViewController: UITableViewDataSource {
 }
 
 // protocol for the cell to press Calculate button
-// Open Calculator VC, Send Person label to calculator VC
+// Open Calculator VC, Send Person label and total (if exists) to calculator VC
 extension CustomViewController: CalculateCellDelegate {
     
     func tapCalculateOnCell(in cell: CalculateCell) {
@@ -105,8 +105,16 @@ extension CustomViewController: CalculateCellDelegate {
             
         let calculatorVC = CalculatorViewController()
             calculatorVC.delegate = self
-     
+        // Person name pass
         calculatorVC.personLabel.text = cell.personLabel.text ?? "Person"
+        // number in calculator if exists
+        if let result = cell.resultLabel.text {
+            if result != "0.00" {
+                calculatorVC.currentInput = result
+                calculatorVC.textToCalculate = result
+            }
+        }
+        
         present(calculatorVC, animated: true, completion: nil)
     }
 }
