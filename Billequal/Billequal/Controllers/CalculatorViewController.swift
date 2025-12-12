@@ -19,10 +19,11 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
 
     private let displayLabel = UILabel()
     private let expressionLabel = UILabel()
-    private var currentInput: String = "0"
     private var operation: String?
-    private var textToCalculate: String = ""
     private var dotRemoved: Bool = false
+    
+    var currentInput: String = "0"
+    var textToCalculate: String = ""
     
     let personLabel = UILabel()
     private let personTextField = UITextField()
@@ -44,7 +45,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         personTextField.delegate = self // for keyboard
         personTextField.keyboardType = .default
         personTextField.textContentType = .none
-        personTextField.returnKeyType = .done
+        personTextField.returnKeyType = .default
         personTextField.autocapitalizationType = .words
         personTextField.textColor = UIColor(named: K.customMainFontColor)
         
@@ -239,13 +240,10 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             operation = nil
             if currentInput == "0" {
                 currentInput = title
-                print(currentInput)
             } else {
                 currentInput += title
-                print(currentInput)
             }
             textToCalculate += title
-            print("textToCalculate:", textToCalculate)
             displayLabel.text = textToCalculate
 
         case ".":
@@ -280,7 +278,6 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             // Check if string is only one character
             let operators: Set<String> = ["+", "−", "×", "÷", "=", ""]
             if operators.contains(textToCalculate) {
-                print("= ", textToCalculate)
                 return
             }
             
@@ -293,7 +290,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
             
             if let result = evaluate(textToCalculate) {
                 displayLabel.text = String(format: "%g", result)
-                print("Result: \(result)")
+    
             } else {
                 displayLabel.text = "Error"
                 return

@@ -51,9 +51,7 @@ class CalculateCell: UITableViewCell {
     }
     
     
-    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+    @IBAction func countButtonPressed(_ sender: UIButton) {
         delegate?.tapCalculateOnCell(in: self)
     }
 }
-
-

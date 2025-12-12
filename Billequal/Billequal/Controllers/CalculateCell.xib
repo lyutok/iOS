@@ -138,7 +138,7 @@
                                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="15"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="calculateButtonPressed:" destination="Vnh-dn-75F" eventType="touchUpInside" id="kqC-Hl-saP"/>
+                                            <action selector="countButtonPressed:" destination="Vnh-dn-75F" eventType="touchUpInside" id="kqC-Hl-saP"/>
                                         </connections>
                                     </button>
                                 </subviews>
