@@ -109,10 +109,10 @@ class StartViewController: UIViewController, UITextFieldDelegate {
     }
 
     
-    //MARK: - Get tips from the string
+    //MARK: - Get tip from the string
     func extractTip(_ labelText: String) -> Double {
         let number = labelText
-            .replacingOccurrences(of: "Add Tips: ", with: "")
+            .replacingOccurrences(of: "Add Tip: ", with: "")
             .replacingOccurrences(of: " %", with: "")
         return Double(number) ?? 0
     }
@@ -133,7 +133,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         // If custom percentage field was edited
         if textField == customPercTextField {
             if let value = Int(customPercTextField.text!) {
-                addTipsLabel.text = "Add Tips: \(value) %"
+                addTipsLabel.text = "Add Tip: \(value) %"
                 customPercTextField.text = "\(value) %"
                 
                 // Reset all buttons to default color
@@ -162,7 +162,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         
         if sender.backgroundColor == #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1){
             sender.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            addTipsLabel.text = "Add Tips: 0 %"
+            addTipsLabel.text = "Add Tip: 0 %"
         } else {
             
             for button in percButtons {
@@ -172,7 +172,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
             
             // Highlight the pressed button
             sender.backgroundColor = #colorLiteral(red: 0.6470588235, green: 0.8274509804, blue: 0.8509803922, alpha: 1)
-            addTipsLabel.text = "Add Tips: \(sender.titleLabel!.text!)"
+            addTipsLabel.text = "Add Tip: \(sender.titleLabel!.text!)"
         }
     }
 
@@ -180,7 +180,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         // get values
         total = Double(totalTextField.text!) ?? 0.0
         pplNumber = Int(pplTextField.text!) ?? 1
-        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
+        tips = extractTip(addTipsLabel.text ?? "Add Tip: 0 %")
         
         view.endEditing(true)   // hides keyboard for ANY active field
         
@@ -193,7 +193,7 @@ class StartViewController: UIViewController, UITextFieldDelegate {
         // get values
         total = Double(totalTextField.text!) ?? 0.0
         pplNumber = Int(pplTextField.text!) ?? 1
-        tips = extractTip(addTipsLabel.text ?? "Add Tips: 0 %")
+        tips = extractTip(addTipsLabel.text ?? "Add Tip: 0 %")
         
         brain.createBill(total: total, pplNumber: pplNumber, tips: tips)
         performSegue(withIdentifier: K.customSegueIdentifier, sender: self)
