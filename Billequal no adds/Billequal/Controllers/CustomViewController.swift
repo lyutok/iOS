@@ -27,7 +27,7 @@ class CustomViewController: UIViewController {
         if let bill = billValues {
             totalValueLabel.text = String(format: "%.2f", bill.total)
             
-            textWithTipsLabel.text = "Tips: " + String(format: "%.0f", bill.tips) + "%"
+            textWithTipsLabel.text = "Tip: " + String(format: "%.0f", bill.tips) + "%"
             
             leftAmount = bill.total
             leftValueLabel.text = String(format: "%.2f", leftAmount)
