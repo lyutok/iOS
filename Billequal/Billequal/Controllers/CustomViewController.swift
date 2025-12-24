@@ -76,10 +76,10 @@ class CustomViewController: UIViewController {
         
         let textToShare = """
                         Total: \(String(format: "%.2f", billValues?.total ?? 0.0))
-                        \(String(format: "%.0f", billValues?.tips ?? 0.0))% included\n
+                        \(String(format: "%.0f", billValues?.tips ?? 0.0))% tip included\n
                         Bill split:
                         \(agregatedData)
-                        — Billequal • Making splits simple
+                        Billequal • Making splits simple
                         """
         
         ShareHelper.presentShareSheet(from: self, sender: sender, text: textToShare)

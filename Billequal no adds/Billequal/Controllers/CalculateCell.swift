@@ -33,9 +33,9 @@ class CalculateCell: UITableViewCell {
         UIPasteboard.general.string = """
             \(personLabel.text ?? "")
             Subtotal: \(resultLabel.text ?? "")
-            With tips: \(resultWithTipsLabel.text ?? "")
+            With tip: \(resultWithTipsLabel.text ?? "")
             
-            — Billequal • Making splits simple
+            Billequal • Making splits simple
             """
         // Animate to "Copied ☑️"
             UIView.transition(with: sender, duration: 0.25, options: .transitionCrossDissolve) {

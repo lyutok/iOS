@@ -20,16 +20,16 @@ class ResultViewController: UIViewController {
         
         if let bill = billValues {
             resultToPayLabel.text = String(format: "%.2f", bill.eachToPay)
-            resultNote.text = "(\(String(format: "%.0f", bill.tips))% tips included)"
+            resultNote.text = "(\(String(format: "%.0f", bill.tips))% tip included)"
         }
     }
     
     func generateTextToShare() -> String {
         return """
-                Each person pays: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) (\(String(format: "%.0f", billValues?.tips ?? 0.0))% tips included)
+                Each person pays: \(String(format: "%.2f", billValues?.eachToPay ?? 0.0)) (\(String(format: "%.0f", billValues?.tips ?? 0.0))% tip included)
                 Total bill: \(String(format: "%.2f", billValues?.total ?? 0.0))
                 
-                — Billequal • Making splits simple
+                Billequal • Making splits simple
                 """
     }
     
