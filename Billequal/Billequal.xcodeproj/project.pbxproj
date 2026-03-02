@@ -10,6 +10,7 @@
 		2003C8E12E7478570012CB2E /* PersonCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2003C8E02E7478560012CB2E /* PersonCalculation.swift */; };
 		2020BCD12ED517EA0014EDB8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2020BCD02ED517EA0014EDB8 /* OpenSans-Semibold.ttf */; };
 		2020BCD52ED5E3DD0014EDB8 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2020BCD42ED5E3DD0014EDB8 /* OpenSans-Bold.ttf */; };
+		203440502F0E8C0A00D85C24 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2034404F2F0E8C0300D85C24 /* ConsentManager.swift */; };
 		2069FC362E5703770014AC45 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2069FC352E5703770014AC45 /* CustomViewController.swift */; };
 		2083A2942EE73D9D007B8453 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083A2932EE73D99007B8453 /* AdManager.swift */; };
 		20A0A2432E5BCAB900FC4514 /* CalculateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */; };
@@ -34,6 +35,7 @@
 		2003C8E02E7478560012CB2E /* PersonCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCalculation.swift; sourceTree = "<group>"; };
 		2020BCD02ED517EA0014EDB8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		2020BCD42ED5E3DD0014EDB8 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		2034404F2F0E8C0300D85C24 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		2069FC352E5703770014AC45 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		2083A2932EE73D99007B8453 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		20A0A2412E5BCAB900FC4514 /* CalculateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateCell.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		20E6D2282E718CA10023E4CA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2034404F2F0E8C0300D85C24 /* ConsentManager.swift */,
 				2083A2932EE73D99007B8453 /* AdManager.swift */,
 				20E6D2292E718CD70023E4CA /* ShareButtonHelper.swift */,
 			);
@@ -190,7 +193,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 2610;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					20EC7AE72E4E91EE0069E4FF = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -242,6 +245,7 @@
 			files = (
 				20EBCB9A2E6F8DE000D627DA /* CalculatorViewController.swift in Sources */,
 				20EC7AF02E4E91EE0069E4FF /* StartViewController.swift in Sources */,
+				203440502F0E8C0A00D85C24 /* ConsentManager.swift in Sources */,
 				20E6D22A2E718CD80023E4CA /* ShareButtonHelper.swift in Sources */,
 				2083A2942EE73D9D007B8453 /* AdManager.swift in Sources */,
 				20EC7AEC2E4E91EE0069E4FF /* AppDelegate.swift in Sources */,
@@ -313,6 +317,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = X7W7DULXL8;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -376,6 +381,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = X7W7DULXL8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

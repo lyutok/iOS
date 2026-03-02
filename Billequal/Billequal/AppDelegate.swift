@@ -13,16 +13,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
 
-        // Start Google Ads without blocking UI
-        DispatchQueue.global(qos: .background).async {
-            MobileAds.shared.start(completionHandler: nil)
+        MobileAds.shared.start(completionHandler: nil)
+
+        DispatchQueue.main.async {
+            if let rootVC = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first?
+                .windows
+                .first?
+                .rootViewController {
+
+                ConsentManager.shared.requestConsent(from: rootVC) {
+                    AdManager.shared.loadAd()
+                }
+            }
         }
 
         return true
     }
+
+
+//    func application(
+//        _ application: UIApplication,
+//        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+//    ) -> Bool {
+//
+//        // Start Google Ads without blocking UI
+//        DispatchQueue.global(qos: .background).async {
+//            MobileAds.shared.start(completionHandler: nil)
+//        }
+//
+//        return true
+//    }
 
     // MARK: UISceneSession Lifecycle
 
