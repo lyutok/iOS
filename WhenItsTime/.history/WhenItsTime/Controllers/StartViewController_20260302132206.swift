@@ -60,25 +60,7 @@ class StartViewController: UIViewController {
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
     }
-    
-    @IBAction func editButtonPressed(_ sender: UIButton) {
-        if sender.tag == 0 {
-                print("Edit local city")
-                presentCitySearch()
-            } else {
-                print("Edit work city")
-                presentCitySearch()
-            }
-    }
-    
-    private func presentCitySearch() {
-        let citySearch = CitySearchViewController()
-        let nav = UINavigationController(rootViewController: citySearch)
-        present(nav, animated: true)
-    }
-    
 }
     
 
@@ -103,29 +85,26 @@ extension StartViewController: CLLocationManagerDelegate {
         // Got location data
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            
-            // Use GPS time if fresh (less than 30 seconds old), otherwise fallback to phone clock
-            let gpsFreshness = Date().timeIntervalSince(location.timestamp)
-            let appTime = gpsFreshness < 30
-                ? timeBrain.makeTime(from: location.timestamp)  // GPS satellite time 
-                : timeBrain.makeTime(from: Date())              // phone clock fallback
-            
+            print(location.timestamp)
+            let appTime = timeBrain.makeTime(from: location.timestamp)
+
+//            print("Date:", timeBrain.formattedWeekdayAndDate(from: appTime))
             self.topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: appTime)
+//            print("Time:", timeBrain.formattedTime(from: appTime))
             self.currentTime.text = timeBrain.formattedTime(from: appTime)
             
             let myLocation = location
-            let phase = locationBrain.timePhase(for: myLocation)
-            let iconName = phase.sfSymbol
             
-            currentDayImage.image = UIImage(systemName: iconName)
-            currentDayImage.tintColor = phase.tintColor
-            
+//            let phase = locationBrain.timePhase(for: myLocation)
+//            let iconName = phase.sfSymbol
+
+//            currentDayImage.image = UIImage(systemName: iconName)
+
             locationBrain.reverseGeocode(location: myLocation) { appLocation in
                 let city = appLocation.city ?? "N/A"
                 self.topCityLabel.text = city
                 self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
                 self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
-                
                 print("Region: \(appLocation.country ?? "N/A")")
                 print("Subregion: \(appLocation.subRegion ?? "N/A")")
                 print("AdministrativeArea: \(appLocation.administrativeArea ?? "N/A")")

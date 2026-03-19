@@ -21,14 +21,6 @@ struct TimeBrain {
         return formatter.string(from: appTime.date)
     }
     
-//    // Medium formatted date (e.g. 25 Feb 2026)
-//    func formattedDate(from appTime: AppTime) -> String {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .none
-//        return formatter.string(from: appTime.date)
-//    }
-    
     // 24-hour formatted time (e.g. 13:53)
     func formattedTime(from appTime: AppTime) -> String {
         let formatter = DateFormatter()

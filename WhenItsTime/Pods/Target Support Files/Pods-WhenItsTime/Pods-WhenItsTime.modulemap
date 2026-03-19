@@ -1,0 +1,6 @@
+framework module Pods_WhenItsTime {
+  umbrella header "Pods-WhenItsTime-umbrella.h"
+
+  export *
+  module * { export * }
+}

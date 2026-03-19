@@ -1,0 +1,7 @@
+platform :ios, '13.0'
+
+target 'WhenItsTime' do
+  use_frameworks! :linkage => :static
+
+  pod 'Solar-dev', '~> 3.0'
+end

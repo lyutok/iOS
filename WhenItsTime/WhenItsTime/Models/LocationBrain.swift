@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreLocation
-//import Solar
+import Solar
 
 struct LocationBrain {
     
@@ -48,48 +48,61 @@ struct LocationBrain {
         return city
     }
     
-//    // Day/Night icons
-//    func timePhase(for location: CLLocation, date: Date = Date()) -> TimePhase {
-//            
-//            guard let solar = Solar(for: date, coordinate: location.coordinate),
-//                  let sunrise = solar.sunrise,
-//                  let sunset = solar.sunset else {
-//                return .day // safe fallback
-//            }
-//            
-//            let oneHour: TimeInterval = 60 * 60
-//            
-//            if date >= sunrise && date < sunrise.addingTimeInterval(oneHour) {
-//                return .sunrise
-//            } else if date >= sunrise.addingTimeInterval(oneHour) &&
-//                        date < sunset.addingTimeInterval(-oneHour) {
-//                return .day
-//            } else if date >= sunset.addingTimeInterval(-oneHour) &&
-//                        date < sunset {
-//                return .sunset
-//            } else {
-//                return .night
-//            }
-//        }
-//}
-//
-//
-//enum TimePhase {
-//    case sunrise
-//    case day
-//    case sunset
-//    case night
-//    
-//    var sfSymbol: String {
-//        switch self {
-//        case .sunrise:
-//            return "sunrise.fill"
-//        case .day:
-//            return "sun.max.fill"
-//        case .sunset:
-//            return "sunset.fill"
-//        case .night:
-//            return "moon.stars.fill"
-//        }
-//    }
+    // Day/Night icons
+    func timePhase(for location: CLLocation, date: Date = Date()) -> TimePhase {
+            
+            guard let solar = Solar(for: date, coordinate: location.coordinate),
+                  let sunrise = solar.sunrise,
+                  let sunset = solar.sunset else {
+                return .day // safe fallback
+            }
+            
+            let oneHour: TimeInterval = 60 * 60
+            
+            if date >= sunrise && date < sunrise.addingTimeInterval(oneHour) {
+                return .sunrise
+            } else if date >= sunrise.addingTimeInterval(oneHour) &&
+                        date < sunset.addingTimeInterval(-oneHour) {
+                return .day
+            } else if date >= sunset.addingTimeInterval(-oneHour) &&
+                        date < sunset {
+                return .sunset
+            } else {
+                return .night
+            }
+        }
+}
+
+
+enum TimePhase {
+    case sunrise
+    case day
+    case sunset
+    case night
+    
+    var sfSymbol: String {
+        switch self {
+        case .sunrise:
+            return "sunrise.fill"
+        case .day:
+            return "sun.max.fill"
+        case .sunset:
+            return "sunset.fill"
+        case .night:
+            return "moonphase.waxing.crescent.inverse"  // moon.stars.fill
+        }
+    }
+    
+    var tintColor: UIColor {
+            switch self {
+            case .sunrise:
+                return .systemOrange
+            case .day:
+                return .systemYellow
+            case .sunset:
+                return .systemOrange
+            case .night:
+                return .tintColor
+            }
+        }
 }
