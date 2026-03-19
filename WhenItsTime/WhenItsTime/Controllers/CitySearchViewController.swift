@@ -110,3 +110,13 @@ extension CitySearchViewController {
         return cell
     }
 }
+
+
+// MARK: - UITableViewDelegate
+extension CitySearchViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCity = filteredCities[indexPath.row]
+        print("Selected: \(selectedCity)")
+        dismiss(animated: true)
+    }
+}
