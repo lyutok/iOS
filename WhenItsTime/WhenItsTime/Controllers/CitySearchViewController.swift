@@ -15,6 +15,18 @@ class CitySearchViewController: UITableViewController {
     private var filteredCities: [String] = []
     
     // MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+        appearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +34,7 @@ class CitySearchViewController: UITableViewController {
         setupSearchController()
         loadCities()
         
+        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.2)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CityCell")
     }
     
@@ -92,6 +105,8 @@ extension CitySearchViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath)
         cell.textLabel?.text = filteredCities[indexPath.row]
+        cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+        cell.selectionStyle = .none
         return cell
     }
 }
