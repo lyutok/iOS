@@ -75,6 +75,7 @@ class StartViewController: UIViewController {
     
     private func presentCitySearch() {
         let citySearch = CitySearchViewController()
+        citySearch.delegate = self
         let nav = UINavigationController(rootViewController: citySearch)
         present(nav, animated: true)
     }
@@ -146,4 +147,11 @@ extension StartViewController: CLLocationManagerDelegate {
             
             print("Location error: \(error.localizedDescription)")
         }
+}
+
+// MARK: - Receive the city
+extension StartViewController: CitySearchDelegate {
+    func didSelectCity(_ city: String) {
+        print("Received: \(city)")
+    }
 }

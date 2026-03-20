@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CitySearchDelegate: AnyObject {
+    func didSelectCity(_ city: String)
+}
+
 class CitySearchViewController: UITableViewController {
+    
+    weak var delegate: CitySearchDelegate?
     
     // MARK: - Properties
     private var searchController = UISearchController(searchResultsController: nil)
@@ -117,6 +123,7 @@ extension CitySearchViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = filteredCities[indexPath.row]
         print("Selected: \(selectedCity)")
+        delegate?.didSelectCity(selectedCity)
         dismiss(animated: true)
     }
 }
