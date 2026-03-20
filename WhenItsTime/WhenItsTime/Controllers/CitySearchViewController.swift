@@ -124,6 +124,7 @@ extension CitySearchViewController {
         let selectedCity = filteredCities[indexPath.row]
         print("Selected: \(selectedCity)")
         delegate?.didSelectCity(selectedCity)
+        searchController.dismiss(animated: false) 
         dismiss(animated: true)
     }
 }
