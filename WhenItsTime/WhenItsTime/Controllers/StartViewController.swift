@@ -18,16 +18,28 @@ class StartViewController: UIViewController {
     @IBOutlet var currentTime: UILabel!
     @IBOutlet var currentDayImage: UIImageView!
     
+    @IBOutlet var workTimeLabel: UILabel!
+    @IBOutlet var workCityLabel: UILabel!
+    
+    
     @IBOutlet var currentTimeView: UIView!
     @IBOutlet var currentTimeBlurView: UIVisualEffectView!
     @IBOutlet var textTimeBlurView: UIVisualEffectView!
     @IBOutlet var workingHoursView: UIView!
     
     let locationManager = CLLocationManager()
+    var editCityFlag = 0 // from which place Edit was clicked
+    
+    // Refresh on swipe down
+    private let refreshControl = UIRefreshControl()
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     // from files
     let timeBrain = TimeBrain()
     let locationBrain = LocationBrain()
+    
+    var lastLocation: CLLocation?
+    var selectedWorkCity: CityItem?  // already have this?
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -51,9 +63,7 @@ class StartViewController: UIViewController {
         textTimeBlurView.layer.borderWidth = 1
         textTimeBlurView.effect = UIBlurEffect(style: .systemThinMaterialLight)
         textTimeBlurView.layer.borderColor = UIColor.white.withAlphaComponent(0.6).cgColor
-        
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,16 +71,86 @@ class StartViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
+        setupActivityIndicator() // ← call it!
+        setupPullToRefresh()
+        updateUI()
+    }
+
+    private func setupActivityIndicator() {
+        activityIndicator.center = CGPoint(x: view.center.x, y: 100)
+        activityIndicator.color = .white
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+    }
+
+    private func setupPullToRefresh() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        panGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(panGesture)
+    }
+    
+    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        print("Pan detected: \(translation.y)")
+        print("State: \(gesture.state.rawValue)") // add this line
+        if gesture.state == .ended {
+            print("Ended with translation: \(translation.y)")
+        }
+        
+        if gesture.state == .ended && translation.y > 80 {
+            print("Refreshing!")
+            activityIndicator.startAnimating()
+            updateUI()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    func updateUI() {
+        guard let location = lastLocation else {
+            locationManager.requestLocation() // no location yet, go fetch it
+            return
+        }
+        
+        // MARK: - Local time
+        let gpsFreshness = Date().timeIntervalSince(location.timestamp)
+        let appTime = gpsFreshness < 30
+            ? timeBrain.makeTime(from: location.timestamp)
+            : timeBrain.makeTime(from: Date())
+        
+        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: appTime)
+        currentTime.text = timeBrain.formattedTime(from: appTime)
+        
+        // MARK: - Day/night icon
+        let phase = locationBrain.timePhase(for: location)
+        currentDayImage.image = UIImage(systemName: phase.sfSymbol)
+        currentDayImage.tintColor = phase.tintColor
+        
+        // MARK: - City name
+        locationBrain.reverseGeocode(location: location) { appLocation in
+            let city = appLocation.city ?? "N/A"
+            self.topCityLabel.text = city
+            self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
+            self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
+        }
+        
+        // MARK: - Work city (coming soon!)
+        if let workCity = selectedWorkCity {
+            // time calculation goes here next!
+        }
     }
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
         if sender.tag == 0 {
                 print("Edit local city")
-                presentCitySearch()
             } else {
                 print("Edit work city")
-                presentCitySearch()
             }
+        editCityFlag = sender.tag
+        presentCitySearch()
     }
     
     private func presentCitySearch() {
@@ -79,12 +159,10 @@ class StartViewController: UIViewController {
         let nav = UINavigationController(rootViewController: citySearch)
         present(nav, animated: true)
     }
-    
 }
     
 
 extension StartViewController: CLLocationManagerDelegate {
-    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
@@ -104,54 +182,42 @@ extension StartViewController: CLLocationManagerDelegate {
         // Got location data
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            
-            // Use GPS time if fresh (less than 30 seconds old), otherwise fallback to phone clock
-            let gpsFreshness = Date().timeIntervalSince(location.timestamp)
-            let appTime = gpsFreshness < 30
-                ? timeBrain.makeTime(from: location.timestamp)  // GPS satellite time 
-                : timeBrain.makeTime(from: Date())              // phone clock fallback
-            
-            self.topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: appTime)
-            self.currentTime.text = timeBrain.formattedTime(from: appTime)
-            
-            let myLocation = location
-            let phase = locationBrain.timePhase(for: myLocation)
-            let iconName = phase.sfSymbol
-            
-            currentDayImage.image = UIImage(systemName: iconName)
-            currentDayImage.tintColor = phase.tintColor
-            
-            locationBrain.reverseGeocode(location: myLocation) { appLocation in
-                let city = appLocation.city ?? "N/A"
-                self.topCityLabel.text = city
-                self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-                self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
-                
-                print("Region: \(appLocation.country ?? "N/A")")
-                print("Subregion: \(appLocation.subRegion ?? "N/A")")
-                print("AdministrativeArea: \(appLocation.administrativeArea ?? "N/A")")
-            }
+            lastLocation = location
+            updateUI()
         }
     }
     
     // Called when location retrieval fails.
     // Code 1 (kCLErrorDenied) may briefly appear on first launch
     // during permission transition — safe to ignore if authorization is granted.
-        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-            
-            if let clError = error as? CLError,
-               clError.code == .denied,
-               manager.authorizationStatus == .authorizedWhenInUse {
-                return // harmless first-launch race condition
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if let clError = error as? CLError {
+            switch clError.code {
+            case .denied:
+                if manager.authorizationStatus == .authorizedWhenInUse { return }
+                print("Location access denied")
+            case .locationUnknown:
+                // harmless, iOS will retry automatically
+                return
+            default:
+                print("Location error: \(error.localizedDescription)")
             }
-            
-            print("Location error: \(error.localizedDescription)")
         }
+    }
 }
 
-// MARK: - Receive the city
+// MARK: - Receive the city and time
 extension StartViewController: CitySearchDelegate {
-    func didSelectCity(_ city: String) {
-        print("Received: \(city)")
+    
+    func didSelectCity(_ city: CityItem) {
+        print("Received: \(city.city)")
+        print("Received Identifier: \(city.identifier)")
+          
+        if editCityFlag == 0 {
+            currentCity.text = city.city + " (Me)"
+        } else {
+            selectedWorkCity = city
+            workCityLabel.text = city.city + " (-7h)"
+        }
     }
 }

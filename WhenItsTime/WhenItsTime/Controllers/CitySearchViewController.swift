@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CitySearchDelegate: AnyObject {
-    func didSelectCity(_ city: String)
+    func didSelectCity(_ city: CityItem)
 }
 
 class CitySearchViewController: UITableViewController {
@@ -17,8 +17,11 @@ class CitySearchViewController: UITableViewController {
     
     // MARK: - Properties
     private var searchController = UISearchController(searchResultsController: nil)
-    private var allCities: [String] = []
-    private var filteredCities: [String] = []
+//    private var allCities: [String] = []
+//    private var filteredCities: [String] = []
+    private var allCities: [CityItem] = []
+    private var filteredCities: [CityItem] = []
+    
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -64,14 +67,15 @@ class CitySearchViewController: UITableViewController {
     
     private func loadCities() {
         allCities = TimeZone.knownTimeZoneIdentifiers
-                .compactMap { identifier -> String? in
-                    let parts = identifier.split(separator: "/")
-                    guard parts.count >= 2 else { return nil }
-                    let region = String(parts[0])
-                    let city = parts.last!.replacingOccurrences(of: "_", with: " ")
-                    return "\(city) (\(region))"
-                }
-                .sorted()
+            .compactMap { identifier -> CityItem? in
+                let parts = identifier.split(separator: "/")
+                guard parts.count >= 2 else { return nil }
+                let region = String(parts[0])
+                let city = parts.last!.replacingOccurrences(of: "_", with: " ")
+                
+                return CityItem(displayName: "\(city) (\(region))", identifier: identifier, city: city)
+            }
+            .sorted { $0.displayName < $1.displayName }
         
         filteredCities = allCities
         tableView.reloadData()
@@ -93,7 +97,7 @@ extension CitySearchViewController: UISearchResultsUpdating {
             filteredCities = allCities
         } else {
             filteredCities = allCities.filter {
-                $0.lowercased().contains(searchText.lowercased())
+                $0.displayName.lowercased().contains(searchText.lowercased())
             }
         }
         
@@ -110,7 +114,7 @@ extension CitySearchViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell", for: indexPath)
-        cell.textLabel?.text = filteredCities[indexPath.row]
+        cell.textLabel?.text = filteredCities[indexPath.row].displayName
         cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
         cell.selectionStyle = .none
         return cell
@@ -121,10 +125,11 @@ extension CitySearchViewController {
 // MARK: - UITableViewDelegate
 extension CitySearchViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCity = filteredCities[indexPath.row]
-        print("Selected: \(selectedCity)")
-        delegate?.didSelectCity(selectedCity)
-        searchController.dismiss(animated: false) 
+        let selected = filteredCities[indexPath.row]
+        print("City: \(selected.city)")
+        print("Identifier: \(selected.identifier)")
+        delegate?.didSelectCity(selected)
+        searchController.dismiss(animated: false)
         dismiss(animated: true)
     }
 }
