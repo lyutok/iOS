@@ -21,7 +21,6 @@ class StartViewController: UIViewController {
     @IBOutlet var workTimeLabel: UILabel!
     @IBOutlet var workCityLabel: UILabel!
     
-    
     @IBOutlet var currentTimeView: UIView!
     @IBOutlet var currentTimeBlurView: UIVisualEffectView!
     @IBOutlet var textTimeBlurView: UIVisualEffectView!
@@ -39,7 +38,8 @@ class StartViewController: UIViewController {
     let locationBrain = LocationBrain()
     
     var lastLocation: CLLocation?
-    var selectedWorkCity: CityItem?  // already have this?
+    var selectedWorkCity: CityItem?
+    var selectedLocalCity: CityItem?
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -130,16 +130,37 @@ class StartViewController: UIViewController {
         currentDayImage.tintColor = phase.tintColor
         
         // MARK: - City name
-        locationBrain.reverseGeocode(location: location) { appLocation in
-            let city = appLocation.city ?? "N/A"
-            self.topCityLabel.text = city
-            self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-            self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
+        if let localCity = selectedLocalCity {
+            // user manually selected a city
+            currentCity.text = "\(localCity.city) (Me)"
+        } else {
+            locationBrain.reverseGeocode(location: location) { appLocation in
+                let city = appLocation.city ?? "N/A"
+                self.topCityLabel.text = city
+                self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
+                self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
+            }
         }
         
-        // MARK: - Work city (coming soon!)
+        // MARK: - Work city
         if let workCity = selectedWorkCity {
-            // time calculation goes here next!
+            print("Calculating time for: \(workCity.city)")
+            let localTimeZone = TimeZone.current
+            let workTimeZone = TimeZone(identifier: workCity.identifier) ?? TimeZone.current
+            
+            // Calculate offset difference in seconds
+            let localOffset = localTimeZone.secondsFromGMT()
+            let workOffset = workTimeZone.secondsFromGMT()
+            let differenceSeconds = workOffset - localOffset
+            let differenceHours = differenceSeconds / 3600
+            
+            // Format offset label (+2h / -7h)
+            let sign = differenceHours >= 0 ? "+" : ""
+            workCityLabel.text = "\(workCity.city) (\(sign)\(differenceHours)h)"
+            
+            // Calculate work city current time
+            let workTime = Date().addingTimeInterval(TimeInterval(differenceSeconds))
+            workTimeLabel.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: workTime))
         }
     }
     
@@ -214,10 +235,10 @@ extension StartViewController: CitySearchDelegate {
         print("Received Identifier: \(city.identifier)")
           
         if editCityFlag == 0 {
-            currentCity.text = city.city + " (Me)"
+            selectedLocalCity = city
         } else {
             selectedWorkCity = city
-            workCityLabel.text = city.city + " (-7h)"
         }
+        updateUI()
     }
 }
