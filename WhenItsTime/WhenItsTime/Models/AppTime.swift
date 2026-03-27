@@ -9,4 +9,5 @@ import Foundation
 
 struct AppTime {
     var date: Date
+    var timeZone: TimeZone = .current
 }

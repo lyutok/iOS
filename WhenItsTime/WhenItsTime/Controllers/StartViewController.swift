@@ -26,6 +26,8 @@ class StartViewController: UIViewController {
     @IBOutlet var textTimeBlurView: UIVisualEffectView!
     @IBOutlet var workingHoursView: UIView!
     
+    @IBOutlet var dayLabel: UILabel!
+    
     let locationManager = CLLocationManager()
     var editCityFlag = 0 // from which place Edit was clicked
     
@@ -72,7 +74,7 @@ class StartViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        setupActivityIndicator() // ← call it!
+        setupActivityIndicator()
         setupPullToRefresh()
         updateUI()
     }
@@ -93,7 +95,7 @@ class StartViewController: UIViewController {
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         print("Pan detected: \(translation.y)")
-        print("State: \(gesture.state.rawValue)") // add this line
+        print("State: \(gesture.state.rawValue)")
         if gesture.state == .ended {
             print("Ended with translation: \(translation.y)")
         }
@@ -111,27 +113,56 @@ class StartViewController: UIViewController {
     
     func updateUI() {
         guard let location = lastLocation else {
-            locationManager.requestLocation() // no location yet, go fetch it
+            locationManager.requestLocation()
             return
         }
         
-        // MARK: - Local time
-        let gpsFreshness = Date().timeIntervalSince(location.timestamp)
-        let appTime = gpsFreshness < 30
-            ? timeBrain.makeTime(from: location.timestamp)
-            : timeBrain.makeTime(from: Date())
+        let now = Date()
         
-        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: appTime)
-        currentTime.text = timeBrain.formattedTime(from: appTime)
+        // MARK: - Local timezone (manual selection or device)
+        let localTimeZone: TimeZone = {
+            if let localCity = selectedLocalCity {
+                return TimeZone(identifier: localCity.identifier) ?? .current
+            }
+            return .current
+        }()
+        
+        // MARK: - Local time
+        let gpsFreshness = now.timeIntervalSince(location.timestamp)
+        let sourceDate = gpsFreshness < 30 ? location.timestamp : now
+        let localOffset = localTimeZone.secondsFromGMT(for: now)
+        let deviceOffset = TimeZone.current.secondsFromGMT(for: now)
+        let adjustedDate = sourceDate.addingTimeInterval(TimeInterval(localOffset - deviceOffset))
+        
+        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: adjustedDate))
+        currentTime.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: adjustedDate))
         
         // MARK: - Day/night icon
-        let phase = locationBrain.timePhase(for: location)
-        currentDayImage.image = UIImage(systemName: phase.sfSymbol)
-        currentDayImage.tintColor = phase.tintColor
+        if selectedLocalCity != nil {
+            // Manual city — use hour-based estimation
+            var calendarWithZone = Calendar.current
+            calendarWithZone.timeZone = localTimeZone
+            let hour = calendarWithZone.component(.hour, from: now)
+            
+            let phase: TimePhase
+            switch hour {
+            case 6..<8:   phase = .sunrise
+            case 8..<19:  phase = .day
+            case 19..<21: phase = .sunset
+            default:      phase = .night
+            }
+            
+            currentDayImage.image = UIImage(systemName: phase.sfSymbol)
+            currentDayImage.tintColor = phase.tintColor
+        } else {
+            // GPS location — use accurate Solar calculation
+            let phase = locationBrain.timePhase(for: location)
+            currentDayImage.image = UIImage(systemName: phase.sfSymbol)
+            currentDayImage.tintColor = phase.tintColor
+        }
         
         // MARK: - City name
         if let localCity = selectedLocalCity {
-            // user manually selected a city
             currentCity.text = "\(localCity.city) (Me)"
         } else {
             locationBrain.reverseGeocode(location: location) { appLocation in
@@ -144,23 +175,23 @@ class StartViewController: UIViewController {
         
         // MARK: - Work city
         if let workCity = selectedWorkCity {
-            print("Calculating time for: \(workCity.city)")
-            let localTimeZone = TimeZone.current
-            let workTimeZone = TimeZone(identifier: workCity.identifier) ?? TimeZone.current
+            let workTimeZone = TimeZone(identifier: workCity.identifier) ?? .current
             
-            // Calculate offset difference in seconds
-            let localOffset = localTimeZone.secondsFromGMT()
-            let workOffset = workTimeZone.secondsFromGMT()
+            let localOffset = localTimeZone.secondsFromGMT(for: now)
+            let workOffset = workTimeZone.secondsFromGMT(for: now)
             let differenceSeconds = workOffset - localOffset
             let differenceHours = differenceSeconds / 3600
             
-            // Format offset label (+2h / -7h)
             let sign = differenceHours >= 0 ? "+" : ""
             workCityLabel.text = "\(workCity.city) (\(sign)\(differenceHours)h)"
             
-            // Calculate work city current time
-            let workTime = Date().addingTimeInterval(TimeInterval(differenceSeconds))
-            workTimeLabel.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: workTime))
+            let workAppTime = timeBrain.makeTime(from: now, in: workTimeZone)
+            workTimeLabel.text = timeBrain.formattedTime(from: workAppTime)
+            
+            // MARK: - Label day name
+            let label = timeBrain.dayLabel(localTimeZone: localTimeZone, workTimeZone: workTimeZone)
+            dayLabel.text = label  // hide if nil
+            dayLabel.isHidden = label == nil
         }
     }
     

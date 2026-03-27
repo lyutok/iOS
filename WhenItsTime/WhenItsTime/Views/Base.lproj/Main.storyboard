@@ -158,14 +158,12 @@
                                                                                                 </label>
                                                                                             </subviews>
                                                                                         </stackView>
-                                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jWj-TB-quQ">
-                                                                                            <rect key="frame" x="23.666666666666686" y="20" width="111" height="20"/>
-                                                                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                            <state key="normal" title="Button"/>
-                                                                                            <buttonConfiguration key="configuration" style="plain" title="(previous day)">
-                                                                                                <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
-                                                                                            </buttonConfiguration>
-                                                                                        </button>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(previous day)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QWy-4c-Py6" userLabel="(previous day)">
+                                                                                            <rect key="frame" x="33.000000000000007" y="20" width="92.666666666666686" height="20"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                             </subviews>
@@ -394,6 +392,7 @@
                         <outlet property="currentTime" destination="kJ7-Jk-A5f" id="YlH-85-V9R"/>
                         <outlet property="currentTimeBlurView" destination="0dP-ET-Lm0" id="9Wp-dl-fJ3"/>
                         <outlet property="currentTimeView" destination="3tc-La-mWi" id="pjF-nY-6DO"/>
+                        <outlet property="dayLabel" destination="QWy-4c-Py6" id="c9i-pb-8b8"/>
                         <outlet property="textTimeBlurView" destination="n4q-44-Z2K" id="TL6-Q8-F6o"/>
                         <outlet property="topCityLabel" destination="bhv-Vf-5BY" id="YUE-ZW-WAo"/>
                         <outlet property="topCountryLabel" destination="dy2-Nl-esJ" id="BRl-6c-cF0"/>
