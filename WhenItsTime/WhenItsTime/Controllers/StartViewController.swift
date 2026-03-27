@@ -134,7 +134,9 @@ class StartViewController: UIViewController {
         let deviceOffset = TimeZone.current.secondsFromGMT(for: now)
         let adjustedDate = sourceDate.addingTimeInterval(TimeInterval(localOffset - deviceOffset))
         
-        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: adjustedDate))
+//        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: adjustedDate))
+        // Top date always uses GPS
+        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: sourceDate))
         currentTime.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: adjustedDate))
         
         // MARK: - Day/night icon
