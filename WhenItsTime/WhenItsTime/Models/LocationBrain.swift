@@ -71,6 +71,15 @@ struct LocationBrain {
                 return .night
             }
         }
+    
+    func timePhase(for hour: Int) -> TimePhase {
+        switch hour {
+        case 6..<8:   return .sunrise
+        case 8..<19:  return .day
+        case 19..<21: return .sunset
+        default:      return .night
+        }
+    }
 }
 
 

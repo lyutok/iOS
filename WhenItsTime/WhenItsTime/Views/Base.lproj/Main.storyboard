@@ -410,6 +410,7 @@
                         <outlet property="topCountryLabel" destination="dy2-Nl-esJ" id="BRl-6c-cF0"/>
                         <outlet property="topDateLabel" destination="iVX-rv-FM7" id="jnL-FS-sZ4"/>
                         <outlet property="workCityLabel" destination="zfM-CJ-aYI" id="oKp-uZ-CFi"/>
+                        <outlet property="workDayImage" destination="zkV-YH-Paw" id="iEx-Oj-zxI"/>
                         <outlet property="workTimeLabel" destination="K0f-tf-euv" id="kZi-Af-D5f"/>
                         <outlet property="workingHoursView" destination="sI8-yE-0bJ" id="Wlg-H4-ada"/>
                     </connections>

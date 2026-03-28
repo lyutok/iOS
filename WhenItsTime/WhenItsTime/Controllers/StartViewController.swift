@@ -20,7 +20,8 @@ class StartViewController: UIViewController {
     @IBOutlet var currentDate: UILabel!
     
     @IBOutlet var workTimeLabel: UILabel!
-    @IBOutlet var workCityLabel: UILabel!
+    @IBOutlet var workCityLabel: UILabel!    
+    @IBOutlet var workDayImage: UIImageView!
     
     @IBOutlet var currentTimeView: UIView!
     @IBOutlet var currentTimeBlurView: UIVisualEffectView!
@@ -146,21 +147,13 @@ class StartViewController: UIViewController {
             currentDate.isHidden = true
         }
         
-        // MARK: - Day/night icon
+        // MARK: - Day/night icon for local city
         if selectedLocalCity != nil {
             // Manual city — use hour-based estimation
-            var calendarWithZone = Calendar.current
-            calendarWithZone.timeZone = localTimeZone
-            let hour = calendarWithZone.component(.hour, from: now)
-            
-            let phase: TimePhase
-            switch hour {
-            case 6..<8:   phase = .sunrise
-            case 8..<19:  phase = .day
-            case 19..<21: phase = .sunset
-            default:      phase = .night
-            }
-            
+            var localCalendar = Calendar.current
+            localCalendar.timeZone = localTimeZone
+            let localHour = localCalendar.component(.hour, from: now)
+            let phase = locationBrain.timePhase(for: localHour)
             currentDayImage.image = UIImage(systemName: phase.sfSymbol)
             currentDayImage.tintColor = phase.tintColor
         } else {
@@ -197,10 +190,18 @@ class StartViewController: UIViewController {
             let workAppTime = timeBrain.makeTime(from: now, in: workTimeZone)
             workTimeLabel.text = timeBrain.formattedTime(from: workAppTime)
             
-            // MARK: - Label day name
+            // Label day name
             let label = timeBrain.dayLabel(localTimeZone: localTimeZone, workTimeZone: workTimeZone)
             dayLabel.text = label  // hide if nil
             dayLabel.isHidden = label == nil
+            
+            // Work city icon
+            var workCalendar = Calendar.current
+            workCalendar.timeZone = workTimeZone
+            let workHour = workCalendar.component(.hour, from: now)
+            let workPhase = locationBrain.timePhase(for: workHour)
+            workDayImage.image = UIImage(systemName: workPhase.sfSymbol)
+            workDayImage.tintColor = workPhase.tintColor
         }
     }
     
