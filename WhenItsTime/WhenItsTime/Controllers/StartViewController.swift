@@ -17,6 +17,7 @@ class StartViewController: UIViewController {
     @IBOutlet var currentCity: UILabel!
     @IBOutlet var currentTime: UILabel!
     @IBOutlet var currentDayImage: UIImageView!
+    @IBOutlet var currentDate: UILabel!
     
     @IBOutlet var workTimeLabel: UILabel!
     @IBOutlet var workCityLabel: UILabel!
@@ -134,10 +135,16 @@ class StartViewController: UIViewController {
         let deviceOffset = TimeZone.current.secondsFromGMT(for: now)
         let adjustedDate = sourceDate.addingTimeInterval(TimeInterval(localOffset - deviceOffset))
         
-//        topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: adjustedDate))
         // Top date always uses GPS
         topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: sourceDate))
         currentTime.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: adjustedDate))
+        // Current date
+        if selectedLocalCity != nil {
+            currentDate.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: adjustedDate))
+            currentDate.isHidden = false
+        } else {
+            currentDate.isHidden = true
+        }
         
         // MARK: - Day/night icon
         if selectedLocalCity != nil {
