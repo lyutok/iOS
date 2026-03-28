@@ -72,6 +72,10 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load saved cities
+        selectedLocalCity = CityStorage.loadLocalCity()
+        selectedWorkCity = CityStorage.loadWorkCity()
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -164,16 +168,23 @@ class StartViewController: UIViewController {
         }
         
         // MARK: - City name
+        // Top labels - GPS
+        locationBrain.reverseGeocode(location: location) { appLocation in
+            let city = appLocation.city ?? "N/A"
+            self.topCityLabel.text = city
+            self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
+        }
+        
+        // Card labels - manual selection or GPS
         if let localCity = selectedLocalCity {
             currentCity.text = "\(localCity.city) (Me)"
         } else {
             locationBrain.reverseGeocode(location: location) { appLocation in
                 let city = appLocation.city ?? "N/A"
-                self.topCityLabel.text = city
                 self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-                self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
             }
         }
+        
         
         // MARK: - Work city
         if let workCity = selectedWorkCity {
@@ -277,8 +288,10 @@ extension StartViewController: CitySearchDelegate {
           
         if editCityFlag == 0 {
             selectedLocalCity = city
+            CityStorage.saveLocalCity(city)
         } else {
             selectedWorkCity = city
+            CityStorage.saveWorkCity(city)
         }
         updateUI()
     }
