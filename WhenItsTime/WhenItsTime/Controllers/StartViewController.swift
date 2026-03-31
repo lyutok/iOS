@@ -30,6 +30,9 @@ class StartViewController: UIViewController {
     
     @IBOutlet var dayLabel: UILabel!
     
+    @IBOutlet var workingHoursWork: UILabel!
+    @IBOutlet var workingHoursCurrentLocation: UILabel!
+    
     let locationManager = CLLocationManager()
     var editCityFlag = 0 // from which place Edit was clicked
     
@@ -178,10 +181,12 @@ class StartViewController: UIViewController {
         // Card labels - manual selection or GPS
         if let localCity = selectedLocalCity {
             currentCity.text = "\(localCity.city) (Me)"
+            self.workingHoursCurrentLocation.text = "\(localCity.city)" // working hour section
         } else {
             locationBrain.reverseGeocode(location: location) { appLocation in
                 let city = appLocation.city ?? "N/A"
                 self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
+                self.self.workingHoursCurrentLocation.text = "\(city)" // working hour section
             }
         }
         
@@ -197,6 +202,8 @@ class StartViewController: UIViewController {
             
             let sign = differenceHours >= 0 ? "+" : ""
             workCityLabel.text = "\(workCity.city) (\(sign)\(differenceHours)h)"
+            
+            workingHoursWork.text = "\(workCity.city) working hours" // working hour section
             
             let workAppTime = timeBrain.makeTime(from: now, in: workTimeZone)
             workTimeLabel.text = timeBrain.formattedTime(from: workAppTime)
