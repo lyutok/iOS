@@ -17,9 +17,22 @@
 		69E8256675696159CB115289 /* Pods-WhenItsTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhenItsTime.release.xcconfig"; path = "Target Support Files/Pods-WhenItsTime/Pods-WhenItsTime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		206CF6DD2F7AD26F0092D637 /* Exceptions for "WhenItsTime" folder in "WhenItsTime" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 202D95F62F3B52920047D1E6 /* WhenItsTime */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		202D95F92F3B52920047D1E6 /* WhenItsTime */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				206CF6DD2F7AD26F0092D637 /* Exceptions for "WhenItsTime" folder in "WhenItsTime" target */,
+			);
 			path = WhenItsTime;
 			sourceTree = "<group>";
 		};
