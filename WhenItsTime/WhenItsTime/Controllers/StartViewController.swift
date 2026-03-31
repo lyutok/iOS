@@ -181,12 +181,12 @@ class StartViewController: UIViewController {
         // Card labels - manual selection or GPS
         if let localCity = selectedLocalCity {
             currentCity.text = "\(localCity.city) (Me)"
-            self.workingHoursCurrentLocation.text = "\(localCity.city)" // working hour section
+            self.workingHoursCurrentLocation.text = "\(localCity.city) time" // working hour section
         } else {
             locationBrain.reverseGeocode(location: location) { appLocation in
                 let city = appLocation.city ?? "N/A"
                 self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-                self.self.workingHoursCurrentLocation.text = "\(city)" // working hour section
+                self.self.workingHoursCurrentLocation.text = "\(city) time" // working hour section
             }
         }
         
