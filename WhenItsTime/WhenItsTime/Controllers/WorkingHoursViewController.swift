@@ -21,8 +21,19 @@ class WorkingHoursViewController: UITableViewController {
     private var selectedIndex = 0        // which preset is selected
     private var isCustomSelected = false // is Custom row selected
     
-    private var customStart = Date()
-    private var customEnd = Date()
+    private var customStart: Date = {
+        var c = DateComponents()
+        c.hour = 9
+        c.minute = 0
+        return Calendar.current.date(from: c) ?? Date()
+    }()
+    
+    private var customEnd: Date = {
+        var c = DateComponents()
+        c.hour = 18
+        c.minute = 0
+        return Calendar.current.date(from: c) ?? Date()
+    }()
     
     private var isStartPickerVisible = false
     private var isEndPickerVisible = false
@@ -30,7 +41,6 @@ class WorkingHoursViewController: UITableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
         setupTableView()
     }
@@ -177,7 +187,6 @@ extension WorkingHoursViewController {
         
         if indexPath.row == 0 {
             // Start row
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "TimeCell", for: indexPath)
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "TimeCell")
             cell.textLabel?.text = "Starts"
             cell.detailTextLabel?.text = formattedTime(customStart)
