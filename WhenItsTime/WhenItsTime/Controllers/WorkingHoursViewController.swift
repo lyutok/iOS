@@ -86,9 +86,23 @@ class WorkingHoursViewController: UITableViewController {
         tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
         tableView.separatorInset = .zero
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PresetCell")
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TimeCell")
         tableView.register(UITableViewCell(style: .value1, reuseIdentifier: "TimeCell").classForCoder, forCellReuseIdentifier: "TimeCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PickerCell")
+        
+        // Tap on empty area below cells → collapse any open picker
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTableTap(_:)))
+        tap.cancelsTouchesInView = false  // don't block normal cell selection
+        tableView.addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleTableTap(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: tableView)
+        // nil means the tap landed on empty space (no cell there)
+        guard tableView.indexPathForRow(at: location) == nil else { return }
+        
+        isStartPickerVisible = false
+        isEndPickerVisible = false
+        tableView.reloadData()
     }
     
     // MARK: - Actions
