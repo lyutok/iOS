@@ -35,9 +35,28 @@ class WorkingHoursViewController: UITableViewController {
         setupTableView()
     }
     
-//    // tells iOS this view never needs keyboard input
-//    override var canBecomeFirstResponder: Bool {
-//        return false }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dismissKeyboard),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    // Force-resign whoever triggered the keyboard, app-wide
+    @objc private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    // Tells iOS this view never needs keyboard input
+    override var canBecomeFirstResponder: Bool { return false }
     
     // MARK: - Setup
     private func setupNavigationBar() {
@@ -226,6 +245,7 @@ extension WorkingHoursViewController {
 extension WorkingHoursViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true) // dismiss keyboard if it somehow appeared
         
         if indexPath.section == 0 {
             let isCustomRow = indexPath.row == presets.count
