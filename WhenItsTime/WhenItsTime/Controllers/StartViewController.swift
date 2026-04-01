@@ -223,6 +223,18 @@ class StartViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func editWorkingHoursPressed(_ sender: UIButton) {
+        presentWorkingHours()
+    }
+    
+    private func presentWorkingHours() {
+        let workingHoursVC = WorkingHoursViewController()
+        workingHoursVC.delegate = self
+        let nav = UINavigationController(rootViewController: workingHoursVC)
+        present(nav, animated: true)
+    }
+    
     @IBAction func editButtonPressed(_ sender: UIButton) {
         if sender.tag == 0 {
                 print("Edit local city")
@@ -301,5 +313,12 @@ extension StartViewController: CitySearchDelegate {
             CityStorage.saveWorkCity(city)
         }
         updateUI()
+    }
+}
+
+// MARK: - Receive Working hours
+extension StartViewController: WorkingHoursDelegate {
+    func didSaveWorkingHours(_ hours: WorkingHours) {
+        
     }
 }
