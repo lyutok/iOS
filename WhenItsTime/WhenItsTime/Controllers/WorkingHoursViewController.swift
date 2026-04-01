@@ -21,19 +21,12 @@ class WorkingHoursViewController: UITableViewController {
     private var selectedIndex = 0        // which preset is selected
     private var isCustomSelected = false // is Custom row selected
     
-    private var customStart: Date = {
-        var c = DateComponents()
-        c.hour = 9
-        c.minute = 0
-        return Calendar.current.date(from: c) ?? Date()
-    }()
+    private var hours: WorkingHours {
+        presets[selectedIndex]
+    }
     
-    private var customEnd: Date = {
-        var c = DateComponents()
-        c.hour = 18
-        c.minute = 0
-        return Calendar.current.date(from: c) ?? Date()
-    }()
+    private var customStart = Date()
+    private var customEnd = Date()
     
     private var isStartPickerVisible = false
     private var isEndPickerVisible = false
@@ -41,6 +34,9 @@ class WorkingHoursViewController: UITableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupCustomWorkingHours(hours: hours)
+        
         setupNavigationBar()
         setupTableView()
     }
@@ -69,6 +65,22 @@ class WorkingHoursViewController: UITableViewController {
     override var canBecomeFirstResponder: Bool { return false }
     
     // MARK: - Setup
+    func setupCustomWorkingHours(hours: WorkingHours) {
+        customStart = {
+                var c = DateComponents()
+                c.hour = hours.startHour
+                c.minute = hours.startMinute
+                return Calendar.current.date(from: c) ?? Date()
+        }()
+            
+        customEnd = {
+            var c = DateComponents()
+            c.hour = hours.endHour
+            c.minute = hours.endMinute
+            return Calendar.current.date(from: c) ?? Date()
+        }()
+    }
+    
     private func setupNavigationBar() {
         title = "Working Hours"
         
@@ -280,6 +292,8 @@ extension WorkingHoursViewController {
             } else {
                 isCustomSelected = false
                 selectedIndex = indexPath.row
+                setupCustomWorkingHours(hours: hours)
+                
                 isStartPickerVisible = false
                 isEndPickerVisible = false
             }
