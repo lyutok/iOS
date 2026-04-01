@@ -31,12 +31,24 @@ class WorkingHoursViewController: UITableViewController {
     private var isStartPickerVisible = false
     private var isEndPickerVisible = false
     
+    // MARK: - Init  (forces insetGrouped style)
+    convenience init() {
+        self.init(style: .insetGrouped)
+    }
+
+    override init(style: UITableView.Style) {
+        super.init(style: .insetGrouped)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(style: .insetGrouped)
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCustomWorkingHours(hours: hours)
-        
         setupNavigationBar()
         setupTableView()
     }
@@ -53,12 +65,19 @@ class WorkingHoursViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
     
     // Force-resign whoever triggered the keyboard, app-wide
     @objc private func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil, from: nil, for: nil
+        )
     }
     
     // Tells iOS this view never needs keyboard input
@@ -67,15 +86,15 @@ class WorkingHoursViewController: UITableViewController {
     // MARK: - Setup
     func setupCustomWorkingHours(hours: WorkingHours) {
         customStart = {
-                var c = DateComponents()
-                c.hour = hours.startHour
-                c.minute = hours.startMinute
-                return Calendar.current.date(from: c) ?? Date()
+            var c = DateComponents()
+            c.hour   = hours.startHour
+            c.minute = hours.startMinute
+            return Calendar.current.date(from: c) ?? Date()
         }()
-            
+        
         customEnd = {
             var c = DateComponents()
-            c.hour = hours.endHour
+            c.hour   = hours.endHour
             c.minute = hours.endMinute
             return Calendar.current.date(from: c) ?? Date()
         }()
@@ -89,7 +108,6 @@ class WorkingHoursViewController: UITableViewController {
             target: self,
             action: #selector(cancelTapped)
         )
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save,
             target: self,
@@ -105,26 +123,11 @@ class WorkingHoursViewController: UITableViewController {
     }
     
     private func setupTableView() {
-        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
-        tableView.separatorInset = .zero
+        // Native iOS grouped background — light gray, rounded cards
+        tableView.backgroundColor = .systemGroupedBackground
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PresetCell")
-        tableView.register(UITableViewCell(style: .value1, reuseIdentifier: "TimeCell").classForCoder, forCellReuseIdentifier: "TimeCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CustomHeaderCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PickerCell")
-        
-        // Tap on empty area below cells → collapse any open picker
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTableTap(_:)))
-        tap.cancelsTouchesInView = false  // don't block normal cell selection
-        tableView.addGestureRecognizer(tap)
-    }
-    
-    @objc private func handleTableTap(_ gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: tableView)
-        // nil means the tap landed on empty space (no cell there)
-        guard tableView.indexPathForRow(at: location) == nil else { return }
-        
-        isStartPickerVisible = false
-        isEndPickerVisible = false
-        tableView.reloadData()
     }
     
     // MARK: - Actions
@@ -141,86 +144,90 @@ class WorkingHoursViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension WorkingHoursViewController {
     
+    // Always 2 sections: [0] Presets  [1] Custom
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return isCustomSelected ? 2 : 1
+        return 2
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return presets.count + 1  // presets + Custom row
+            return presets.count
         } else {
-            // Start row + optional picker + End row + optional picker
-            var rows = 2
+            // Row 0 is always the "Custom" toggle row
+            guard isCustomSelected else { return 1 }
+            // + Start row + optional start picker + End row + optional end picker
+            var rows = 3  // Custom header + Starts + Ends
             if isStartPickerVisible { rows += 1 }
-            if isEndPickerVisible { rows += 1 }
+            if isEndPickerVisible   { rows += 1 }
             return rows
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            return presetCell(at: indexPath)
-        } else {
-            return customCell(at: indexPath)
-        }
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return indexPath.section == 0
+            ? presetCell(at: indexPath)
+            : customCell(at: indexPath)
     }
     
-    // MARK: - Section 0: Presets
+    // MARK: - Section 0: Preset cells
     private func presetCell(at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath)
-        let isCustomRow = indexPath.row == presets.count
         
-        if isCustomRow {
-            cell.textLabel?.text = "Custom"
-            let isSelected = isCustomSelected
-            cell.imageView?.image = UIImage(systemName: isSelected ? "circle.fill" : "circle")
-        } else {
-            cell.textLabel?.text = presets[indexPath.row].displayString
-            let isSelected = !isCustomSelected && selectedIndex == indexPath.row
-            cell.imageView?.image = UIImage(systemName: isSelected ? "circle.fill" : "circle")
-        }
-        
-        cell.imageView?.tintColor = .white
-        cell.textLabel?.textColor = .white
-        cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
-        cell.selectionStyle = .none
+        let isChecked = !isCustomSelected && selectedIndex == indexPath.row
+        var config = cell.defaultContentConfiguration()
+        config.text = presets[indexPath.row].displayString
+        config.image = circleImage(filled: isChecked)
+        config.imageProperties.tintColor = isChecked ? .systemGray : .systemGray3
+        cell.contentConfiguration = config
+        cell.accessoryView  = nil
+        cell.accessoryType  = .none
+        cell.selectionStyle = .default
         return cell
     }
     
-    // MARK: - Section 1: Custom
+    // MARK: - Section 1: Custom cells
+    // Row layout (when isCustomSelected):
+    //   0  – "Custom"  (toggle + checkmark)
+    //   1  – "Starts"  + time value
+    //   2  – Start picker           ← only when isStartPickerVisible
+    //   2/3 – "Ends"   + time value
+    //   3/4 – End picker            ← only when isEndPickerVisible
     private func customCell(at indexPath: IndexPath) -> UITableViewCell {
-        // Start row is always row 0
-        // If start picker visible → row 1 is picker, row 2 is End
-        // If start picker not visible → row 1 is End
         
-        let startPickerRow = 1
-        let endRow = isStartPickerVisible ? 2 : 1
-        let endPickerRow = endRow + 1
-        
+        // ── Row 0: "Custom" toggle ──────────────────────────────────────
         if indexPath.row == 0 {
-            // Start row
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: "TimeCell")
-            cell.textLabel?.text = "Starts"
-            cell.detailTextLabel?.text = formattedTime(customStart)
-  
-            cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
-            cell.textLabel?.textColor = .white
-            cell.detailTextLabel?.textColor = .white
-            cell.selectionStyle = .none
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "CustomHeaderCell", for: indexPath)
+            var config = cell.defaultContentConfiguration()
+            config.text = "Custom"
+            config.image = circleImage(filled: isCustomSelected)
+            config.imageProperties.tintColor = isCustomSelected ? .systemGray : .systemGray3
+            cell.contentConfiguration = config
+            cell.accessoryView  = nil
+            cell.accessoryType  = .none
+            cell.selectionStyle = .default
             return cell
+        }
+        
+        // ── Rows below only exist when isCustomSelected == true ──────────
+        let startPickerRow = 2
+        let endRow         = isStartPickerVisible ? 3 : 2
+        let endPickerRow   = endRow + 1
+        
+        if indexPath.row == 1 {
+            // Starts row
+            return timeRow(title: "Starts", time: formattedTime(customStart))
+            
         } else if indexPath.row == startPickerRow && isStartPickerVisible {
             // Start picker
             return pickerCell(for: indexPath, isStart: true)
+            
         } else if indexPath.row == endRow {
-            // End row
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: "TimeCell")
-            cell.textLabel?.text = "Ends"
-            cell.detailTextLabel?.text = formattedTime(customEnd)
-            cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
-            cell.textLabel?.textColor = .white
-            cell.detailTextLabel?.textColor = .white
-            cell.selectionStyle = .none
-            return cell
+            // Ends row
+            return timeRow(title: "Ends", time: formattedTime(customEnd))
+            
         } else if indexPath.row == endPickerRow && isEndPickerVisible {
             // End picker
             return pickerCell(for: indexPath, isStart: false)
@@ -229,19 +236,27 @@ extension WorkingHoursViewController {
         return UITableViewCell()
     }
     
-    // MARK: - Picker cell
+    // "Starts" / "Ends" row — label on left, blue time on right
+    private func timeRow(title: String, time: String) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.textLabel?.text              = title
+        cell.detailTextLabel?.text        = time
+        cell.detailTextLabel?.textColor   = .label
+        cell.selectionStyle               = .default
+        return cell
+    }
+    
+    // MARK: - Picker cell (unchanged logic, white background)
     private func pickerCell(for indexPath: IndexPath, isStart: Bool) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell", for: indexPath)
-        
-        // Clear existing pickers
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         
         let picker = UIDatePicker()
-        picker.datePickerMode = .time
+        picker.datePickerMode         = .time
         picker.preferredDatePickerStyle = .wheels
-        picker.minuteInterval = 30
-        picker.date = isStart ? customStart : customEnd
-        picker.tag = isStart ? 0 : 1
+        picker.minuteInterval         = 30
+        picker.date                   = isStart ? customStart : customEnd
+        picker.tag                    = isStart ? 0 : 1
         picker.addTarget(self, action: #selector(timePickerChanged(_:)), for: .valueChanged)
         picker.translatesAutoresizingMaskIntoConstraints = false
         
@@ -253,16 +268,21 @@ extension WorkingHoursViewController {
             picker.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor)
         ])
         
-        cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
         cell.selectionStyle = .none
         return cell
     }
     
-    // MARK: - Helper
+    // MARK: - Helpers
+    // Circle SF Symbol for left-side image in content configuration
+    private func circleImage(filled: Bool) -> UIImage? {
+        let name = filled ? "circle.fill" : "circle"
+        return UIImage(systemName: name)
+    }
+
     private func formattedTime(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .none
+        formatter.locale = Locale(identifier: "en_US_POSIX") // prevents locale overriding HH:mm
+        formatter.dateFormat = "HH:mm"
         return formatter.string(from: date)
     }
     
@@ -279,42 +299,47 @@ extension WorkingHoursViewController {
 // MARK: - UITableViewDelegate
 extension WorkingHoursViewController {
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(true) // dismiss keyboard if it somehow appeared
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        view.endEditing(true)
         
         if indexPath.section == 0 {
-            let isCustomRow = indexPath.row == presets.count
-            
-            if isCustomRow {
-                isCustomSelected = true
-                isStartPickerVisible = false
-                isEndPickerVisible = false
-            } else {
-                isCustomSelected = false
-                selectedIndex = indexPath.row
-                setupCustomWorkingHours(hours: hours)
-                
-                isStartPickerVisible = false
-                isEndPickerVisible = false
-            }
-            
+            // ── Preset selected ─────────────────────────────────────────
+            isCustomSelected  = false
+            selectedIndex     = indexPath.row
+            setupCustomWorkingHours(hours: hours)   // seed Custom with preset values
+            isStartPickerVisible = false
+            isEndPickerVisible   = false
             tableView.reloadData()
             
         } else {
-            // Section 1 — Custom time rows
-            let endRow = isStartPickerVisible ? 2 : 1
-            
+            // ── Custom section ───────────────────────────────────────────
             if indexPath.row == 0 {
-                // Tapped Start
-                isStartPickerVisible.toggle()
-                isEndPickerVisible = false
-            } else if indexPath.row == endRow {
-                // Tapped End
-                isEndPickerVisible.toggle()
-                isStartPickerVisible = false
+                // Toggle Custom on/off
+                isCustomSelected.toggle()
+                if !isCustomSelected {
+                    isStartPickerVisible = false
+                    isEndPickerVisible   = false
+                }
+                tableView.reloadData()
+                
+            } else {
+                // Starts / Ends rows
+                let endRow = isStartPickerVisible ? 3 : 2
+                
+                if indexPath.row == 1 {
+                    // Starts tapped
+                    isStartPickerVisible.toggle()
+                    isEndPickerVisible = false
+                } else if indexPath.row == endRow {
+                    // Ends tapped
+                    isEndPickerVisible.toggle()
+                    isStartPickerVisible = false
+                }
+                
+                tableView.reloadData()
             }
-            
-            tableView.reloadData()
         }
     }
 }
