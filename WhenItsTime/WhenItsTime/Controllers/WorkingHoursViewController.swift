@@ -128,6 +128,21 @@ class WorkingHoursViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PresetCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CustomHeaderCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PickerCell")
+        
+        // Tap on empty area below cells → collapse any open picker
+          let tap = UITapGestureRecognizer(target: self, action: #selector(handleTableTap(_:)))
+          tap.cancelsTouchesInView = false  // don't block normal cell selection
+          tableView.addGestureRecognizer(tap)
+      }
+      
+      @objc private func handleTableTap(_ gesture: UITapGestureRecognizer) {
+          let location = gesture.location(in: tableView)
+          // nil means the tap landed on empty space (no cell there)
+          guard tableView.indexPathForRow(at: location) == nil else { return }
+          
+          isStartPickerVisible = false
+          isEndPickerVisible = false
+          tableView.reloadData()
     }
     
     // MARK: - Actions
