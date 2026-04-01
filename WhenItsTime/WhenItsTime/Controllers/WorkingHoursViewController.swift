@@ -51,6 +51,8 @@ class WorkingHoursViewController: UITableViewController {
         setupCustomWorkingHours(hours: hours)
         setupNavigationBar()
         setupTableView()
+        
+        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +118,7 @@ class WorkingHoursViewController: UITableViewController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1.0)
+        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
         appearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -199,6 +201,8 @@ extension WorkingHoursViewController {
         cell.accessoryView  = nil
         cell.accessoryType  = .none
         cell.selectionStyle = .default
+        cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+        
         return cell
     }
     
@@ -223,6 +227,8 @@ extension WorkingHoursViewController {
             cell.accessoryView  = nil
             cell.accessoryType  = .none
             cell.selectionStyle = .default
+            cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+
             return cell
         }
         
@@ -251,7 +257,7 @@ extension WorkingHoursViewController {
         return UITableViewCell()
     }
     
-    // "Starts" / "Ends" row — label on left, blue time on right
+    // "Starts" / "Ends" row — label on left, time on right
     private func timeRow(title: String, time: String) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         cell.textLabel?.text              = title
