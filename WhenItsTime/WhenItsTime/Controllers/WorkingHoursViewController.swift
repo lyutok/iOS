@@ -253,6 +253,7 @@ extension WorkingHoursViewController {
         
         let picker = UIDatePicker()
         picker.datePickerMode         = .time
+        picker.locale = Locale(identifier: "en_GB")
         picker.preferredDatePickerStyle = .wheels
         picker.minuteInterval         = 30
         picker.date                   = isStart ? customStart : customEnd
