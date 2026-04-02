@@ -52,7 +52,7 @@ class WorkingHoursViewController: UITableViewController {
         setupNavigationBar()
         setupTableView()
         
-        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.2)
+        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,14 +111,15 @@ class WorkingHoursViewController: UITableViewController {
             action: #selector(cancelTapped)
         )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .save,
+            barButtonSystemItem: .done,
             target: self,
             action: #selector(saveTapped)
         )
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(white: 0.4, alpha: 1)
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
         appearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -192,16 +193,22 @@ extension WorkingHoursViewController {
     private func presetCell(at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath)
         
+//        let layer = cell.layer
+//        layer.borderColor = UIColor.white.cgColor
+//        layer.borderWidth = 1.0
+        
         let isChecked = !isCustomSelected && selectedIndex == indexPath.row
         var config = cell.defaultContentConfiguration()
         config.text = presets[indexPath.row].displayString
         config.image = circleImage(filled: isChecked)
-        config.imageProperties.tintColor = isChecked ? .systemGray : .systemGray3
+        config.imageProperties.tintColor = isChecked ? UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1) : .systemGray3
+        // isChecked ? .systemGray : .systemGray3
         cell.contentConfiguration = config
         cell.accessoryView  = nil
         cell.accessoryType  = .none
-        cell.selectionStyle = .default
-        cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        // UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.5)
         
         return cell
     }
@@ -222,12 +229,13 @@ extension WorkingHoursViewController {
             var config = cell.defaultContentConfiguration()
             config.text = "Custom"
             config.image = circleImage(filled: isCustomSelected)
-            config.imageProperties.tintColor = isCustomSelected ? .systemGray : .systemGray3
+            config.imageProperties.tintColor = isCustomSelected ? UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1) : .systemGray3
             cell.contentConfiguration = config
             cell.accessoryView  = nil
             cell.accessoryType  = .none
-            cell.selectionStyle = .default
-            cell.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.3)
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+            // UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.5)
 
             return cell
         }
@@ -263,14 +271,17 @@ extension WorkingHoursViewController {
         cell.textLabel?.text              = title
         cell.detailTextLabel?.text        = time
         cell.detailTextLabel?.textColor   = .label
-        cell.selectionStyle               = .default
+        cell.selectionStyle               = .none
+        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        
         return cell
     }
     
-    // MARK: - Picker cell (unchanged logic, white background)
+    // MARK: - Picker cell
     private func pickerCell(for indexPath: IndexPath, isStart: Bool) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell", for: indexPath)
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
         
         let picker = UIDatePicker()
         picker.datePickerMode         = .time
