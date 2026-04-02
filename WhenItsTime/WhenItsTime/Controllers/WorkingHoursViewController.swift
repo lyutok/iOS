@@ -193,22 +193,16 @@ extension WorkingHoursViewController {
     private func presetCell(at indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath)
         
-//        let layer = cell.layer
-//        layer.borderColor = UIColor.white.cgColor
-//        layer.borderWidth = 1.0
-        
         let isChecked = !isCustomSelected && selectedIndex == indexPath.row
         var config = cell.defaultContentConfiguration()
         config.text = presets[indexPath.row].displayString
         config.image = circleImage(filled: isChecked)
         config.imageProperties.tintColor = isChecked ? UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1) : .systemGray3
-        // isChecked ? .systemGray : .systemGray3
         cell.contentConfiguration = config
         cell.accessoryView  = nil
         cell.accessoryType  = .none
         cell.selectionStyle = .none
-        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
-        // UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.5)
+        applyCellBackground(to: cell)
         
         return cell
     }
@@ -234,8 +228,7 @@ extension WorkingHoursViewController {
             cell.accessoryView  = nil
             cell.accessoryType  = .none
             cell.selectionStyle = .none
-            cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
-            // UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 0.5)
+            applyCellBackground(to: cell)
 
             return cell
         }
@@ -272,7 +265,7 @@ extension WorkingHoursViewController {
         cell.detailTextLabel?.text        = time
         cell.detailTextLabel?.textColor   = .label
         cell.selectionStyle               = .none
-        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        applyCellBackground(to: cell)
         
         return cell
     }
@@ -281,7 +274,7 @@ extension WorkingHoursViewController {
     private func pickerCell(for indexPath: IndexPath, isStart: Bool) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell", for: indexPath)
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-        cell.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        applyCellBackground(to: cell)
         
         let picker = UIDatePicker()
         picker.datePickerMode         = .time
@@ -306,6 +299,14 @@ extension WorkingHoursViewController {
     }
     
     // MARK: - Helpers
+    private func applyCellBackground(to cell: UITableViewCell) {
+        var config = UIBackgroundConfiguration.listCell()
+        config.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
+        config.strokeColor = .white
+        config.strokeWidth = 0.7
+        cell.backgroundConfiguration = config
+    }
+    
     // Circle SF Symbol for left-side image in content configuration
     private func circleImage(filled: Bool) -> UIImage? {
         let name = filled ? "circle.fill" : "circle"
