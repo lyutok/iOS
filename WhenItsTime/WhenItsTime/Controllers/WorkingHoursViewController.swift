@@ -168,6 +168,21 @@ class WorkingHoursViewController: UITableViewController {
 //        print(choosenWorkingHours)
         print(formattedTime(customStart))
         print(formattedTime(customEnd))
+        
+        let result: WorkingHours
+        
+        let start = Calendar.current.dateComponents([.hour, .minute], from: customStart)
+        let end = Calendar.current.dateComponents([.hour, .minute], from: customEnd)
+               
+        result = WorkingHours(
+           startHour: start.hour ?? 0,
+           startMinute: start.minute ?? 0,
+           endHour: end.hour ?? 0,
+           endMinute: end.minute ?? 0
+        )
+        
+        delegate?.didSaveWorkingHours(result)
+        
         dismiss(animated: true)
     }
 }

@@ -319,6 +319,6 @@ extension StartViewController: CitySearchDelegate {
 // MARK: - Receive Working hours
 extension StartViewController: WorkingHoursDelegate {
     func didSaveWorkingHours(_ hours: WorkingHours) {
-        
+        print("Received:", hours)
     }
 }
