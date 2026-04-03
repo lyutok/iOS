@@ -42,9 +42,9 @@ struct TimeBrain {
         let workDay = workCalendar.component(.day, from: now)
         
         if workDay < localDay {
-            return "(+1 day)"
-        } else if workDay > localDay {
             return "(-1 day)"
+        } else if workDay > localDay {
+            return "(+1 day)"
         } else {
             return nil // same day, no label needed
         }

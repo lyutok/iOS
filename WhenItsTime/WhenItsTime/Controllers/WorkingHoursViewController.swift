@@ -17,6 +17,7 @@ class WorkingHoursViewController: UITableViewController {
     // Colors
     let myBackgrdGreen = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
     let myGray = UIColor(red: 180/255, green: 200/255, blue: 205/255, alpha: 1)
+    let myNavButtonsGray = UIColor(white: 0.4, alpha: 1)
     
     // MARK: - Properties
     weak var delegate: WorkingHoursDelegate?
@@ -28,6 +29,8 @@ class WorkingHoursViewController: UITableViewController {
     private var hours: WorkingHours {
         presets[selectedIndex]
     }
+    
+    private var choosenWorkingHours: WorkingHours?
     
     private var customStart = Date()
     private var customEnd = Date()
@@ -114,14 +117,14 @@ class WorkingHoursViewController: UITableViewController {
             target: self,
             action: #selector(cancelTapped)
         )
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(white: 0.4, alpha: 1)
+        navigationItem.leftBarButtonItem?.tintColor = myNavButtonsGray
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
             target: self,
             action: #selector(saveTapped)
         )
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(white: 0.4, alpha: 1)
+        navigationItem.rightBarButtonItem?.tintColor = myNavButtonsGray
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -161,6 +164,10 @@ class WorkingHoursViewController: UITableViewController {
     
     @objc private func saveTapped() {
         // TODO: pass back selected hours
+//        print(selectedIndex)
+//        print(choosenWorkingHours)
+        print(formattedTime(customStart))
+        print(formattedTime(customEnd))
         dismiss(animated: true)
     }
 }
@@ -200,6 +207,7 @@ extension WorkingHoursViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PresetCell", for: indexPath)
         
         let isChecked = !isCustomSelected && selectedIndex == indexPath.row
+        
         var config = cell.defaultContentConfiguration()
         config.text = presets[indexPath.row].displayString
         config.image = circleImage(filled: isChecked)
@@ -348,6 +356,9 @@ extension WorkingHoursViewController {
             // ── Preset selected ─────────────────────────────────────────
             isCustomSelected  = false
             selectedIndex     = indexPath.row
+        
+            choosenWorkingHours = presets[selectedIndex]
+            
             setupCustomWorkingHours(hours: hours)   // seed Custom with preset values
             isStartPickerVisible = false
             isEndPickerVisible   = false
