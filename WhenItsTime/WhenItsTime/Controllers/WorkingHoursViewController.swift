@@ -14,6 +14,10 @@ protocol WorkingHoursDelegate: AnyObject {
 
 class WorkingHoursViewController: UITableViewController {
     
+    // Colors
+    let myBackgrdGreen = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
+    let myGray = UIColor(red: 180/255, green: 200/255, blue: 205/255, alpha: 1)
+    
     // MARK: - Properties
     weak var delegate: WorkingHoursDelegate?
     
@@ -52,7 +56,7 @@ class WorkingHoursViewController: UITableViewController {
         setupNavigationBar()
         setupTableView()
         
-        tableView.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
+        tableView.backgroundColor = myBackgrdGreen
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +114,8 @@ class WorkingHoursViewController: UITableViewController {
             target: self,
             action: #selector(cancelTapped)
         )
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(white: 0.4, alpha: 1)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .done,
             target: self,
@@ -119,7 +125,7 @@ class WorkingHoursViewController: UITableViewController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1)
+        appearance.backgroundColor = myBackgrdGreen
         appearance.shadowColor = .clear
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -197,7 +203,7 @@ extension WorkingHoursViewController {
         var config = cell.defaultContentConfiguration()
         config.text = presets[indexPath.row].displayString
         config.image = circleImage(filled: isChecked)
-        config.imageProperties.tintColor = isChecked ? UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1) : .systemGray3
+        config.imageProperties.tintColor = isChecked ? myBackgrdGreen : myGray
         cell.contentConfiguration = config
         cell.accessoryView  = nil
         cell.accessoryType  = .none
@@ -223,7 +229,7 @@ extension WorkingHoursViewController {
             var config = cell.defaultContentConfiguration()
             config.text = "Custom"
             config.image = circleImage(filled: isCustomSelected)
-            config.imageProperties.tintColor = isCustomSelected ? UIColor(red: 105/255, green: 181/255, blue: 190/255, alpha: 1) : .systemGray3
+            config.imageProperties.tintColor = isCustomSelected ? myBackgrdGreen : myGray
             cell.contentConfiguration = config
             cell.accessoryView  = nil
             cell.accessoryType  = .none
