@@ -415,6 +415,7 @@
                         <outlet property="workCityLabel" destination="zfM-CJ-aYI" id="oKp-uZ-CFi"/>
                         <outlet property="workDayImage" destination="zkV-YH-Paw" id="iEx-Oj-zxI"/>
                         <outlet property="workTimeLabel" destination="K0f-tf-euv" id="kZi-Af-D5f"/>
+                        <outlet property="workingHours" destination="COE-Fd-W1Q" id="F4j-yC-Cm6"/>
                         <outlet property="workingHoursCurrentLocation" destination="SGD-ff-ApL" id="7gg-UU-DBn"/>
                         <outlet property="workingHoursView" destination="sI8-yE-0bJ" id="Wlg-H4-ada"/>
                         <outlet property="workingHoursWork" destination="WAc-uT-77z" id="DOZ-Hw-qp1"/>

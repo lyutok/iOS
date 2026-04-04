@@ -31,6 +31,8 @@ class StartViewController: UIViewController {
     @IBOutlet var dayLabel: UILabel!
     
     @IBOutlet var workingHoursWork: UILabel!
+    @IBOutlet var workingHours: UILabel!
+    
     @IBOutlet var workingHoursCurrentLocation: UILabel!
     
     let locationManager = CLLocationManager()
@@ -320,5 +322,7 @@ extension StartViewController: CitySearchDelegate {
 extension StartViewController: WorkingHoursDelegate {
     func didSaveWorkingHours(_ hours: WorkingHours) {
         print("Received:", hours)
+        print(hours.displayString)
+        workingHours.text = hours.displayString
     }
 }
