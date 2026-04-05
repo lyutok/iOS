@@ -254,8 +254,10 @@ class StartViewController: UIViewController {
                                         endMinute: localEndMin
                                         )
         
-        workingHoursInLocalTime.text = localWorkingHours.displayString
+//        workingHoursInLocalTime.text = localWorkingHours.displayString
 //        String(format: "%02d:%02d - %02d:%02d", localStartHour, localStartMin, localEndHour, localEndMin)
+        
+        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
 }
     
     
@@ -271,11 +273,11 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
-        if sender.tag == 0 {
-                print("Edit local city")
-            } else {
-                print("Edit work city")
-            }
+//        if sender.tag == 0 {
+//                print("Edit local city")
+//            } else {
+//                print("Edit work city")
+//            }
         editCityFlag = sender.tag
         presentCitySearch()
     }
@@ -359,7 +361,7 @@ extension StartViewController: WorkingHoursDelegate {
         updateUI()
         
     
-        print("Received:", hours)
+//        print("Received:", hours)
 //        print(hours.displayString)
 //        workingHours.text = hours.displayString
     }
