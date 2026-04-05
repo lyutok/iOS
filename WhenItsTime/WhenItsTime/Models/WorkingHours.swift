@@ -44,10 +44,10 @@ struct WorkingHours: Codable {
     private func timeEmoji(for hour: Int) -> String {
         switch hour {
         case 0..<6:   return "😴"
-        case 6..<9:   return "🌅"
+        case 6..<9:   return "☕️"
         case 9..<19:  return "☀️"
-        case 19..<22: return "🌆"
-        default:      return "😴"  // 22-23
+        case 19..<22: return "🌙"
+        default:      return "🌒"  // 22-23
         }
     }
     

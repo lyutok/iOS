@@ -127,12 +127,12 @@ class StartViewController: UIViewController {
     }
     
     func updateUI() {
-        guard let location = lastLocation else {
-            locationManager.requestLocation()
-            return
-        }
-        
         let now = Date()
+        
+        // If we don't have a location yet, request one (but don't bail out)
+        if lastLocation == nil {
+            locationManager.requestLocation()
+        }
         
         // MARK: - Local timezone (manual selection or device)
         let localTimeZone: TimeZone = {
@@ -143,13 +143,18 @@ class StartViewController: UIViewController {
         }()
         
         // MARK: - Local time
-        let gpsFreshness = now.timeIntervalSince(location.timestamp)
-        let sourceDate = gpsFreshness < 30 ? location.timestamp : now
+        let sourceDate: Date
+        if let location = lastLocation {
+            let gpsFreshness = now.timeIntervalSince(location.timestamp)
+            sourceDate = gpsFreshness < 30 ? location.timestamp : now
+        } else {
+            sourceDate = now
+        }
         let localOffset = localTimeZone.secondsFromGMT(for: now)
         let deviceOffset = TimeZone.current.secondsFromGMT(for: now)
         let adjustedDate = sourceDate.addingTimeInterval(TimeInterval(localOffset - deviceOffset))
         
-        // Top date always uses GPS
+        // Top date
         topDateLabel.text = timeBrain.formattedWeekdayAndDate(from: timeBrain.makeTime(from: sourceDate))
         currentTime.text = timeBrain.formattedTime(from: timeBrain.makeTime(from: adjustedDate))
         // Current date
@@ -161,7 +166,7 @@ class StartViewController: UIViewController {
         }
         
         // MARK: - Day/night icon for local city
-        if selectedLocalCity != nil {
+        if let localCity = selectedLocalCity {
             // Manual city — use hour-based estimation
             var localCalendar = Calendar.current
             localCalendar.timeZone = localTimeZone
@@ -169,30 +174,52 @@ class StartViewController: UIViewController {
             let phase = locationBrain.timePhase(for: localHour)
             currentDayImage.image = UIImage(systemName: phase.sfSymbol)
             currentDayImage.tintColor = phase.tintColor
-        } else {
+        } else if let location = lastLocation {
             // GPS location — use accurate Solar calculation
             let phase = locationBrain.timePhase(for: location)
+            currentDayImage.image = UIImage(systemName: phase.sfSymbol)
+            currentDayImage.tintColor = phase.tintColor
+        } else {
+            // No GPS yet — fall back to hour-based estimation using device timezone
+            let localHour = Calendar.current.component(.hour, from: now)
+            let phase = locationBrain.timePhase(for: localHour)
             currentDayImage.image = UIImage(systemName: phase.sfSymbol)
             currentDayImage.tintColor = phase.tintColor
         }
         
         // MARK: - City name
-        // Top labels - GPS
-        locationBrain.reverseGeocode(location: location) { appLocation in
-            let city = appLocation.city ?? "N/A"
-            self.topCityLabel.text = city
-            self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
-        }
-        
-        // Card labels - manual selection or GPS
-        if let localCity = selectedLocalCity {
-            currentCity.text = "\(localCity.city) (Me)"
-            self.workingHoursCurrentLocation.text = "\(localCity.city) time" // working hour section
-        } else {
+        if let location = lastLocation {
+            // Single reverse geocode for both top labels and card labels
             locationBrain.reverseGeocode(location: location) { appLocation in
                 let city = appLocation.city ?? "N/A"
-                self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-                self.self.workingHoursCurrentLocation.text = "\(city) time" // working hour section
+                
+                // Top labels - always from GPS
+                self.topCityLabel.text = city
+                self.topCountryLabel.text = "\(appLocation.country ?? "N/A"), \(appLocation.subRegion ?? "N/A")"
+                
+                // Card labels - manual selection or GPS
+                if let localCity = self.selectedLocalCity {
+                    self.currentCity.text = "\(localCity.city) (Me)"
+                    self.workingHoursCurrentLocation.text = "\(localCity.city)"
+                } else {
+                    self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
+                    self.workingHoursCurrentLocation.text = "\(city)"
+                }
+            }
+        } else {
+            // No GPS yet — show what we can
+            if let localCity = selectedLocalCity {
+                currentCity.text = "\(localCity.city) (Me)"
+                topCityLabel.text = localCity.city
+                self.workingHoursCurrentLocation.text = "\(localCity.city)"
+            } else {
+                // Use city name from timezone identifier as a fallback (e.g. "Atlantic/Canary" → "Canary")
+                let tzCity = localTimeZone.identifier
+                    .split(separator: "/").last
+                    .map { $0.replacingOccurrences(of: "_", with: " ") } ?? "Current Location"
+                currentCity.text = "\(tzCity) (Me)"
+                topCityLabel.text = tzCity
+                self.workingHoursCurrentLocation.text = "\(tzCity)"
             }
         }
         
