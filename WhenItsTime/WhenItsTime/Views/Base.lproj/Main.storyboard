@@ -357,23 +357,12 @@
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nW7-Xh-B5f">
-                                                                <rect key="frame" x="0.0" y="28.333333333333371" width="183.66666666666666" height="19.333333333333329"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16:00 - 01:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-ch-CU2">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="97.666666666666671" height="19.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                                        <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(same day)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9LS-pd-kj6">
-                                                                        <rect key="frame" x="102.66666666666666" y="0.0" width="81" height="19.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                                        <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
-                                                            </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16:00 - 01:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-ch-CU2">
+                                                                <rect key="frame" x="0.0" y="28.333333333333371" width="97.666666666666671" height="19.333333333333329"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                                <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -408,7 +397,6 @@
                         <outlet property="currentTimeBlurView" destination="0dP-ET-Lm0" id="9Wp-dl-fJ3"/>
                         <outlet property="currentTimeView" destination="3tc-La-mWi" id="pjF-nY-6DO"/>
                         <outlet property="dayLabel" destination="QWy-4c-Py6" id="c9i-pb-8b8"/>
-                        <outlet property="dayLabelForWorkingHours" destination="9LS-pd-kj6" id="1CL-OJ-UcN"/>
                         <outlet property="textTimeBlurView" destination="n4q-44-Z2K" id="TL6-Q8-F6o"/>
                         <outlet property="topCityLabel" destination="bhv-Vf-5BY" id="YUE-ZW-WAo"/>
                         <outlet property="topCountryLabel" destination="dy2-Nl-esJ" id="BRl-6c-cF0"/>

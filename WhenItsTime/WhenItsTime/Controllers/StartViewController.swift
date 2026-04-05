@@ -36,7 +36,6 @@ class StartViewController: UIViewController {
     @IBOutlet var workingHours: UILabel!
     @IBOutlet var workingHoursCurrentLocation: UILabel!
     @IBOutlet var workingHoursInLocalTime: UILabel!
-    @IBOutlet var dayLabelForWorkingHours: UILabel!
     
     var selectedWorkingHours: WorkingHours = WorkingHours.presets[0]
     
@@ -254,10 +253,17 @@ class StartViewController: UIViewController {
                                         endMinute: localEndMin
                                         )
         
+        let whDayLabel = WorkingHours.whdayLabel(
+            localStartSeconds: localStartSeconds,
+            localEndSeconds: localEndSeconds
+        )
+        
 //        workingHoursInLocalTime.text = localWorkingHours.displayString
 //        String(format: "%02d:%02d - %02d:%02d", localStartHour, localStartMin, localEndHour, localEndMin)
         
-        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
+//        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
+        workingHoursInLocalTime.text = localWorkingHours.localDisplayString(dayLabel: whDayLabel)
+        
 }
     
     
