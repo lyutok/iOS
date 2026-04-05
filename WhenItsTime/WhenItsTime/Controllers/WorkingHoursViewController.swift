@@ -55,6 +55,8 @@ class WorkingHoursViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        overrideUserInterfaceStyle = .light
+        
         setupCustomWorkingHours(hours: hours)
         setupNavigationBar()
         setupTableView()
