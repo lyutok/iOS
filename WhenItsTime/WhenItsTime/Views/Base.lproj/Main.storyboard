@@ -316,8 +316,8 @@
                                                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QJa-Px-Ax7">
                                                                 <rect key="frame" x="0.0" y="19.333333333333371" width="320" height="31"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:00 - 18:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Fd-W1Q">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="90.666666666666671" height="31"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:-- - --:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Fd-W1Q">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="31"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                         <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -408,6 +408,7 @@
                         <outlet property="currentTimeBlurView" destination="0dP-ET-Lm0" id="9Wp-dl-fJ3"/>
                         <outlet property="currentTimeView" destination="3tc-La-mWi" id="pjF-nY-6DO"/>
                         <outlet property="dayLabel" destination="QWy-4c-Py6" id="c9i-pb-8b8"/>
+                        <outlet property="dayLabelForWorkingHours" destination="9LS-pd-kj6" id="1CL-OJ-UcN"/>
                         <outlet property="textTimeBlurView" destination="n4q-44-Z2K" id="TL6-Q8-F6o"/>
                         <outlet property="topCityLabel" destination="bhv-Vf-5BY" id="YUE-ZW-WAo"/>
                         <outlet property="topCountryLabel" destination="dy2-Nl-esJ" id="BRl-6c-cF0"/>
@@ -417,6 +418,7 @@
                         <outlet property="workTimeLabel" destination="K0f-tf-euv" id="kZi-Af-D5f"/>
                         <outlet property="workingHours" destination="COE-Fd-W1Q" id="F4j-yC-Cm6"/>
                         <outlet property="workingHoursCurrentLocation" destination="SGD-ff-ApL" id="7gg-UU-DBn"/>
+                        <outlet property="workingHoursInLocalTime" destination="7bW-ch-CU2" id="gcH-OS-5Vv"/>
                         <outlet property="workingHoursView" destination="sI8-yE-0bJ" id="Wlg-H4-ada"/>
                         <outlet property="workingHoursWork" destination="WAc-uT-77z" id="DOZ-Hw-qp1"/>
                     </connections>

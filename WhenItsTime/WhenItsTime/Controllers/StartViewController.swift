@@ -10,30 +10,35 @@ import CoreLocation
 
 class StartViewController: UIViewController {
     
+    // top location, time section
     @IBOutlet var topCityLabel: UILabel!
     @IBOutlet var topCountryLabel: UILabel!
     @IBOutlet var topDateLabel: UILabel!
     
+    // current location / working hours section
     @IBOutlet var currentCity: UILabel!
     @IBOutlet var currentTime: UILabel!
     @IBOutlet var currentDayImage: UIImageView!
     @IBOutlet var currentDate: UILabel!
     
     @IBOutlet var workTimeLabel: UILabel!
-    @IBOutlet var workCityLabel: UILabel!    
+    @IBOutlet var workCityLabel: UILabel!
     @IBOutlet var workDayImage: UIImageView!
     
     @IBOutlet var currentTimeView: UIView!
     @IBOutlet var currentTimeBlurView: UIVisualEffectView!
     @IBOutlet var textTimeBlurView: UIVisualEffectView!
+    @IBOutlet var dayLabel: UILabel! // label for city time
+    
+    // Working Hours section
     @IBOutlet var workingHoursView: UIView!
-    
-    @IBOutlet var dayLabel: UILabel!
-    
     @IBOutlet var workingHoursWork: UILabel!
     @IBOutlet var workingHours: UILabel!
-    
     @IBOutlet var workingHoursCurrentLocation: UILabel!
+    @IBOutlet var workingHoursInLocalTime: UILabel!
+    @IBOutlet var dayLabelForWorkingHours: UILabel!
+    
+    var selectedWorkingHours: WorkingHours = WorkingHours.presets[0]
     
     let locationManager = CLLocationManager()
     var editCityFlag = 0 // from which place Edit was clicked
@@ -89,14 +94,14 @@ class StartViewController: UIViewController {
         setupPullToRefresh()
         updateUI()
     }
-
+    
     private func setupActivityIndicator() {
         activityIndicator.center = CGPoint(x: view.center.x, y: 100)
         activityIndicator.color = .white
         activityIndicator.hidesWhenStopped = true
         view.addSubview(activityIndicator)
     }
-
+    
     private func setupPullToRefresh() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         panGesture.cancelsTouchesInView = false
@@ -194,13 +199,16 @@ class StartViewController: UIViewController {
         
         
         // MARK: - Work city
+        var differenceSeconds: Int = 0
+        var differenceHours: Int = 0
+        
         if let workCity = selectedWorkCity {
             let workTimeZone = TimeZone(identifier: workCity.identifier) ?? .current
             
             let localOffset = localTimeZone.secondsFromGMT(for: now)
             let workOffset = workTimeZone.secondsFromGMT(for: now)
-            let differenceSeconds = workOffset - localOffset
-            let differenceHours = differenceSeconds / 3600
+            differenceSeconds = workOffset - localOffset
+            differenceHours = differenceSeconds / 3600
             
             let sign = differenceHours >= 0 ? "+" : ""
             workCityLabel.text = "\(workCity.city) (\(sign)\(differenceHours)h)"
@@ -223,7 +231,32 @@ class StartViewController: UIViewController {
             workDayImage.image = UIImage(systemName: workPhase.sfSymbol)
             workDayImage.tintColor = workPhase.tintColor
         }
-    }
+        
+        // MARK: - Working Hours
+        workingHours.text = selectedWorkingHours.displayString
+//        print(workingHours.text)
+        
+        // Working hours in local time
+        // Working hours in local time
+        let hours = selectedWorkingHours
+        let localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
+        let localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
+        
+        let localStartHour = (localStartSeconds / 3600 + 24) % 24
+        let localStartMin = (localStartSeconds % 3600) / 60
+        let localEndHour = (localEndSeconds / 3600 + 24) % 24
+        let localEndMin = (localEndSeconds % 3600) / 60
+        
+        let localWorkingHours = WorkingHours(
+                                        startHour: localStartHour,
+                                        startMinute: localStartMin,
+                                        endHour: localEndHour,
+                                        endMinute: localEndMin
+                                        )
+        
+        workingHoursInLocalTime.text = localWorkingHours.displayString
+//        String(format: "%02d:%02d - %02d:%02d", localStartHour, localStartMin, localEndHour, localEndMin)
+}
     
     
     @IBAction func editWorkingHoursPressed(_ sender: UIButton) {
@@ -321,8 +354,13 @@ extension StartViewController: CitySearchDelegate {
 // MARK: - Receive Working hours
 extension StartViewController: WorkingHoursDelegate {
     func didSaveWorkingHours(_ hours: WorkingHours) {
+        selectedWorkingHours = hours
+        
+        updateUI()
+        
+    
         print("Received:", hours)
-        print(hours.displayString)
-        workingHours.text = hours.displayString
+//        print(hours.displayString)
+//        workingHours.text = hours.displayString
     }
 }

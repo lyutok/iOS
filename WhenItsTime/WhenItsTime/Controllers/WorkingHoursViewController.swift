@@ -163,7 +163,6 @@ class WorkingHoursViewController: UITableViewController {
     }
     
     @objc private func saveTapped() {
-        // TODO: pass back selected hours
 //        print(selectedIndex)
 //        print(choosenWorkingHours)
         print(formattedTime(customStart))
