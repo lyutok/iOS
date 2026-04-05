@@ -53,9 +53,9 @@ struct WorkingHours: Codable {
     
     static func whdayLabel(localStartSeconds: Int, localEndSeconds: Int) -> String? {
         if localEndSeconds > 86400 {
-            return "(+1 day)"
+            return "ׁ· next day"
         } else if localStartSeconds < 0 {
-            return "(-1 day)"
+            return "· previous day"
         } else {
             return nil // same day — no label needed
         }
