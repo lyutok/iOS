@@ -315,7 +315,7 @@ class StartViewController: UIViewController {
         let endWH = localWorkingHours.timeSFSymbolAndColor(for: localEndHour)
         endWHimg.image = UIImage(systemName: endWH.name)
         endWHimg.tintColor = endWH.color
-        endWorkingHoursInLocalTime.text = String(format: "%02d:%02d", localEndHour, localEndMin)
+        endWorkingHoursInLocalTime.text = String(format: "%02d:%02d \(whDayLabel ?? "")", localEndHour, localEndMin)
         
         
 //        startWorkingHoursInLocalTime.text = localWorkingHours.localDisplayString(dayLabel: whDayLabel)
