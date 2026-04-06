@@ -35,8 +35,12 @@ class StartViewController: UIViewController {
     @IBOutlet var workingHoursWork: UILabel!
     @IBOutlet var workingHours: UILabel!
     @IBOutlet var workingHoursCurrentLocation: UILabel!
-    @IBOutlet var workingHoursInLocalTime: UILabel!
+    @IBOutlet var startWorkingHoursInLocalTime: UILabel!
     
+    @IBOutlet var startWHimg: UIImageView!
+    @IBOutlet var endWHimg: UIImageView!
+    
+    @IBOutlet var endWorkingHoursInLocalTime: UILabel!
     var selectedWorkingHours: WorkingHours = WorkingHours.presets[0]
     
     let locationManager = CLLocationManager()
@@ -166,7 +170,7 @@ class StartViewController: UIViewController {
         }
         
         // MARK: - Day/night icon for local city
-        if let localCity = selectedLocalCity {
+        if selectedLocalCity != nil {
             // Manual city — use hour-based estimation
             var localCalendar = Calendar.current
             localCalendar.timeZone = localTimeZone
@@ -235,9 +239,18 @@ class StartViewController: UIViewController {
             let workOffset = workTimeZone.secondsFromGMT(for: now)
             differenceSeconds = workOffset - localOffset
             differenceHours = differenceSeconds / 3600
+            let differenceMinutes = (abs(differenceSeconds) % 3600) / 60
             
-            let sign = differenceHours >= 0 ? "+" : ""
-            workCityLabel.text = "\(workCity.city) (\(sign)\(differenceHours)h)"
+            let sign = differenceSeconds >= 0 ? "+" : "-"
+            let offsetLabel: String
+            if differenceMinutes == 30 {
+                offsetLabel = "\(sign)\(abs(differenceHours)).5h"
+            } else if differenceMinutes != 0 {
+                offsetLabel = String(format: "%@%d:%02dh", sign, abs(differenceHours), differenceMinutes)
+            } else {
+                offsetLabel = "\(sign)\(abs(differenceHours))h"
+            }
+            workCityLabel.text = "\(workCity.city) (\(offsetLabel))"
             
             workingHoursWork.text = "\(workCity.city) working hours" // working hour section
             
@@ -263,15 +276,20 @@ class StartViewController: UIViewController {
 //        print(workingHours.text)
         
         // Working hours in local time
-        // Working hours in local time
         let hours = selectedWorkingHours
         let localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
         let localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
         
-        let localStartHour = (localStartSeconds / 3600 + 24) % 24
-        let localStartMin = (localStartSeconds % 3600) / 60
-        let localEndHour = (localEndSeconds / 3600 + 24) % 24
-        let localEndMin = (localEndSeconds % 3600) / 60
+        // Normalize to 0..<86400 to handle negative values correctly
+        // (Swift's % preserves sign, so -1800 % 3600 = -1800, not 1800)
+        let normStart = ((localStartSeconds % 86400) + 86400) % 86400
+        let normEnd   = ((localEndSeconds   % 86400) + 86400) % 86400
+        
+        let localStartHour = normStart / 3600
+        let localStartMin  = (normStart % 3600) / 60
+        let localEndHour   = normEnd / 3600
+        let localEndMin    = (normEnd % 3600) / 60
+        
         
         let localWorkingHours = WorkingHours(
                                         startHour: localStartHour,
@@ -289,7 +307,18 @@ class StartViewController: UIViewController {
 //        String(format: "%02d:%02d - %02d:%02d", localStartHour, localStartMin, localEndHour, localEndMin)
         
 //        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
-        workingHoursInLocalTime.text = localWorkingHours.localDisplayString(dayLabel: whDayLabel)
+        let startWH = localWorkingHours.timeSFSymbolAndColor(for: localStartHour)
+        startWHimg.image = UIImage(systemName: startWH.name)
+        startWHimg.tintColor = startWH.color
+        startWorkingHoursInLocalTime.text = String(format: "%02d:%02d -", localStartHour, localStartMin)
+        
+        let endWH = localWorkingHours.timeSFSymbolAndColor(for: localEndHour)
+        endWHimg.image = UIImage(systemName: endWH.name)
+        endWHimg.tintColor = endWH.color
+        endWorkingHoursInLocalTime.text = String(format: "%02d:%02d", localEndHour, localEndMin)
+        
+        
+//        startWorkingHoursInLocalTime.text = localWorkingHours.localDisplayString(dayLabel: whDayLabel)
         
 }
     

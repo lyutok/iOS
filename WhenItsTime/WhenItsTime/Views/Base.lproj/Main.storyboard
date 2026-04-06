@@ -305,7 +305,7 @@
                                                 <rect key="frame" x="10" y="0.0" width="330" height="120"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2RY-pr-gb6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="330" height="50.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="330" height="49.666666666666664"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable or set location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAc-uT-77z">
                                                                 <rect key="frame" x="0.0" y="0.0" width="156.33333333333334" height="19.333333333333332"/>
@@ -314,16 +314,16 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleAspectFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QJa-Px-Ax7">
-                                                                <rect key="frame" x="0.0" y="19.333333333333371" width="320" height="31"/>
+                                                                <rect key="frame" x="0.0" y="19.333333333333371" width="320" height="30.333333333333329"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:-- - --:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Fd-W1Q">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="31"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="30.333333333333332"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                         <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3F-Hf-MdV">
-                                                                        <rect key="frame" x="268" y="0.0" width="52" height="31"/>
+                                                                        <rect key="frame" x="268" y="0.0" width="52" height="30.333333333333332"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain" title="Edit" titleAlignment="center">
@@ -342,14 +342,14 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view alpha="0.25" contentMode="center" semanticContentAttribute="spatial" translatesAutoresizingMaskIntoConstraints="NO" id="MeF-fY-sb4" userLabel="Line View">
-                                                        <rect key="frame" x="0.0" y="60.333333333333371" width="330" height="2"/>
+                                                        <rect key="frame" x="0.0" y="59.666666666666742" width="330" height="2"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="krT-ji-Nwm"/>
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="4eI-hc-Doj">
-                                                        <rect key="frame" x="0.0" y="72.333333333333371" width="330" height="47.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="71.666666666666742" width="330" height="48.333333333333343"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a city to compare time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGD-ff-ApL">
                                                                 <rect key="frame" x="0.0" y="0.0" width="194.66666666666666" height="19.333333333333332"/>
@@ -357,12 +357,37 @@
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:-- - --:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-ch-CU2">
-                                                                <rect key="frame" x="0.0" y="28.333333333333371" width="82.666666666666671" height="19.333333333333329"/>
-                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                                <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wig-or-8Sy">
+                                                                <rect key="frame" x="0.0" y="28.333333333333258" width="135" height="20"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YzS-pn-bCJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="20.666666666666668" height="20"/>
+                                                                        <color key="tintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="vQi-hQ-l8R"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:-- -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bW-ch-CU2" userLabel="Working Hours Begin">
+                                                                        <rect key="frame" x="25.666666666666664" y="0.0" width="44.999999999999993" height="19.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                                        <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dcs-MU-Swm">
+                                                                        <rect key="frame" x="75.666666666666671" y="0.0" width="20.666666666666671" height="20"/>
+                                                                        <color key="tintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="An8-TG-l0z"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSP-Vi-BQ1">
+                                                                        <rect key="frame" x="101.33333333333334" y="0.0" width="33.666666666666657" height="19.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                                        <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -397,6 +422,10 @@
                         <outlet property="currentTimeBlurView" destination="0dP-ET-Lm0" id="9Wp-dl-fJ3"/>
                         <outlet property="currentTimeView" destination="3tc-La-mWi" id="pjF-nY-6DO"/>
                         <outlet property="dayLabel" destination="QWy-4c-Py6" id="c9i-pb-8b8"/>
+                        <outlet property="endWHimg" destination="dcs-MU-Swm" id="dCf-Ow-3gO"/>
+                        <outlet property="endWorkingHoursInLocalTime" destination="LSP-Vi-BQ1" id="xPu-6M-eMe"/>
+                        <outlet property="startWHimg" destination="YzS-pn-bCJ" id="yX8-o3-CBS"/>
+                        <outlet property="startWorkingHoursInLocalTime" destination="7bW-ch-CU2" id="gcH-OS-5Vv"/>
                         <outlet property="textTimeBlurView" destination="n4q-44-Z2K" id="TL6-Q8-F6o"/>
                         <outlet property="topCityLabel" destination="bhv-Vf-5BY" id="YUE-ZW-WAo"/>
                         <outlet property="topCountryLabel" destination="dy2-Nl-esJ" id="BRl-6c-cF0"/>
@@ -406,7 +435,6 @@
                         <outlet property="workTimeLabel" destination="K0f-tf-euv" id="kZi-Af-D5f"/>
                         <outlet property="workingHours" destination="COE-Fd-W1Q" id="F4j-yC-Cm6"/>
                         <outlet property="workingHoursCurrentLocation" destination="SGD-ff-ApL" id="7gg-UU-DBn"/>
-                        <outlet property="workingHoursInLocalTime" destination="7bW-ch-CU2" id="gcH-OS-5Vv"/>
                         <outlet property="workingHoursView" destination="sI8-yE-0bJ" id="Wlg-H4-ada"/>
                         <outlet property="workingHoursWork" destination="WAc-uT-77z" id="DOZ-Hw-qp1"/>
                     </connections>

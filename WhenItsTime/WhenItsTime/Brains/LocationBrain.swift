@@ -111,7 +111,7 @@ enum TimePhase {
             case .sunset:
                 return .systemOrange
             case .night:
-                return .tintColor
+                return .systemBlue
             }
         }
 }

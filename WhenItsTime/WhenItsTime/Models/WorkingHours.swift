@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct WorkingHours: Codable {
     var startHour: Int    // e.g. 9
@@ -30,24 +31,24 @@ struct WorkingHours: Codable {
 //        return "\(startEmoji) \(String(format: "%02d:%02d", startHour, startMinute)) - \(endEmoji) \(String(format: "%02d:%02d", endHour, endMinute))"
 //    }
     
-    func localDisplayString(dayLabel: String?) -> String {
-        let startEmoji = timeEmoji(for: startHour)
-        let endEmoji = timeEmoji(for: endHour)
-        let time = "\(startEmoji) \(String(format: "%02d:%02d", startHour, startMinute)) - \(endEmoji) \(String(format: "%02d:%02d", endHour, endMinute))"
-        
-        if let label = dayLabel {
-            return "\(time) \(label)"
-        }
-        return time
-    }
+//    func localDisplayString(dayLabel: String?) -> String {
+//        let startEmoji = timeEmoji(for: startHour)
+//        let endEmoji = timeEmoji(for: endHour)
+//        let time = "\(startEmoji) \(String(format: "%02d:%02d", startHour, startMinute)) - \(endEmoji) \(String(format: "%02d:%02d", endHour, endMinute))"
+//        
+//        if let label = dayLabel {
+//            return "\(time) \(label)"
+//        }
+//        return time
+//    }
     
-    private func timeEmoji(for hour: Int) -> String {
+    func timeSFSymbolAndColor(for hour: Int) -> (name: String, color: UIColor) {
         switch hour {
-        case 0..<6:   return "😴"
-        case 6..<9:   return "☕️"
-        case 9..<19:  return "☀️"
-        case 19..<22: return "🌙"
-        default:      return "🌒"  // 22-23
+        case 0..<6:   return ("bed.double.fill", .systemGray)
+        case 6..<9:   return ("cup.and.saucer.fill", .systemBrown)
+        case 9..<19:  return ("sun.max.fill", .systemYellow)
+        case 19..<22: return ("sunset.fill", .systemOrange)
+            default:      return ("moonphase.waxing.crescent.fill", .systemBlue)
         }
     }
     
@@ -62,3 +63,17 @@ struct WorkingHours: Codable {
     }
     
 }
+
+
+//var tintColor: UIColor {
+//        switch self {
+//        case .sunrise:
+//            return .systemOrange
+//        case .day:
+//            return .systemYellow
+//        case .sunset:
+//            return .systemOrange
+//        case .night:
+//            return .tintColor
+//        }
+//    }
