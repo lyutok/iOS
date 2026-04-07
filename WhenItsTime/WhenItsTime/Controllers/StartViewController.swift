@@ -86,6 +86,18 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Adjust long city names to fit within their borders
+        let labelsToShrink = [
+            currentCity, workCityLabel, topCityLabel, topCountryLabel,
+            workingHoursWork, workingHoursCurrentLocation
+        ]
+        
+        for label in labelsToShrink {
+            label?.adjustsFontSizeToFitWidth = true
+            label?.minimumScaleFactor = 0.5
+            label?.lineBreakMode = .byTruncatingTail
+        }
+        
         // Load saved cities
         selectedLocalCity = CityStorage.loadLocalCity()
         selectedWorkCity = CityStorage.loadWorkCity()
@@ -210,10 +222,10 @@ class StartViewController: UIViewController {
                 // Card labels - manual selection or GPS
                 if let localCity = self.selectedLocalCity {
                     self.currentCity.text = "\(localCity.city) (Me)"
-                    self.workingHoursCurrentLocation.text = "\(localCity.city)"
+                    self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(localCity.city)" : ""
                 } else {
                     self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
-                    self.workingHoursCurrentLocation.text = "\(city)"
+                    self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(city)" : ""
                 }
             }
         } else {
@@ -221,7 +233,7 @@ class StartViewController: UIViewController {
             if let localCity = selectedLocalCity {
                 currentCity.text = "\(localCity.city) (Me)"
                 topCityLabel.text = localCity.city
-                self.workingHoursCurrentLocation.text = "\(localCity.city)"
+                self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(localCity.city)" : ""
             } else {
                 // Use city name from timezone identifier as a fallback (e.g. "Atlantic/Canary" → "Canary")
                 let tzCity = localTimeZone.identifier
@@ -229,7 +241,7 @@ class StartViewController: UIViewController {
                     .map { $0.replacingOccurrences(of: "_", with: " ") } ?? "Current Location"
                 currentCity.text = "\(tzCity) (Me)"
                 topCityLabel.text = tzCity
-                self.workingHoursCurrentLocation.text = "\(tzCity)"
+                self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(tzCity)" : ""
             }
         }
         
@@ -321,12 +333,11 @@ class StartViewController: UIViewController {
             endWHimg.tintColor = endWH.color
             endWorkingHoursInLocalTime.text = String(format: "%02d:%02d \(whDayLabel ?? "")", localEndHour, localEndMin)
         } else {
-            startWorkingHoursInLocalTime.text = "--:-- -"
-            endWorkingHoursInLocalTime.text = "--:--"
-            startWHimg.image = UIImage(systemName: "sun.max.fill")
-            startWHimg.tintColor = .systemGray
-            endWHimg.image = UIImage(systemName: "sun.max.fill")
-            endWHimg.tintColor = .systemGray
+            workingHoursCurrentLocation.text = ""
+            startWorkingHoursInLocalTime.text = ""
+            endWorkingHoursInLocalTime.text = ""
+            startWHimg.image = nil
+            endWHimg.image = nil
         }
         
 }

@@ -48,7 +48,7 @@ struct WorkingHours: Codable {
         case 6..<9:   return ("cup.and.saucer.fill", .systemBrown)
         case 9..<19:  return ("sun.max.fill", .systemYellow)
         case 19..<22: return ("sunset.fill", .systemOrange)
-            default:      return ("moon.stars.fill", .systemBlue)
+            default:  return ("moon.stars.fill", .systemBlue)
         }
     }
     
