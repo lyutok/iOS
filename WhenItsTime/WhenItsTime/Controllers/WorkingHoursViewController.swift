@@ -22,6 +22,8 @@ class WorkingHoursViewController: UITableViewController {
     // MARK: - Properties
     weak var delegate: WorkingHoursDelegate?
     
+    var initialWorkingHours: WorkingHours?
+    
     private let presets = WorkingHours.presets
     private var selectedIndex = 0        // which preset is selected
     private var isCustomSelected = false // is Custom row selected
@@ -57,7 +59,20 @@ class WorkingHoursViewController: UITableViewController {
         
         overrideUserInterfaceStyle = .light
         
-        setupCustomWorkingHours(hours: hours)
+        let initialWH = initialWorkingHours ?? hours
+        if let presetIndex = presets.firstIndex(where: {
+            $0.startHour == initialWH.startHour &&
+            $0.startMinute == initialWH.startMinute &&
+            $0.endHour == initialWH.endHour &&
+            $0.endMinute == initialWH.endMinute
+        }) {
+            selectedIndex = presetIndex
+            isCustomSelected = false
+        } else {
+            isCustomSelected = true
+        }
+        
+        setupCustomWorkingHours(hours: initialWH)
         setupNavigationBar()
         setupTableView()
         

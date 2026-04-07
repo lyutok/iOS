@@ -89,6 +89,11 @@ class StartViewController: UIViewController {
         selectedLocalCity = CityStorage.loadLocalCity()
         selectedWorkCity = CityStorage.loadWorkCity()
         
+        // Load saved working hours
+        if let savedWH = WorkingHoursStorage.load() {
+            selectedWorkingHours = savedWH
+        }
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -329,6 +334,7 @@ class StartViewController: UIViewController {
     
     private func presentWorkingHours() {
         let workingHoursVC = WorkingHoursViewController()
+        workingHoursVC.initialWorkingHours = selectedWorkingHours
         workingHoursVC.delegate = self
         let nav = UINavigationController(rootViewController: workingHoursVC)
         present(nav, animated: true)
@@ -419,12 +425,8 @@ extension StartViewController: CitySearchDelegate {
 extension StartViewController: WorkingHoursDelegate {
     func didSaveWorkingHours(_ hours: WorkingHours) {
         selectedWorkingHours = hours
+        WorkingHoursStorage.save(hours)
         
         updateUI()
-        
-    
-//        print("Received:", hours)
-//        print(hours.displayString)
-//        workingHours.text = hours.displayString
     }
 }
