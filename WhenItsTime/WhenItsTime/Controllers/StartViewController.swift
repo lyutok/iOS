@@ -37,11 +37,12 @@ class StartViewController: UIViewController {
     @IBOutlet var workingHoursCurrentLocation: UILabel!
     @IBOutlet var startWorkingHoursInLocalTime: UILabel!
     
+    var selectedWorkingHours: WorkingHours = WorkingHours.presets[0]
+    
     @IBOutlet var startWHimg: UIImageView!
     @IBOutlet var endWHimg: UIImageView!
     
     @IBOutlet var endWorkingHoursInLocalTime: UILabel!
-    var selectedWorkingHours: WorkingHours = WorkingHours.presets[0]
     
     let locationManager = CLLocationManager()
     var editCityFlag = 0 // from which place Edit was clicked
@@ -281,49 +282,52 @@ class StartViewController: UIViewController {
 //        print(workingHours.text)
         
         // Working hours in local time
-        let hours = selectedWorkingHours
-        let localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
-        let localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
-        
-        // Normalize to 0..<86400 to handle negative values correctly
-        // (Swift's % preserves sign, so -1800 % 3600 = -1800, not 1800)
-        let normStart = ((localStartSeconds % 86400) + 86400) % 86400
-        let normEnd   = ((localEndSeconds   % 86400) + 86400) % 86400
-        
-        let localStartHour = normStart / 3600
-        let localStartMin  = (normStart % 3600) / 60
-        let localEndHour   = normEnd / 3600
-        let localEndMin    = (normEnd % 3600) / 60
-        
-        
-        let localWorkingHours = WorkingHours(
-                                        startHour: localStartHour,
-                                        startMinute: localStartMin,
-                                        endHour: localEndHour,
-                                        endMinute: localEndMin
-                                        )
-        
-        let whDayLabel = WorkingHours.whdayLabel(
-            localStartSeconds: localStartSeconds,
-            localEndSeconds: localEndSeconds
-        )
-        
-//        workingHoursInLocalTime.text = localWorkingHours.displayString
-//        String(format: "%02d:%02d - %02d:%02d", localStartHour, localStartMin, localEndHour, localEndMin)
-        
-//        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
-        let startWH = localWorkingHours.timeSFSymbolAndColor(for: localStartHour)
-        startWHimg.image = UIImage(systemName: startWH.name)
-        startWHimg.tintColor = startWH.color
-        startWorkingHoursInLocalTime.text = String(format: "%02d:%02d -", localStartHour, localStartMin)
-        
-        let endWH = localWorkingHours.timeSFSymbolAndColor(for: localEndHour)
-        endWHimg.image = UIImage(systemName: endWH.name)
-        endWHimg.tintColor = endWH.color
-        endWorkingHoursInLocalTime.text = String(format: "%02d:%02d \(whDayLabel ?? "")", localEndHour, localEndMin)
-        
-        
-//        startWorkingHoursInLocalTime.text = localWorkingHours.localDisplayString(dayLabel: whDayLabel)
+        if selectedWorkCity != nil {
+            let hours = selectedWorkingHours
+            let localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
+            let localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
+            
+            // Normalize to 0..<86400 to handle negative values correctly
+            // (Swift's % preserves sign, so -1800 % 3600 = -1800, not 1800)
+            let normStart = ((localStartSeconds % 86400) + 86400) % 86400
+            let normEnd   = ((localEndSeconds   % 86400) + 86400) % 86400
+            
+            let localStartHour = normStart / 3600
+            let localStartMin  = (normStart % 3600) / 60
+            let localEndHour   = normEnd / 3600
+            let localEndMin    = (normEnd % 3600) / 60
+            
+            
+            let localWorkingHours = WorkingHours(
+                                            startHour: localStartHour,
+                                            startMinute: localStartMin,
+                                            endHour: localEndHour,
+                                            endMinute: localEndMin
+                                            )
+            
+            let whDayLabel = WorkingHours.whdayLabel(
+                localStartSeconds: localStartSeconds,
+                localEndSeconds: localEndSeconds
+            )
+            
+    //        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
+            let startWH = localWorkingHours.timeSFSymbolAndColor(for: localStartHour)
+            startWHimg.image = UIImage(systemName: startWH.name)
+            startWHimg.tintColor = startWH.color
+            startWorkingHoursInLocalTime.text = String(format: "%02d:%02d -", localStartHour, localStartMin)
+            
+            let endWH = localWorkingHours.timeSFSymbolAndColor(for: localEndHour)
+            endWHimg.image = UIImage(systemName: endWH.name)
+            endWHimg.tintColor = endWH.color
+            endWorkingHoursInLocalTime.text = String(format: "%02d:%02d \(whDayLabel ?? "")", localEndHour, localEndMin)
+        } else {
+            startWorkingHoursInLocalTime.text = "--:-- -"
+            endWorkingHoursInLocalTime.text = "--:--"
+            startWHimg.image = UIImage(systemName: "sun.max.fill")
+            startWHimg.tintColor = .systemGray
+            endWHimg.image = UIImage(systemName: "sun.max.fill")
+            endWHimg.tintColor = .systemGray
+        }
         
 }
     
