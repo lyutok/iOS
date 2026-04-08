@@ -22,6 +22,7 @@ class StartViewController: UIViewController {
     @IBOutlet var currentDate: UILabel!
     
     @IBOutlet var workTimeLabel: UILabel!
+    @IBOutlet var timeDifferenceLabel: UILabel!
     @IBOutlet var workCityLabel: UILabel!
     @IBOutlet var workDayImage: UIImageView!
     
@@ -221,17 +222,17 @@ class StartViewController: UIViewController {
                 
                 // Card labels - manual selection or GPS
                 if let localCity = self.selectedLocalCity {
-                    self.currentCity.text = "\(localCity.city) (Me)"
+                    self.currentCity.text = "\(localCity.city)"
                     self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(localCity.city)" : ""
                 } else {
-                    self.currentCity.text = "\(self.locationBrain.shortCityName(city: city)) (Me)"
+                    self.currentCity.text = "\(self.locationBrain.shortCityName(city: city))"
                     self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(city)" : ""
                 }
             }
         } else {
             // No GPS yet — show what we can
             if let localCity = selectedLocalCity {
-                currentCity.text = "\(localCity.city) (Me)"
+                currentCity.text = "\(localCity.city)"
                 topCityLabel.text = localCity.city
                 self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(localCity.city)" : ""
             } else {
@@ -239,7 +240,7 @@ class StartViewController: UIViewController {
                 let tzCity = localTimeZone.identifier
                     .split(separator: "/").last
                     .map { $0.replacingOccurrences(of: "_", with: " ") } ?? "Current Location"
-                currentCity.text = "\(tzCity) (Me)"
+                currentCity.text = "\(tzCity)"
                 topCityLabel.text = tzCity
                 self.workingHoursCurrentLocation.text = self.selectedWorkCity != nil ? "\(tzCity)" : ""
             }
@@ -268,7 +269,8 @@ class StartViewController: UIViewController {
             } else {
                 offsetLabel = "\(sign)\(abs(differenceHours))h"
             }
-            workCityLabel.text = "\(workCity.city) (\(offsetLabel))"
+            workCityLabel.text = "\(workCity.city)"
+            timeDifferenceLabel.text = offsetLabel
             
             workingHoursWork.text = "\(workCity.city) working hours" // working hour section
             
