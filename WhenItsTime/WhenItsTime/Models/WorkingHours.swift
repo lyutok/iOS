@@ -25,23 +25,6 @@ struct WorkingHours: Codable {
         WorkingHours(startHour: 8,  startMinute: 0, endHour: 17, endMinute: 0)
     ]
     
-//    var localDisplayString: String {
-//        let startEmoji = timeEmoji(for: startHour)
-//        let endEmoji = timeEmoji(for: endHour)
-//        return "\(startEmoji) \(String(format: "%02d:%02d", startHour, startMinute)) - \(endEmoji) \(String(format: "%02d:%02d", endHour, endMinute))"
-//    }
-    
-//    func localDisplayString(dayLabel: String?) -> String {
-//        let startEmoji = timeEmoji(for: startHour)
-//        let endEmoji = timeEmoji(for: endHour)
-//        let time = "\(startEmoji) \(String(format: "%02d:%02d", startHour, startMinute)) - \(endEmoji) \(String(format: "%02d:%02d", endHour, endMinute))"
-//        
-//        if let label = dayLabel {
-//            return "\(time) \(label)"
-//        }
-//        return time
-//    }
-    
     func timeSFSymbolAndColor(for hour: Int) -> (name: String, color: UIColor) {
         switch hour {
         case 0..<6:   return ("bed.double.fill", .systemGray)
@@ -62,18 +45,95 @@ struct WorkingHours: Codable {
         }
     }
     
+    // MARK: - Working hours status
+    func isCurrentlyWorking(currentHour: Int, currentMinute: Int) -> Bool {
+        let currentTotalMinutes = currentHour * 60 + currentMinute
+        let startTotalMinutes = startHour * 60 + startMinute
+        let endTotalMinutes = endHour * 60 + endMinute
+        
+        return currentTotalMinutes >= startTotalMinutes && currentTotalMinutes < endTotalMinutes
+    }
+
+    func timeUntilChange(currentHour: Int, currentMinute: Int) -> String {
+        let currentTotalMinutes = currentHour * 60 + currentMinute
+        let startTotalMinutes = startHour * 60 + startMinute
+        let endTotalMinutes = endHour * 60 + endMinute
+        
+        let isWorking = isCurrentlyWorking(currentHour: currentHour, currentMinute: currentMinute)
+        
+        let targetMinutes = isWorking ? endTotalMinutes : startTotalMinutes
+        var diff = targetMinutes - currentTotalMinutes
+        
+        // Handle next day wraparound
+        if diff < 0 { diff += 24 * 60 }
+        
+        let hours = diff / 60
+        let minutes = diff % 60
+        
+        if isWorking {
+            if hours == 0 {
+                return "⏰ Ends in \(minutes)min"
+            }
+            return "⏰ Ends in \(hours)h \(minutes)min"
+        } else {
+            if hours == 0 {
+                return "⏰ Start in \(minutes)min"
+            }
+            return "⏰ Start in \(hours)h \(minutes)min"
+        }
+    }
+    
+    // MARK: - Weekend check
+    func isWeekend(in timeZone: TimeZone, now: Date = Date()) -> Bool {
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        let weekday = calendar.component(.weekday, from: now)
+        return weekday == 1 || weekday == 7  // 1 = Sunday, 7 = Saturday
+    }
+
+    func nextMondayString(in timeZone: TimeZone, now: Date = Date()) -> String {
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        let weekday = calendar.component(.weekday, from: now)
+        
+        // Days until Monday
+        let daysUntilMonday: Int
+        switch weekday {
+        case 1: daysUntilMonday = 1  // Sunday → tomorrow
+        case 7: daysUntilMonday = 2  // Saturday → 2 days
+        default: daysUntilMonday = 0 // weekday (shouldn't happen)
+        }
+        
+        let nextMonday = calendar.date(byAdding: .day, value: daysUntilMonday, to: now)!
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"  // "Monday"
+        formatter.timeZone = timeZone
+        
+        return formatter.string(from: nextMonday)
+    }
+    
+    func timeUntilWeekend(in timeZone: TimeZone, now: Date = Date()) -> String {
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        
+        let nextMonday = calendar.nextDate(
+            after: now,
+            matching: DateComponents(hour: startHour, minute: startMinute, weekday: 2),
+            matchingPolicy: .nextTime
+        )!
+        
+        let diff = Int(nextMonday.timeIntervalSince(now))
+        let days = diff / 86400
+        let hours = (diff % 86400) / 3600
+        let minutes = (diff % 3600) / 60
+        
+        if days > 0 {
+            return "Back to work in \(days)d \(hours)h \(minutes)min"
+        } else {
+            return "Back to work in \(hours)h \(minutes)min"
+        }
+    }
+    
 }
 
-
-//var tintColor: UIColor {
-//        switch self {
-//        case .sunrise:
-//            return .systemOrange
-//        case .day:
-//            return .systemYellow
-//        case .sunset:
-//            return .systemOrange
-//        case .night:
-//            return .tintColor
-//        }
-//    }

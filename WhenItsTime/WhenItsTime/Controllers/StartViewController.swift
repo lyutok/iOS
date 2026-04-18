@@ -31,6 +31,11 @@ class StartViewController: UIViewController {
     @IBOutlet var textTimeBlurView: UIVisualEffectView!
     @IBOutlet var dayLabel: UILabel! // label for city time
     
+    // Prompt section
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var countdownLabel: UILabel!
+    @IBOutlet var bestTimeConnect: UILabel!
+    
     // Working Hours section
     @IBOutlet var workingHoursView: UIView!
     @IBOutlet var workingHoursWork: UILabel!
@@ -246,7 +251,6 @@ class StartViewController: UIViewController {
             }
         }
         
-        
         // MARK: - Work city
         var differenceSeconds: Int = 0
         var differenceHours: Int = 0
@@ -289,8 +293,26 @@ class StartViewController: UIViewController {
             let workPhase = locationBrain.timePhase(for: workHour)
             workDayImage.image = UIImage(systemName: workPhase.sfSymbol)
             workDayImage.tintColor = workPhase.tintColor
+
+            // MARK: - Working hours status
+            let workMinute = workCalendar.component(.minute, from: now)
+                
+            if selectedWorkingHours.isWeekend(in: workTimeZone) {
+                // Get current day name in work city timezone
+                let dayFormatter = DateFormatter()
+                dayFormatter.dateFormat = "EEEE"  // "Saturday"
+                dayFormatter.timeZone = workTimeZone
+                let dayName = dayFormatter.string(from: now)
+                
+                statusLabel.text = "It is \(dayName) in \(workCity.city)"
+                countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
+            } else {
+                let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
+                statusLabel.text = isWorking ? "✅ \(workCity.city) is in working hours" : "😴 \(workCity.city) is out of working hours"
+                countdownLabel.text = selectedWorkingHours.timeUntilChange(currentHour: workHour, currentMinute: workMinute)
+            }
         }
-        
+            
         // MARK: - Working Hours
         workingHours.text = selectedWorkingHours.displayString
 //        print(workingHours.text)
@@ -324,7 +346,6 @@ class StartViewController: UIViewController {
                 localEndSeconds: localEndSeconds
             )
             
-    //        workingHoursInLocalTime.text = localWorkingHours.localDisplayString
             let startWH = localWorkingHours.timeSFSymbolAndColor(for: localStartHour)
             startWHimg.image = UIImage(systemName: startWH.name)
             startWHimg.tintColor = startWH.color
@@ -358,11 +379,6 @@ class StartViewController: UIViewController {
     }
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
-//        if sender.tag == 0 {
-//                print("Edit local city")
-//            } else {
-//                print("Edit work city")
-//            }
         editCityFlag = sender.tag
         presentCitySearch()
     }
