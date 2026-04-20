@@ -72,14 +72,14 @@ struct WorkingHours: Codable {
         
         if isWorking {
             if hours == 0 {
-                return "⏰ Ends in \(minutes)min"
+                return "Ends in \(minutes)min"
             }
-            return "⏰ Ends in \(hours)h \(minutes)min"
+            return "Ends in \(hours)h \(minutes)min"
         } else {
             if hours == 0 {
-                return "⏰ Starts in \(minutes)min"
+                return "Starts in \(minutes)min"
             }
-            return "⏰ Starts in \(hours)h \(minutes)min"
+            return "Starts in \(hours)h \(minutes)min"
         }
     }
     
@@ -129,9 +129,9 @@ struct WorkingHours: Codable {
         let minutes = (diff % 3600) / 60
         
         if days > 0 {
-            return "⏰ Back to work in \(days)d \(hours)h \(minutes)min"
+            return "Back to work in \(days)d \(hours)h \(minutes)min"
         } else {
-            return "⏰ Back to work in \(hours)h \(minutes)min"
+            return "Back to work in \(hours)h \(minutes)min"
         }
     }
     

@@ -309,7 +309,7 @@ class StartViewController: UIViewController {
                 countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
             } else {
                 let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
-                statusLabel.text = isWorking ? "✅ \(workCity.city) is in working hours" : "😴 \(workCity.city) is out of working hours"
+                statusLabel.text = isWorking ? "☑ \(workCity.city) is in working hours" : "🗒️ \(workCity.city) is out of working hours"
                 countdownLabel.text = selectedWorkingHours.timeUntilChange(currentHour: workHour, currentMinute: workMinute)
             }
         }
@@ -379,16 +379,16 @@ class StartViewController: UIViewController {
             
             switch best.quality {
             case .perfect:
-                bestTimeLabel.text = "☀️ Best time: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
+                bestTimeLabel.text = "♥ Best time to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
                 yourTimeLabel.text = "(your time)"
             case .stretch:
-                bestTimeLabel.text = "😬 Best bet: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+                bestTimeLabel.text = "😬 Best bet to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
                 yourTimeLabel.text = "(your time)"
             case .late:
-                bestTimeLabel.text = "🌆 Best bet: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+                bestTimeLabel.text = "🌆 Best bet to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
                 yourTimeLabel.text = "(your time)"
             case .noGoodTime:
-                bestTimeLabel.text = "😔 No good time"
+                bestTimeLabel.text = "😔 No good time to connect:"
                 yourTimeLabel.text = "they work while you sleep"
             }
         }
