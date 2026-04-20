@@ -34,7 +34,8 @@ class StartViewController: UIViewController {
     // Prompt section
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var countdownLabel: UILabel!
-    @IBOutlet var bestTimeConnect: UILabel!
+    @IBOutlet var bestTimeLabel: UILabel!
+    @IBOutlet var yourTimeLabel: UILabel!
     
     // Working Hours section
     @IBOutlet var workingHoursView: UIView!
@@ -293,10 +294,10 @@ class StartViewController: UIViewController {
             let workPhase = locationBrain.timePhase(for: workHour)
             workDayImage.image = UIImage(systemName: workPhase.sfSymbol)
             workDayImage.tintColor = workPhase.tintColor
-
+            
             // MARK: - Working hours status
             let workMinute = workCalendar.component(.minute, from: now)
-                
+            
             if selectedWorkingHours.isWeekend(in: workTimeZone) {
                 // Get current day name in work city timezone
                 let dayFormatter = DateFormatter()
@@ -304,7 +305,7 @@ class StartViewController: UIViewController {
                 dayFormatter.timeZone = workTimeZone
                 let dayName = dayFormatter.string(from: now)
                 
-                statusLabel.text = "It is \(dayName) in \(workCity.city)"
+                statusLabel.text = "🎉 It is \(dayName) in \(workCity.city)"
                 countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
             } else {
                 let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
@@ -315,13 +316,17 @@ class StartViewController: UIViewController {
             
         // MARK: - Working Hours
         workingHours.text = selectedWorkingHours.displayString
-//        print(workingHours.text)
+        
+        var localStartSeconds: Int = 0
+        var localEndSeconds: Int = 0
+        var currentWorkTimeZone: TimeZone = .current
         
         // Working hours in local time
-        if selectedWorkCity != nil {
+        if let workCity = selectedWorkCity {
+            currentWorkTimeZone = TimeZone(identifier: workCity.identifier) ?? .current
             let hours = selectedWorkingHours
-            let localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
-            let localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
+            localStartSeconds = hours.startHour * 3600 + hours.startMinute * 60 - differenceSeconds
+            localEndSeconds = hours.endHour * 3600 + hours.endMinute * 60 - differenceSeconds
             
             // Normalize to 0..<86400 to handle negative values correctly
             // (Swift's % preserves sign, so -1800 % 3600 = -1800, not 1800)
@@ -361,6 +366,31 @@ class StartViewController: UIViewController {
             endWorkingHoursInLocalTime.text = ""
             startWHimg.image = nil
             endWHimg.image = nil
+        }
+        
+        // MARK: - Best time to connect
+        let bestTime = selectedWorkingHours.bestTimeToConnect(
+            localStartSeconds: localStartSeconds,
+            localEndSeconds: localEndSeconds
+        )
+        
+        if let best = bestTime {
+            let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Monday, " : ""
+            
+            switch best.quality {
+            case .perfect:
+                bestTimeLabel.text = "☀️ Best time: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
+                yourTimeLabel.text = "(your time)"
+            case .stretch:
+                bestTimeLabel.text = "😬 Best bet: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+                yourTimeLabel.text = "(your time)"
+            case .late:
+                bestTimeLabel.text = "🌆 Best bet: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+                yourTimeLabel.text = "(your time)"
+            case .noGoodTime:
+                bestTimeLabel.text = "😔 No good time"
+                yourTimeLabel.text = "they work while you sleep"
+            }
         }
         
 }

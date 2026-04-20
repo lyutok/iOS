@@ -227,10 +227,10 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalCentering" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="eIJ-BH-E7Y">
-                                                            <rect key="frame" x="20" y="12" width="310" height="170.33333333333334"/>
+                                                            <rect key="frame" x="20" y="12" width="310" height="170"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalCentering" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BSy-yk-TMu">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="44.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="44.333333333333336"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="😴Amsterdam is out of working hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ax-Cu-g0N">
                                                                             <rect key="frame" x="11" y="0.0" width="288" height="20.333333333333332"/>
@@ -239,7 +239,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts in 6h 20 min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vh-ZS-8NE">
-                                                                            <rect key="frame" x="83" y="28.333333333333314" width="144" height="16.333333333333329"/>
+                                                                            <rect key="frame" x="83" y="28.333333333333314" width="144" height="16"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" systemColor="viewFlipsideBackgroundColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -247,14 +247,14 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <view alpha="0.25" contentMode="center" semanticContentAttribute="spatial" translatesAutoresizingMaskIntoConstraints="NO" id="5JH-i7-OTZ" userLabel="Line View">
-                                                                    <rect key="frame" x="0.0" y="56.666666666666629" width="310" height="2"/>
+                                                                    <rect key="frame" x="0.0" y="56.333333333333314" width="310" height="2"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="2" id="vTb-KR-Di8"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AXR-Ng-SAN">
-                                                                    <rect key="frame" x="0.0" y="70.666666666666629" width="310" height="38.666666666666657"/>
+                                                                    <rect key="frame" x="0.0" y="70.333333333333314" width="310" height="38.666666666666657"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♥ Best time to connect: 16:00 - 20:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZx-gs-6tl">
                                                                             <rect key="frame" x="16" y="0.0" width="278" height="19.333333333333332"/>
@@ -263,7 +263,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(your time)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxe-LT-301">
-                                                                            <rect key="frame" x="115.33333333333334" y="19.333333333333371" width="79.666666666666657" height="19.333333333333329"/>
+                                                                            <rect key="frame" x="115.33333333333334" y="19.333333333333314" width="79.666666666666657" height="19.333333333333329"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -271,14 +271,14 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEe-3n-Yty" userLabel="Line View">
-                                                                    <rect key="frame" x="0.0" y="121.33333333333331" width="310" height="2"/>
+                                                                    <rect key="frame" x="0.0" y="120.99999999999994" width="310" height="2"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="2" id="VAq-Fd-jWf"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Pf3-aJ-9cW">
-                                                                    <rect key="frame" x="0.0" y="135.33333333333331" width="310" height="35"/>
+                                                                    <rect key="frame" x="0.0" y="134.99999999999994" width="310" height="35"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fl-Yv-TgG">
                                                                             <rect key="frame" x="0.0" y="0.0" width="152" height="35"/>
@@ -432,7 +432,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bestTimeConnect" destination="JZx-gs-6tl" id="W3h-T2-uVu"/>
+                        <outlet property="bestTimeLabel" destination="JZx-gs-6tl" id="W3h-T2-uVu"/>
                         <outlet property="countdownLabel" destination="9vh-ZS-8NE" id="BhS-N8-6R5"/>
                         <outlet property="currentCity" destination="OVI-Cs-Y2Q" id="mgy-sw-OQK"/>
                         <outlet property="currentDate" destination="OYr-IR-Mb7" id="Ogo-9b-sSg"/>
@@ -458,6 +458,7 @@
                         <outlet property="workingHoursCurrentLocation" destination="SGD-ff-ApL" id="7gg-UU-DBn"/>
                         <outlet property="workingHoursView" destination="sI8-yE-0bJ" id="Wlg-H4-ada"/>
                         <outlet property="workingHoursWork" destination="WAc-uT-77z" id="DOZ-Hw-qp1"/>
+                        <outlet property="yourTimeLabel" destination="sxe-LT-301" id="6cH-ML-w5a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="560-R0-2OU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
