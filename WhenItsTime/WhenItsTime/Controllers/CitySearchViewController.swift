@@ -70,10 +70,11 @@ class CitySearchViewController: UITableViewController {
             .compactMap { identifier -> CityItem? in
                 let parts = identifier.split(separator: "/")
                 guard parts.count >= 2 else { return nil }
-                let region = String(parts[0])
+                let countryCode = timeZoneToCountryCode[identifier] ?? ""
+                let country = Locale.current.localizedString(forRegionCode: countryCode) ?? String(parts[0])
                 let city = parts.last!.replacingOccurrences(of: "_", with: " ")
                 
-                return CityItem(displayName: "\(city) (\(region))", identifier: identifier, city: city)
+                return CityItem(displayName: "\(city) (\(country))", identifier: identifier, city: city)
             }
             .sorted { $0.displayName < $1.displayName }
         

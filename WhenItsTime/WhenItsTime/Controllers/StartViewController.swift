@@ -305,11 +305,11 @@ class StartViewController: UIViewController {
                 dayFormatter.timeZone = workTimeZone
                 let dayName = dayFormatter.string(from: now)
                 
-                statusLabel.text = "🎉 It is \(dayName) in \(workCity.city)"
+                statusLabel.text = "It is \(dayName) in \(workCity.city)"
                 countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
             } else {
                 let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
-                statusLabel.text = isWorking ? "☑ \(workCity.city) is in working hours" : "🗒️ \(workCity.city) is out of working hours"
+                statusLabel.text = isWorking ? "☑ \(workCity.city) is in working hours" : "\(workCity.city) is out of working hours"
                 countdownLabel.text = selectedWorkingHours.timeUntilChange(currentHour: workHour, currentMinute: workMinute)
             }
         }
