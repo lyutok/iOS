@@ -138,10 +138,10 @@ struct WorkingHours: Codable {
     // MARK: - Best time to connect
     struct BestTimeResult {
         enum Quality {
-            case perfect    // ☀️ 08:00-21:59
-            case stretch    // 😬 06:00-07:59
-            case late       // 🌆 22:00-01:59
-            case noGoodTime // 😔 02:00-05:59
+            case ideal    // overlap in 08:00–22:00
+            case early    // 06:00–08:00
+            case late     // 22:00–02:00
+            case offTime  // fallback (02:00–06:00 or none)
         }
         let quality: Quality
         let startHour: Int
@@ -176,14 +176,14 @@ struct WorkingHours: Codable {
         
         // Priority 1 — Perfect zone
         if let (start, end) = overlap(zoneStart: perfectStart, zoneEnd: perfectEnd) {
-            return BestTimeResult(quality: .perfect,
+            return BestTimeResult(quality: .ideal,
                                 startHour: (start % (24*60)) / 60, startMinute: start % 60,
                                 endHour: (end % (24*60)) / 60, endMinute: end % 60)
         }
         
         // Priority 2a — Stretch zone
         if let (start, end) = overlap(zoneStart: stretchStart, zoneEnd: stretchEnd) {
-            return BestTimeResult(quality: .stretch,
+            return BestTimeResult(quality: .early,
                                 startHour: (start % (24*60)) / 60, startMinute: start % 60,
                                 endHour: (end % (24*60)) / 60, endMinute: end % 60)
         }
@@ -196,7 +196,7 @@ struct WorkingHours: Codable {
         }
         
         // Priority 3 — No good time
-        return BestTimeResult(quality: .noGoodTime,
+        return BestTimeResult(quality: .offTime,
                             startHour: 0, startMinute: 0,
                             endHour: 0, endMinute: 0)
     }

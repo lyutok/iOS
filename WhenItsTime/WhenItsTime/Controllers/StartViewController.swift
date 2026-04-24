@@ -375,21 +375,21 @@ class StartViewController: UIViewController {
         )
         
         if let best = bestTime {
-            let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Monday, " : ""
+            let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Mon, " : ""
             
             switch best.quality {
-            case .perfect:
-                bestTimeLabel.text = "♥ Best time to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
+            case .ideal:
+                bestTimeLabel.text = "Good time to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
                 yourTimeLabel.text = "(your time)"
-            case .stretch:
-                bestTimeLabel.text = "😬 Best bet to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+            case .early:
+                bestTimeLabel.text = "Slightly early, but workable: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
                 yourTimeLabel.text = "(your time)"
             case .late:
-                bestTimeLabel.text = "🌆 Best bet to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
+                bestTimeLabel.text = "Late, but still reasonable: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
                 yourTimeLabel.text = "(your time)"
-            case .noGoodTime:
-                bestTimeLabel.text = "😔 No good time to connect:"
-                yourTimeLabel.text = "they work while you sleep"
+            case .offTime:
+                bestTimeLabel.text = "Outside typical working hours."
+                yourTimeLabel.text = "No overlap window."
             }
         }
         
