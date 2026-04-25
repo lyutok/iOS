@@ -388,7 +388,7 @@ class StartViewController: UIViewController {
         )
         
         if let best = bestTime {
-            let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Mon, " : ""
+            let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Mon " : ""
             
             let timeRange = String(format: "%02d:%02d", best.startHour, best.startMinute) + " - " +
                             String(format: "%02d:%02d", best.endHour, best.endMinute)
@@ -427,14 +427,18 @@ class StartViewController: UIViewController {
                                         normTheirStart / 3600, (normTheirStart % 3600) / 60,
                                         normTheirEnd / 3600, (normTheirEnd % 3600) / 60)
 
-            yourTimeLabel.text = "· Your time: \(mondayPrefix)\(timeRange)"
-            theirTimeLabel.text = "· Their time: \(mondayPrefix)\(theirTimeRange) \(theirDayLabel)"
+            let dayPart = theirDayLabel.isEmpty ? "" : " \(theirDayLabel)"
+            yourTimeLabel.text = "\(mondayPrefix)\(timeRange) (you)"
+            if let workCity = selectedWorkCity {
+                theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) (\(workCity.city))"
+            }
+            
             confidanceLable.text = confidenceText
 
             // 3.  Switch titles
             switch best.quality {
             case .ideal:
-                bestTimeLabel.text = "Good time to connect:"
+                bestTimeLabel.text = "Suggested time to connect:"
                 
             case .early:
                 bestTimeLabel.text = "Slightly early, but workable:"

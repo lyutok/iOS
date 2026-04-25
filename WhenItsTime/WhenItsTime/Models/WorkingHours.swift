@@ -129,77 +129,11 @@ struct WorkingHours: Codable {
         let minutes = (diff % 3600) / 60
         
         if days > 0 {
-            return "☑ Available in \(days)d \(hours)h \(minutes)min"
+            return "Available in \(days)d \(hours)h \(minutes)min"
         } else {
-            return "☑ Available in \(hours)h \(minutes)min"
+            return "Available in \(hours)h \(minutes)min"
         }
     }
-    
-    // MARK: - Best time to connect
-//    struct BestTimeResult {
-//        enum Quality {
-//            case ideal    // overlap in 08:00–22:00
-//            case early    // 06:00–08:00
-//            case late     // 22:00–02:00
-//            case offTime  // fallback (02:00–06:00 or none)
-//        }
-//        let quality: Quality
-//        let startHour: Int
-//        let startMinute: Int
-//        let endHour: Int
-//        let endMinute: Int
-//    }
-//
-//    func bestTimeToConnect(localStartSeconds: Int, localEndSeconds: Int) -> BestTimeResult? {
-//        // Available zones in minutes
-//        let perfectStart = 8 * 60    // 08:00
-//        let perfectEnd = 22 * 60     // 22:00
-//        let stretchStart = 6 * 60    // 06:00
-//        let stretchEnd = 8 * 60      // 08:00
-//        let lateStart = 22 * 60      // 22:00
-//        let lateEnd = 26 * 60        // 02:00 next day (26h)
-//
-//        let workStart = localStartSeconds / 60
-//        let workEnd = localEndSeconds / 60
-//        
-//        // Helper to find overlap
-//        func overlap(zoneStart: Int, zoneEnd: Int) -> (Int, Int)? {
-//            for offset in [-24*60, 0, 24*60] {
-//                let shiftedStart = workStart + offset
-//                let shiftedEnd = workEnd + offset
-//                let start = max(shiftedStart, zoneStart)
-//                let end = min(shiftedEnd, zoneEnd)
-//                if start < end { return (start, end) }
-//            }
-//            return nil
-//        }
-//        
-//        // Priority 1 — Perfect zone
-//        if let (start, end) = overlap(zoneStart: perfectStart, zoneEnd: perfectEnd) {
-//            return BestTimeResult(quality: .ideal,
-//                                startHour: (start % (24*60)) / 60, startMinute: start % 60,
-//                                endHour: (end % (24*60)) / 60, endMinute: end % 60)
-//        }
-//        
-//        // Priority 2a — Stretch zone
-//        if let (start, end) = overlap(zoneStart: stretchStart, zoneEnd: stretchEnd) {
-//            return BestTimeResult(quality: .early,
-//                                startHour: (start % (24*60)) / 60, startMinute: start % 60,
-//                                endHour: (end % (24*60)) / 60, endMinute: end % 60)
-//        }
-//        
-//        // Priority 2b — Late zone
-//        if let (start, end) = overlap(zoneStart: lateStart, zoneEnd: lateEnd) {
-//            return BestTimeResult(quality: .late,
-//                                startHour: (start % (24*60)) / 60, startMinute: start % 60,
-//                                endHour: (end % (24*60)) / 60, endMinute: end % 60)
-//        }
-//        
-//        // Priority 3 — No good time
-//        return BestTimeResult(quality: .offTime,
-//                            startHour: 0, startMinute: 0,
-//                            endHour: 0, endMinute: 0)
-//    }
     
     // MARK: - Best time to connect
     struct BestTimeResult {
