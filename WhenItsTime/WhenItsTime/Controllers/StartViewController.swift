@@ -34,8 +34,11 @@ class StartViewController: UIViewController {
     // Prompt section
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var countdownLabel: UILabel!
+    
     @IBOutlet var bestTimeLabel: UILabel!
     @IBOutlet var yourTimeLabel: UILabel!
+    @IBOutlet var theirTimeLabel: UILabel!
+    @IBOutlet var confidanceLable: UILabel!
     
     // Working Hours section
     @IBOutlet var workingHoursView: UIView!
@@ -369,6 +372,16 @@ class StartViewController: UIViewController {
         }
         
         // MARK: - Best time to connect
+        func confidenceLabel(_ value: Int) -> String {
+            switch value {
+            case 75...100: return "Strong overlap"
+            case 40..<75:  return "Good overlap"
+            case 15..<40:  return "Limited overlap"
+            case 1..<15:   return "Very limited"
+            default:       return "No overlap"
+            }
+        }
+        
         let bestTime = selectedWorkingHours.bestTimeToConnect(
             localStartSeconds: localStartSeconds,
             localEndSeconds: localEndSeconds
@@ -377,22 +390,50 @@ class StartViewController: UIViewController {
         if let best = bestTime {
             let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Mon, " : ""
             
+            let timeRange = String(format: "%02d:%02d", best.startHour, best.startMinute) + " - " +
+                            String(format: "%02d:%02d", best.endHour, best.endMinute)
+            
+//            let timePoint = String(format: "%02d:%02d", best.startHour, best.startMinute)
+            
+            let confidenceText = confidenceLabel(best.confidence)
+
+            // 1. Handle "none"
+            if best.quality == .none {
+                bestTimeLabel.text = "Outside typical working hours."
+                yourTimeLabel.text = "No overlap window"
+                
+                theirTimeLabel.isHidden = true
+                theirTimeLabel.text = nil
+                
+                confidanceLable.isHidden = true
+                confidanceLable.text = nil
+                
+                return
+            }
+
+            // 2. Shared UI (only for valid cases)
+            theirTimeLabel.isHidden = false
+            confidanceLable.isHidden = false
+
+            yourTimeLabel.text = "· Your time: \(mondayPrefix)\(timeRange)"
+            theirTimeLabel.text = "· Their time: \(mondayPrefix)\(timeRange)"
+            confidanceLable.text = confidenceText
+
+            // 3.  Switch titles
             switch best.quality {
             case .ideal:
-                bestTimeLabel.text = "Good time to connect: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute)) - \(String(format: "%02d:%02d", best.endHour, best.endMinute))"
-                yourTimeLabel.text = "(your time)"
+                bestTimeLabel.text = "Good time to connect:"
+                
             case .early:
-                bestTimeLabel.text = "Slightly early, but workable: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
-                yourTimeLabel.text = "(your time)"
+                bestTimeLabel.text = "Slightly early, but workable:"
+                
             case .late:
-                bestTimeLabel.text = "Late, but still reasonable: \(mondayPrefix)\(String(format: "%02d:%02d", best.startHour, best.startMinute))"
-                yourTimeLabel.text = "(your time)"
-            case .offTime:
-                bestTimeLabel.text = "Outside typical working hours."
-                yourTimeLabel.text = "No overlap window."
+                bestTimeLabel.text = "Late, but still reasonable:"
+                
+            case .none:
+                break // already handled
             }
         }
-        
 }
     
     
