@@ -266,7 +266,6 @@
                                                                         </label>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="JZx-gs-6tl" firstAttribute="centerY" secondItem="AXR-Ng-SAN" secondAttribute="centerY" id="22u-vN-qEY"/>
                                                                         <constraint firstItem="fms-7r-7k5" firstAttribute="centerX" secondItem="AXR-Ng-SAN" secondAttribute="centerX" id="2ar-q4-uq7"/>
                                                                         <constraint firstItem="JZx-gs-6tl" firstAttribute="centerX" secondItem="AXR-Ng-SAN" secondAttribute="centerX" id="UP7-gp-G1h"/>
                                                                         <constraint firstItem="fms-7r-7k5" firstAttribute="centerY" secondItem="AXR-Ng-SAN" secondAttribute="centerY" id="upH-DP-dOh"/>
@@ -283,14 +282,14 @@
                                                                     <rect key="frame" x="0.0" y="115.33333333333331" width="310" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="😴Amsterdam is out of working hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ax-Cu-g0N">
-                                                                            <rect key="frame" x="11" y="0.0" width="288" height="17.666666666666668"/>
-                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                            <rect key="frame" x="40.000000000000014" y="0.0" width="230.33333333333337" height="17.333333333333332"/>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts in 6h 20 min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vh-ZS-8NE">
-                                                                            <rect key="frame" x="83" y="22.666666666666629" width="144" height="17.333333333333329"/>
-                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                            <rect key="frame" x="97.666666666666657" y="22.333333333333371" width="115" height="17.666666666666671"/>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
