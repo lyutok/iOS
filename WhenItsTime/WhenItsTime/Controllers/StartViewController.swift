@@ -415,8 +415,20 @@ class StartViewController: UIViewController {
             theirTimeLabel.isHidden = false
             confidanceLable.isHidden = false
 
+            let theirStartTotalSeconds = best.startHour * 3600 + best.startMinute * 60 + differenceSeconds
+            let theirEndTotalSeconds = best.endHour * 3600 + best.endMinute * 60 + differenceSeconds
+            
+            let theirDayLabel = WorkingHours.whdayLabel(localStartSeconds: theirStartTotalSeconds, localEndSeconds: theirEndTotalSeconds) ?? ""
+            
+            let normTheirStart = ((theirStartTotalSeconds % 86400) + 86400) % 86400
+            let normTheirEnd = ((theirEndTotalSeconds % 86400) + 86400) % 86400
+            
+            let theirTimeRange = String(format: "%02d:%02d - %02d:%02d", 
+                                        normTheirStart / 3600, (normTheirStart % 3600) / 60,
+                                        normTheirEnd / 3600, (normTheirEnd % 3600) / 60)
+
             yourTimeLabel.text = "· Your time: \(mondayPrefix)\(timeRange)"
-            theirTimeLabel.text = "· Their time: \(mondayPrefix)\(timeRange)"
+            theirTimeLabel.text = "· Their time: \(mondayPrefix)\(theirTimeRange) \(theirDayLabel)"
             confidanceLable.text = confidenceText
 
             // 3.  Switch titles
