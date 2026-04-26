@@ -69,6 +69,11 @@ class StartViewController: UIViewController {
     var selectedWorkCity: CityItem?
     var selectedLocalCity: CityItem?
     
+    // city for WorkCity after selection
+    var workCityName: String {
+        return selectedWorkCity?.city ?? ""
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -277,10 +282,10 @@ class StartViewController: UIViewController {
             } else {
                 offsetLabel = "\(sign)\(abs(differenceHours))h"
             }
-            workCityLabel.text = "\(workCity.city)"
+            workCityLabel.text = workCityName
             timeDifferenceLabel.text = offsetLabel
             
-            workingHoursWork.text = "\(workCity.city) working hours" // working hour section
+            workingHoursWork.text = "\(workCityName) working hours" // working hour section
             
             let workAppTime = timeBrain.makeTime(from: now, in: workTimeZone)
             workTimeLabel.text = timeBrain.formattedTime(from: workAppTime)
@@ -308,11 +313,11 @@ class StartViewController: UIViewController {
                 dayFormatter.timeZone = workTimeZone
                 let dayName = dayFormatter.string(from: now)
                 
-                statusLabel.text = "It is \(dayName) in \(workCity.city)"
+                statusLabel.text = "It is \(dayName) in \(workCityName)"
                 countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
             } else {
                 let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
-                statusLabel.text = isWorking ? "☑ \(workCity.city) is in working hours" : "\(workCity.city) is out of working hours"
+                statusLabel.text = isWorking ? "☑ \(workCityName) is in working hours" : "\(workCityName) is out of working hours"
                 countdownLabel.text = selectedWorkingHours.timeUntilChange(currentHour: workHour, currentMinute: workMinute)
             }
         }
@@ -429,8 +434,8 @@ class StartViewController: UIViewController {
 
             let dayPart = theirDayLabel.isEmpty ? "" : " \(theirDayLabel)"
             yourTimeLabel.text = "\(mondayPrefix)\(timeRange) (you)"
-            if let workCity = selectedWorkCity {
-                theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) (\(workCity.city))"
+            if selectedWorkCity != nil {
+                theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) (\(workCityName))"
             }
             
             confidanceLable.text = confidenceText
