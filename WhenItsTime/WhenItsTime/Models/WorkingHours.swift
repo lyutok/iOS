@@ -37,7 +37,7 @@ struct WorkingHours: Codable {
     
     static func whdayLabel(localStartSeconds: Int, localEndSeconds: Int) -> String? {
         if localEndSeconds > 86400 {
-            return "ׁ· next day"
+            return "· next day"
         } else if localStartSeconds < 0 {
             return "· previous day"
         } else {
@@ -72,14 +72,14 @@ struct WorkingHours: Codable {
         
         if isWorking {
             if hours == 0 {
-                return "Ends in \(minutes)min"
+                return "Ends in \(minutes)m"
             }
-            return "Ends in \(hours)h \(minutes)min"
+            return "Ends in \(hours)h \(minutes)m"
         } else {
             if hours == 0 {
-                return "Starts in \(minutes)min"
+                return "Available in \(minutes)m"
             }
-            return "Starts in \(hours)h \(minutes)min"
+            return "Available in \(hours)h \(minutes)m"
         }
     }
     

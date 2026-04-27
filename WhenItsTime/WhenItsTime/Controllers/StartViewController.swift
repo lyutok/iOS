@@ -32,13 +32,13 @@ class StartViewController: UIViewController {
     @IBOutlet var dayLabel: UILabel! // label for city time
     
     // Prompt section
-    @IBOutlet var statusLabel: UILabel!
-    @IBOutlet var countdownLabel: UILabel!
-    
     @IBOutlet var bestTimeLabel: UILabel!
     @IBOutlet var yourTimeLabel: UILabel!
     @IBOutlet var theirTimeLabel: UILabel!
-    @IBOutlet var confidanceLable: UILabel!
+//    @IBOutlet var confidanceLable: UILabel!
+    
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var countdownLabel: UILabel!
     
     // Working Hours section
     @IBOutlet var workingHoursView: UIView!
@@ -317,7 +317,7 @@ class StartViewController: UIViewController {
                 countdownLabel.text = selectedWorkingHours.timeUntilWeekend(in: workTimeZone)
             } else {
                 let isWorking = selectedWorkingHours.isCurrentlyWorking(currentHour: workHour, currentMinute: workMinute)
-                statusLabel.text = isWorking ? "☑ \(workCityName) is in working hours" : "\(workCityName) is out of working hours"
+                statusLabel.text = isWorking ? "\(workCityName) is in working hours" : "\(workCityName) is offline"
                 countdownLabel.text = selectedWorkingHours.timeUntilChange(currentHour: workHour, currentMinute: workMinute)
             }
         }
@@ -377,12 +377,12 @@ class StartViewController: UIViewController {
         }
         
         // MARK: - Best time to connect
-        func confidenceLabel(_ value: Int) -> String {
+        func confidence(_ value: Int) -> String {
             switch value {
             case 75...100: return "Strong overlap"
             case 40..<75:  return "Good overlap"
             case 15..<40:  return "Limited overlap"
-            case 1..<15:   return "Very limited"
+            case 1..<15:   return "Very limited overlap"
             default:       return "No overlap"
             }
         }
@@ -396,30 +396,34 @@ class StartViewController: UIViewController {
             let mondayPrefix = selectedWorkingHours.isWeekend(in: currentWorkTimeZone) ? "Mon " : ""
             
             let timeRange = String(format: "%02d:%02d", best.startHour, best.startMinute) + " - " +
-                            String(format: "%02d:%02d", best.endHour, best.endMinute)
+            String(format: "%02d:%02d", best.endHour, best.endMinute)
             
-//            let timePoint = String(format: "%02d:%02d", best.startHour, best.startMinute)
+            let confidenceText = confidence(best.confidence)
             
-            let confidenceText = confidenceLabel(best.confidence)
-
             // 1. Handle "none"
             if best.quality == .none {
-                bestTimeLabel.text = "Outside typical working hours."
-                yourTimeLabel.text = "No overlap window"
-                
-                theirTimeLabel.isHidden = true
+                bestTimeLabel.text = nil
+                yourTimeLabel.text = nil
                 theirTimeLabel.text = nil
+                //                confidanceLable.text = nil
+                statusLabel.text = nil
+                countdownLabel.text = nil
                 
-                confidanceLable.isHidden = true
-                confidanceLable.text = nil
-                
+                if workCityName != "" {
+                    yourTimeLabel.text = "Outside typical working hours."
+                    theirTimeLabel.text = "No overlap window"
+                } else {
+                    bestTimeLabel.text = "Add a city to get started"
+                    yourTimeLabel.text = "Find the best time to connect"
+                    theirTimeLabel.text = "without calculating time zones."
+                }
                 return
             }
-
+            
             // 2. Shared UI (only for valid cases)
             theirTimeLabel.isHidden = false
-            confidanceLable.isHidden = false
-
+            //            confidanceLable.isHidden = false
+            
             let theirStartTotalSeconds = best.startHour * 3600 + best.startMinute * 60 + differenceSeconds
             let theirEndTotalSeconds = best.endHour * 3600 + best.endMinute * 60 + differenceSeconds
             
@@ -428,34 +432,34 @@ class StartViewController: UIViewController {
             let normTheirStart = ((theirStartTotalSeconds % 86400) + 86400) % 86400
             let normTheirEnd = ((theirEndTotalSeconds % 86400) + 86400) % 86400
             
-            let theirTimeRange = String(format: "%02d:%02d - %02d:%02d", 
+            let theirTimeRange = String(format: "%02d:%02d - %02d:%02d",
                                         normTheirStart / 3600, (normTheirStart % 3600) / 60,
                                         normTheirEnd / 3600, (normTheirEnd % 3600) / 60)
-
+            
             let dayPart = theirDayLabel.isEmpty ? "" : " \(theirDayLabel)"
-            yourTimeLabel.text = "\(mondayPrefix)\(timeRange) (you)"
+            yourTimeLabel.text = "\(mondayPrefix)\(timeRange) · you"
             if selectedWorkCity != nil {
-                theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) (\(workCityName))"
+                theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) · \(workCityName)"
             }
             
-            confidanceLable.text = confidenceText
-
+            //            confidanceLable.text = confidenceText
+            
             // 3.  Switch titles
             switch best.quality {
             case .ideal:
-                bestTimeLabel.text = "Suggested time to connect:"
+                bestTimeLabel.text = confidenceText
                 
             case .early:
-                bestTimeLabel.text = "Slightly early, but workable:"
+                bestTimeLabel.text = "\(confidenceText) (Early Hours)"
                 
             case .late:
-                bestTimeLabel.text = "Late, but still reasonable:"
+                bestTimeLabel.text = "\(confidenceText) (Late Hours)"
                 
             case .none:
                 break // already handled
             }
         }
-}
+    }
     
     
     @IBAction func editWorkingHoursPressed(_ sender: UIButton) {
