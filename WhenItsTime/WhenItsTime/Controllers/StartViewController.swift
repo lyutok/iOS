@@ -442,18 +442,16 @@ class StartViewController: UIViewController {
                 theirTimeLabel.text = "\(mondayPrefix)\(theirTimeRange)\(dayPart) · \(workCityName)"
             }
             
-            //            confidanceLable.text = confidenceText
-            
             // 3.  Switch titles
             switch best.quality {
             case .ideal:
                 bestTimeLabel.text = confidenceText
                 
             case .early:
-                bestTimeLabel.text = "\(confidenceText) (Early Hours)"
+                bestTimeLabel.text = "\(confidenceText) (early hours)"
                 
             case .late:
-                bestTimeLabel.text = "\(confidenceText) (Late Hours)"
+                bestTimeLabel.text = "\(confidenceText) (late hours)"
                 
             case .none:
                 break // already handled
